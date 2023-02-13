@@ -1,0 +1,58 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="micky.sports.shop.dao.OrderDao">
+	<select id="orderSelect" resultType="micky.sports.shop.dto.ProductDto">
+		SELECT P_NAME,P_NO,P_PRICE,P_COLOR,P_SIZE,P_FILESRC FROM PRODUCT WHERE P_NO=#{param1}
+    </select>
+	<insert id="payment" >
+		INSERT INTO ORDER_MEMBER(OM_CNTNUM,OM_NUM,P_NO,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,OM_STATE,OM_CANCLE,OM_CDATE,C_REASON) 
+		VALUES(ORDER_SEQ.NEXTVAL,TO_CHAR(SYSDATE, 'YYYYMMDD')||#{param1},#{param2},#{param3},#{param1},SYSDATE,'포인트',
+		(SELECT P_PRICE FROM PRODUCT WHERE P_NO=#{param2})*#{param3},'결제완료','N',NULL,NULL)
+    </insert>
+    
+    
+    <!-- 나의 주문 내역 보기 join -->
+    <resultMap type="micky.sports.shop.dto.OrderMemberDto" id="OrderMemberDto">
+    	<result column="om_cntnum" property="om_cntnum" />
+    	<result column="om_num" property="om_num" />
+    	<result column="p_no" property="p_no" />
+    	<result column="u_cnt" property="u_cnt" />
+    	<result column="m_id" property="m_id" />
+    	<result column="om_date" property="om_date" />
+    	<result column="om_pay" property="om_pay" />
+    	<result column="p_price" property="p_price" />
+    	<result column="om_state" property="om_state" />
+    	<result column="om_cancle" property="om_cancle" />
+    	<result column="om_cdate" property="om_cdate" />
+    	<result column="c_reason" property="c_reason" />
+    </resultMap>
+    <resultMap type="micky.sports.shop.dto.ProductDto" id="ProductDto">
+    	<result column="P_NO" property="p_no"/>
+    	<result column="P_NAME" property="p_name"/>
+    	<result column="P_PRICE" property="p_price"/>
+    	<result column="P_CNT" property="p_cnt"/>
+    	<result column="P_COLOR" property="p_color"/>
+    	<result column="P_SIZE" property="p_size"/>
+    	<result column="P_FILESRC" property="p_filesrc"/>
+		<collection property="orderMemberDto" resultMap="OrderMemberDto"></collection>
+    </resultMap>
+    <select id="mtOrderList" parameterType="micky.sports.shop.dto.ProductDto" resultMap="ProductDto">
+		SELECT OM_DATE,P_NO,OM_NUM,M_ID,P_COLOR,P_SIZE,U_CNT,P_PRICE,OM_STATE,P_NAME
+		FROM (SELECT OM.OM_DATE,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.P_PRICE,OM.OM_STATE,P.P_COLOR,P.P_SIZE,P.P_NAME
+		FROM ORDER_MEMBER OM INNER JOIN PRODUCT P ON OM.P_NO=P.P_NO)
+		WHERE M_ID=#{param1} ORDER BY OM_DATE DESC
+    </select>
+    
+	<!-- 주문페이지에서 회원정보확인하기 -->
+    <select id="ordersMember" resultType="micky.sports.shop.dto.MemberDto">
+		SELECT M_ID,M_PW,M_NAME,M_TEL,M_NAME2,M_EMAIL,M_GRADE,M_AGE,M_GENDER,M_CASH,M_FILESRC
+		FROM MEMBER WHERE M_ID=#{param1}
+    </select>
+
+	<!-- 주문시 회원캐시 차감 -->
+	<update id="delcash">
+		UPDATE MEMBER SET M_CASH=M_CASH-#{param2} WHERE M_ID=#{param1}
+	</update>
+	
+</mapper>

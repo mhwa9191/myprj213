@@ -51,7 +51,7 @@ public class OrderPaymentService implements MickyServiceInter{
 		//구매한 금액 회원 캐시 차감 update
 		odao.delcash(loginId,Integer.parseInt(totPrices));
 		
-		model.addAttribute("mId",loginId);
+		//model.addAttribute("mId",loginId);
 		
 	}
 

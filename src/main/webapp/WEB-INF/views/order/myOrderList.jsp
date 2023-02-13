@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,51 +29,43 @@
  <div>
  	<p>회원님의 현재 보유 캐시 : ${myList.m_cash }</p>
  </div>
- DATECNT
+ 
 
  <h3>나의주문내역 </h3>
 <table width="800" border="1">
-	<tr>
-		<td>주문날짜</td>
-		<td>주문번호</td>
-		<td>상품명</td>
-		<td>색상</td>
-		<td>사이즈</td>
-		<td>주문수량</td>
-		<td>총액</td>
-		<td>결제형태</td>
-		<td></td>	
-	</tr>
-	<c:forEach items="${omdList }" var="mlist">
-	<tr>
-		<td>${mlist.orderMemberDto.om_date }</td>
-<%-- 		<c:set value="${mlist.orderMemberDto.om_date }" var="omdate" />
-			<c:choose>
-				<c:when test="${mlist.orderMemberDto.om_date ne omdate }">
-				<td>
-				<c:out value="${mlist.orderMemberDto.om_date }"></c:out>
-				</td>
-				</c:when>
-		
-				<c:when test="${mlist.orderMemberDto.om_date eq omdate }">
-				<td>
-				<c:out value=""></c:out>
-				</td>
-				</c:when>
-			</c:choose> --%>
-		<td>${mlist.orderMemberDto.om_num }</td>
-		<td>${mlist.p_name }</td>
-		<td>${mlist.p_color }</td>
-		<td>${mlist.p_size }</td>
-		<td>${mlist.orderMemberDto.u_cnt }</td>
-		<td>${mlist.orderMemberDto.p_price }</td>
-		<td>${mlist.orderMemberDto.om_state }</td>
-		<td>
-			<button>결제취소</button>
-			<button>리뷰쓰기</button>
-		</td>
-	</tr>
-	</c:forEach>
+	<thead>
+		<tr>
+			<td>주문일자</td>
+			<td>주문번호</td>
+			<td colspan="2">상품정보</td>
+			<td>주문수량</td>
+			<td>총액</td>
+			<td colspan="2">주문상태</td>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${omdList }" var="mlist">
+		<tr>
+			<td><fmt:formatDate value="${mlist.orderMemberDto.om_date }" pattern="yyyy.MM.dd"/></td>
+			<td>${mlist.orderMemberDto.om_num }</td>
+			<td><img src="../resources/img/productimg/${mlist.p_filesrc }.jpg" width="50" alt="" /></td>
+			<td>
+				${mlist.p_name } <br />
+				${mlist.p_color } <br />
+				${mlist.p_size }
+			</td>
+			<td>${mlist.orderMemberDto.u_cnt }</td>
+			<td>${mlist.orderMemberDto.p_price }</td>
+			<td>
+				${mlist.orderMemberDto.om_state } <br />
+				<button type="button" onclick="location.href='#'">결제취소</button>
+			</td>
+			<td>
+				<button type="button" onclick="location.href='../review/reviewBoard'">리뷰쓰기</button>
+			</td>
+		</tr>
+		</c:forEach>
+	</tbody>
 </table>
 
 </body>

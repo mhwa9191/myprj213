@@ -1,6 +1,8 @@
 package micky.sports.shop.dto;
 
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +16,7 @@ public class ProductDto {
 	private String p_color; //색상
 	private String p_size; //사이즈
 	private String p_filesrc; //첨부파일
+	private Date p_date; //상품등록일
 	
 	private OrderMemberDto orderMemberDto; //join
 	

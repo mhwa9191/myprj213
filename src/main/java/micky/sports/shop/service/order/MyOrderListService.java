@@ -32,7 +32,7 @@ public class MyOrderListService implements MickyServiceInter{
 		//System.out.println("*********~~~~~~~~~~~~~~~~~"+loginId);
 		
 		OrderDao odao=sqlSession.getMapper(OrderDao.class);
-		System.out.println("-");
+
 		ArrayList<OrderMemberDto> omdList=odao.mtOrderList(loginId);
 
 		model.addAttribute("omdList",omdList);

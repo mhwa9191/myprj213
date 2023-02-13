@@ -18,7 +18,7 @@ public class ProductDto {
 	private String p_filesrc; //첨부파일
 	private Date p_date; //상품등록일
 	
-	private OrderMemberDto orderMemberDto; //join
+	//private OrderMemberDto orderMemberDto; //join
 	
 	public ProductDto() {
 		// TODO Auto-generated constructor stub

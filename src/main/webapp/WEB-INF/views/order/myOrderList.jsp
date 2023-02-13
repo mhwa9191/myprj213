@@ -35,6 +35,7 @@
 <table width="800" border="1">
 	<thead>
 		<tr>
+	
 			<td>주문일자</td>
 			<td>주문번호</td>
 			<td colspan="2">상품정보</td>
@@ -46,18 +47,19 @@
 	<tbody>
 		<c:forEach items="${omdList }" var="mlist">
 		<tr>
-			<td><fmt:formatDate value="${mlist.orderMemberDto.om_date }" pattern="yyyy.MM.dd"/></td>
-			<td>${mlist.orderMemberDto.om_num }</td>
-			<td><img src="../resources/img/productimg/${mlist.p_filesrc }.jpg" width="50" alt="" /></td>
+
+			<td><fmt:formatDate value="${mlist.om_date }" pattern="yyyy.MM.dd"/></td>
+			<td>${mlist.om_num }</td>
+			<td><img src="../resources/img/productimg/${mlist.productDto.p_filesrc }.jpg" width="50" alt="상품사진" /></td>
 			<td>
-				${mlist.p_name } <br />
-				${mlist.p_color } <br />
-				${mlist.p_size }
+				${mlist.productDto.p_name } <br />
+				${mlist.productDto.p_color } <br />
+				${mlist.productDto.p_size }
 			</td>
-			<td>${mlist.orderMemberDto.u_cnt }</td>
-			<td>${mlist.orderMemberDto.p_price }</td>
+			<td>${mlist.u_cnt }</td>
+			<td>${mlist.p_price }</td>
 			<td>
-				${mlist.orderMemberDto.om_state } <br />
+				${mlist.om_state } <br />
 				<button type="button" onclick="location.href='#'">결제취소</button>
 			</td>
 			<td>

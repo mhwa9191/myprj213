@@ -26,6 +26,7 @@
     	<result column="om_cancle" property="om_cancle" />
     	<result column="om_cdate" property="om_cdate" />
     	<result column="c_reason" property="c_reason" />
+		<collection property="productDto" resultMap="ProductDto"></collection>
     </resultMap>
     <resultMap type="micky.sports.shop.dto.ProductDto" id="ProductDto">
     	<result column="P_NO" property="p_no"/>
@@ -35,11 +36,11 @@
     	<result column="P_COLOR" property="p_color"/>
     	<result column="P_SIZE" property="p_size"/>
     	<result column="P_FILESRC" property="p_filesrc"/>
-		<collection property="orderMemberDto" resultMap="OrderMemberDto"></collection>
+<!-- 		<collection property="orderMemberDto" resultMap="OrderMemberDto"></collection> -->
     </resultMap>
-    <select id="mtOrderList" parameterType="micky.sports.shop.dto.ProductDto" resultMap="ProductDto">
-		SELECT OM_DATE,P_NO,OM_NUM,M_ID,P_COLOR,P_SIZE,U_CNT,P_PRICE,OM_STATE,P_NAME,P_FILESRC
-		FROM (SELECT OM.OM_DATE,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.P_PRICE,OM.OM_STATE,P.P_COLOR,P.P_SIZE,P.P_NAME,P.P_FILESRC
+    <select id="mtOrderList" parameterType="micky.sports.shop.dto.OrderMemberDto" resultMap="OrderMemberDto">
+		SELECT OM_CNTNUM,OM_DATE,P_NO,OM_NUM,M_ID,P_COLOR,P_SIZE,U_CNT,P_PRICE,OM_STATE,P_NAME,P_FILESRC
+		FROM (SELECT OM.OM_CNTNUM,OM.OM_DATE,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.P_PRICE,OM.OM_STATE,P.P_COLOR,P.P_SIZE,P.P_NAME,P.P_FILESRC
 		FROM ORDER_MEMBER OM INNER JOIN PRODUCT P ON OM.P_NO=P.P_NO)
 		WHERE M_ID=#{param1} ORDER BY OM_DATE DESC
     </select>

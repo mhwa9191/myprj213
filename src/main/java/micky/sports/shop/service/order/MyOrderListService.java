@@ -12,13 +12,16 @@ import org.springframework.ui.Model;
 import micky.sports.shop.dao.OrderDao;
 import micky.sports.shop.dto.OrderMemberDto;
 import micky.sports.shop.service.MickyServiceInter;
+import micky.sports.shop.vopage.SearchVO;
 
 public class MyOrderListService implements MickyServiceInter{
 	private SqlSession sqlSession;
 	private HttpSession httpsession;
-	public MyOrderListService(SqlSession sqlSession,HttpSession httpsession) {
+	private SearchVO searchVO;
+	public MyOrderListService(SqlSession sqlSession,SearchVO searchVO,HttpSession httpsession) {
 		this.sqlSession=sqlSession;
 		this.httpsession=httpsession;
+		this.searchVO=searchVO;
 	}
 	@Override
 	public void execute(Model model) {
@@ -33,9 +36,25 @@ public class MyOrderListService implements MickyServiceInter{
 		
 		OrderDao odao=sqlSession.getMapper(OrderDao.class);
 
-		ArrayList<OrderMemberDto> omdList=odao.mtOrderList(loginId);
-
+		//페이징
+		String strPage=request.getParameter("page");
+		if(strPage==null) {
+			strPage="1";
+		}
+		//System.out.println("---------/"+strPage);
+		int page=Integer.parseInt(strPage);
+		searchVO.setPage(page);
+		int total=odao.selectBoardTotCount(loginId);	
+		searchVO.pageCalculate(total);
+		//System.out.println("---------/"+total);
+		int rowStart=searchVO.getRowStart();
+		int rowEnd=searchVO.getRowEnd();
+		
+		ArrayList<OrderMemberDto> omdList=odao.mtOrderList(loginId,rowStart,rowEnd);
+		
 		model.addAttribute("omdList",omdList);
+		model.addAttribute("totRowcnt",total);
+		model.addAttribute("searchVO",searchVO);
 		
 		//나의주문내역에서 정보확인
 		model.addAttribute("myList",odao.ordersMember(loginId));

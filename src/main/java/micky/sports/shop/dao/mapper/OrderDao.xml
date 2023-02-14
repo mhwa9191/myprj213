@@ -39,10 +39,13 @@
 <!-- 		<collection property="orderMemberDto" resultMap="OrderMemberDto"></collection> -->
     </resultMap>
     <select id="mtOrderList" parameterType="micky.sports.shop.dto.OrderMemberDto" resultMap="OrderMemberDto">
-		SELECT OM_CNTNUM,OM_DATE,P_NO,OM_NUM,M_ID,P_COLOR,P_SIZE,U_CNT,P_PRICE,OM_STATE,P_NAME,P_FILESRC
-		FROM (SELECT OM.OM_CNTNUM,OM.OM_DATE,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.P_PRICE,OM.OM_STATE,P.P_COLOR,P.P_SIZE,P.P_NAME,P.P_FILESRC
-		FROM ORDER_MEMBER OM INNER JOIN PRODUCT P ON OM.P_NO=P.P_NO)
-		WHERE M_ID=#{param1} ORDER BY OM_DATE DESC
+    	SELECT OM_CNTNUM,OM_NUM,P_NO,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,OM_STATE,OM_CANCLE,OM_CDATE,C_REASON,P_NAME,P_COLOR,P_SIZE,P_FILESRC
+		FROM (SELECT ROWNUM NUM, PAGEOM.* 
+		FROM (SELECT OM_CNTNUM,OM_NUM,P_NO,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,OM_STATE,OM_CANCLE,OM_CDATE,C_REASON,P_NAME,P_COLOR,P_SIZE,P_FILESRC
+		FROM (SELECT OM.OM_CNTNUM,OM.OM_NUM,OM.P_NO,OM.U_CNT,OM.M_ID,OM.OM_DATE,OM.OM_PAY,OM.P_PRICE,OM.OM_STATE,OM.OM_CANCLE,OM.OM_CDATE,OM.C_REASON,
+		P.P_NAME,P.P_COLOR,P.P_SIZE,P.P_FILESRC
+		FROM ORDER_MEMBER OM INNER JOIN PRODUCT P ON OM.P_NO=P.P_NO) WHERE M_ID=#{param1} ORDER BY OM_DATE DESC) PAGEOM)
+		WHERE NUM BETWEEN #{param2} AND #{param3}
     </select>
     
 	<!-- 주문페이지에서 회원정보확인하기 -->
@@ -56,4 +59,22 @@
 		UPDATE MEMBER SET M_CASH=M_CASH-#{param2} WHERE M_ID=#{param1}
 	</update>
 	
+	<!-- 나의주문내역보기 페이징 -->
+	<select id="selectBoardTotCount" resultType="Integer">
+		SELECT COUNT(*) FROM ORDER_MEMBER WHERE M_ID=#{param1}
+	</select>
+	
+	<!-- 나의주문내역에서 취소요청 클릭시 화면전환 -->
+	<select id="myOrderCancelOffer" parameterType="micky.sports.shop.dto.OrderMemberDto" resultMap="OrderMemberDto">
+   		SELECT OM_CNTNUM,OM_DATE,P_NO,OM_NUM,M_ID,P_COLOR,P_SIZE,U_CNT,P_PRICE,OM_STATE,P_NAME,P_FILESRC
+		FROM (SELECT OM.OM_CNTNUM,OM.OM_DATE,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.P_PRICE,OM.OM_STATE,P.P_COLOR,P.P_SIZE,P.P_NAME,P.P_FILESRC
+		FROM ORDER_MEMBER OM INNER JOIN PRODUCT P ON OM.P_NO=P.P_NO)
+		WHERE OM_CNTNUM=#{param1}
+    </select>
+
+	<!-- 취소사유 적은후 취소요청하기  -->
+	<update id="myOCancelOffersubmit">
+		UPDATE ORDER_MEMBER SET OM_CANCLE='Y', C_REASON=#{param2}, OM_CDATE=SYSDATE WHERE OM_CNTNUM=#{param1}
+	</update>
+
 </mapper>

@@ -28,8 +28,9 @@
 		<div>
 			<input type="hidden" name="pname" value="${pm.p_name }" />
 			<input type="hidden" name="pfilesrc" value="${pm.p_filesrc }" /> 
+		<!-- 상품사진을 누를때마다 새로운 값을 보내서 아랫단의 ${product } 값을 지정하게됨 -->
 			<a href="productDetail?pname=${pm.p_name }&pfilesrc=${pm.p_filesrc }">
-			<img src="../resources/img/productimg/${pm.p_filesrc }.jpg" width="50" class="product_img" alt="" />
+			<img src="../resources/img/productimg/${pm.p_filesrc }.jpg" width="150" class="product_img" alt="" />
 			</a>
 			<input type="hidden" name="pcolor" value="${pm.p_color }" />
 		</div>		
@@ -73,6 +74,8 @@
 </form>
 
 <script>
+	/* 수량-+버튼생성시 해당 재고량에 맞게 확인 */
+	/* -+버튼 눌렀을때 수량 변화 */
 	function Count(type,pno,totcnt) { /* ths [object HTMLButtonElement] */
 		/* alert(type+"***"+pno+"***"+totcnt); */
 		var cnt=".cnt_"+pno;
@@ -87,6 +90,7 @@
 	}
 </script>
 <script>
+	/* 상품선택 후 목록에서 다시 지우기 */
 	function deletechoice(pno){
 		var pnoid="choice_"+pno;
 		$("#"+pnoid).remove();
@@ -94,7 +98,7 @@
 </script>
 <script>
 	/* 사이즈 선택시 */
-	/* 해당 사이즈의 재고량 변화 */
+	/* 수량선택하면 바로 해당 내용이 구매선택목록이됨 */
 	function sizeNo(pno,pcolor,psize,totcnt) {
 		$('.print-message-no-opt').css('display','none');
 	 	/* alert("초이스 확인창"); */
@@ -140,6 +144,40 @@ $('#order_form').click(function(){
 </script>
 
 	장바구니
+	<br />
+	<br />
+	<br />
+	
+<h3>이동확인하기</h3>
+<div class="pdp-anchor-wrap">
+    <ul class="flex-center" style="top: 97px;">
+        <li class="active">
+            <a href="#product-info">상품정보</a>
+        </li>
+        <li class="">
+            <a href="#product-review">리뷰</a>
+        </li>
+        <li>
+            <a href="#product-size">사이즈정보</a>
+        </li>
+        <li>
+            <a href="#product-delivery">배송정보</a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="pdp-section pdp-section-review" id="product-review">
+	<h2>리뷰보기</h2>
+	<h2>리뷰보기</h2>
+	<h2>리뷰보기</h2>
+	<h2>리뷰보기</h2>
+	<h2>리뷰보기</h2>
+	<h2>리뷰보기</h2>
+	<h2>리뷰보기</h2>
+	<h2>리뷰보기</h2>
+	<h2>리뷰보기</h2>
+</div>
 
 </body>
 </html>

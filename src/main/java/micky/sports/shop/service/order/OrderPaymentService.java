@@ -53,6 +53,18 @@ public class OrderPaymentService implements MickyServiceInter{
 		
 		//model.addAttribute("mId",loginId);
 		
+		//결제완료후 뒤로가기로 했을때 내용을 지우기 위해 세션에 넣기 결제완료후에는 세션값삭제
+		httpsession.removeAttribute("orderPSelectList");
+		httpsession.removeAttribute("cnt");
+		System.out.println("확인이되는가");
+		httpsession.removeAttribute("orderPSelectList");
+		httpsession.removeAttribute("cnt");
+		
+		httpsession.setAttribute("ccccc","98989");
+		System.out.println("ccccc확인이되는가");
+		String ccccc = (String)httpsession.getAttribute("ccccc");
+		System.out.println("*********~~~~~~~~~~~~~~~~~"+ccccc);
+		
 	}
 
 }

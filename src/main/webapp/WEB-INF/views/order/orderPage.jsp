@@ -16,9 +16,13 @@
 <hr />
 <h5>구매할 상품</h5>
 
+<hr />
+${ccccc} ?세션확인하는거다?
+<hr />
+
 <form action="payment" method="post">
 <c:forEach items="${orderPSelectList}" var="slist" varStatus="status">
-<div>
+<div class="selectlist">
 	<img src="../resources/img/productimg/${slist.p_filesrc }.jpg" width="50" alt="" /> <br />
 	<input type="text" name="p_no" value="${slist.p_no }"/>
 	<input type="text" name="cnt" value="${cnt[status.index] }"/> <br />
@@ -56,15 +60,30 @@
 회원로그인일경우 
 비회원구매일경우
 
+<button class="replaceLink">replaceLink</button>
+<script>
+$('.replaceLink').click(function(){
+
+	
+	var link='../order/myOrderList';
+	location.replace(link);
+	
+});
+</script>
 <script>
 $('.btn_payment').click(function(){
 	var m_cash = ${ordersMember.m_cash };
 	var totPrices=$('.totPrices').val();
 	/* alert(totPrices); */
+
 	if (m_cash < totPrices){
 		$('.message-no-cash').css('display','block');
 		return false;
 	}
+	var link='../order/myOrderList';
+	alert(link);
+	location.replace(link);
+	
 });
 </script>
 

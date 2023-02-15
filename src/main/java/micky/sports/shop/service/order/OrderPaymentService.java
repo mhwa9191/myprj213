@@ -41,30 +41,42 @@ public class OrderPaymentService implements MickyServiceInter{
 		
 		OrderDao odao=sqlSession.getMapper(OrderDao.class);
 		ProductDao pdao=sqlSession.getMapper(ProductDao.class);
+		
+		String orderResult="주문성공";
+		
+		//수량이나 캐시가 없으면 결제가 진행되지 않도록하기
+		int memberCach=odao.ordersMember(loginId).getM_cash();
+		if(memberCach<Integer.parseInt(totPrices)) {
+			//캐시부족...
+			orderResult="0";
+		}			
 		for (int i = 0; i < pNo.length; i++) {
-			//System.out.println("**********"+cnt[i]);
-			//구매이력 추가 insert
-			odao.payment(loginId,pNo[i],Integer.parseInt(cnt[i]));
-			//구매한 수량 재고 삭제 update
-			pdao.delpayment(pNo[i],Integer.parseInt(cnt[i]));		
+			int checkCnt= pdao.checkPrdCnt(pNo[i]).getP_cnt();
+			if (checkCnt<Integer.parseInt(cnt[i])) {
+				//재고부족...
+				orderResult="1";
+				break;
+			}
 		}		
+		if (orderResult=="주문성공") {
+			for (int i = 0; i < pNo.length; i++) {
+				//구매이력 추가 insert
+				odao.payment(loginId,pNo[i],Integer.parseInt(cnt[i]));
+				//구매한 수량 재고 삭제 update
+				pdao.delpayment(pNo[i],Integer.parseInt(cnt[i]));						
+			}		
+		}
 		//구매한 금액 회원 캐시 차감 update
 		odao.delcash(loginId,Integer.parseInt(totPrices));
 		
+		//가장최근 주문번호확인
+		String checkOmnum= odao.checkOmnum(loginId);
+
+		//주문결과창
+		model.addAttribute("checkOmnum",checkOmnum);
+		model.addAttribute("orderResult",orderResult);
 		//model.addAttribute("mId",loginId);
-		
-		//결제완료후 뒤로가기로 했을때 내용을 지우기 위해 세션에 넣기 결제완료후에는 세션값삭제
-		httpsession.removeAttribute("orderPSelectList");
-		httpsession.removeAttribute("cnt");
-		System.out.println("확인이되는가");
-		httpsession.removeAttribute("orderPSelectList");
-		httpsession.removeAttribute("cnt");
-		
-		httpsession.setAttribute("ccccc","98989");
-		System.out.println("ccccc확인이되는가");
-		String ccccc = (String)httpsession.getAttribute("ccccc");
-		System.out.println("*********~~~~~~~~~~~~~~~~~"+ccccc);
-		
+
 	}
 
 }

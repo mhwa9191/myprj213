@@ -33,7 +33,7 @@ public class OrderController {
 	@RequestMapping("/orderPage")
 	public String orderView(HttpServletRequest request, Model model) {
 		System.out.println("========orderPage=======");
-		
+
 		model.addAttribute("request",request);
 		mickyServiceInter=new OrderPageService(sqlSession,httpsession);
 		mickyServiceInter.execute(model);
@@ -50,7 +50,7 @@ public class OrderController {
 		mickyServiceInter=new OrderPaymentService(sqlSession,httpsession);
 		mickyServiceInter.execute(model);
 		
-		return "redirect:myOrderList";
+		return "/order/orderResult";
 	}
 	
 	//나의 주문 내역보기

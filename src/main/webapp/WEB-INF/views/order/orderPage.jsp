@@ -16,10 +16,6 @@
 <hr />
 <h5>구매할 상품</h5>
 
-<hr />
-${ccccc} ?세션확인하는거다?
-<hr />
-
 <form action="payment" method="post">
 <c:forEach items="${orderPSelectList}" var="slist" varStatus="status">
 <div class="selectlist">
@@ -48,7 +44,7 @@ ${ccccc} ?세션확인하는거다?
 
 <hr />
 <!-- 주문페이지에서 결제로 넘어가지 않고 다시 상품페이지로 돌아가기 -->
-<a href="/shop/product/productList"><button>취소</button></a>
+<a href="../product/productList"><button>취소</button></a>
 
 <hr />
 배송비(만원이하 2,500원)
@@ -60,29 +56,16 @@ ${ccccc} ?세션확인하는거다?
 회원로그인일경우 
 비회원구매일경우
 
-<button class="replaceLink">replaceLink</button>
-<script>
-$('.replaceLink').click(function(){
 
-	
-	var link='../order/myOrderList';
-	location.replace(link);
-	
-});
-</script>
 <script>
 $('.btn_payment').click(function(){
 	var m_cash = ${ordersMember.m_cash };
 	var totPrices=$('.totPrices').val();
 	/* alert(totPrices); */
-
 	if (m_cash < totPrices){
 		$('.message-no-cash').css('display','block');
 		return false;
 	}
-	var link='../order/myOrderList';
-	alert(link);
-	location.replace(link);
 	
 });
 </script>

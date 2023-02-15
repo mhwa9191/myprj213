@@ -48,7 +48,7 @@
 		WHERE NUM BETWEEN #{param2} AND #{param3}
     </select>
     
-	<!-- 주문페이지에서 회원정보확인하기 -->
+	<!-- 주문페이지에서 회원정보확인하기 + 수량이나 캐시가 없으면 결제가 진행되지 않도록하기 -->
     <select id="ordersMember" resultType="micky.sports.shop.dto.MemberDto">
 		SELECT M_ID,M_PW,M_NAME,M_TEL,M_NAME2,M_EMAIL,M_GRADE,M_AGE,M_GENDER,M_CASH,M_FILESRC
 		FROM MEMBER WHERE M_ID=#{param1}
@@ -58,6 +58,11 @@
 	<update id="delcash">
 		UPDATE MEMBER SET M_CASH=M_CASH-#{param2} WHERE M_ID=#{param1}
 	</update>
+	
+	<!-- 주문성공시 주문번호 -->
+    <select id="checkOmnum" resultType="String" >
+		SELECT MAX(OM_NUM) FROM ORDER_MEMBER WHERE M_ID=#{param1}
+    </select>
 	
 	<!-- 나의주문내역보기 페이징 -->
 	<select id="selectBoardTotCount" resultType="Integer">

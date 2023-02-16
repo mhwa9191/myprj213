@@ -10,50 +10,57 @@
 <script src="../resources/js/jquery.bpopup.min.js"></script>
 </head>
 <body>
-<c:if test="${empty sessionScope.loginid }">
-   <a href="../loginform">login</a> 
-   |  <a href="">join</a>
+<c:if test="${empty sessionScope.loginid}">
+   <a href="../member/loginform">login</a> 
+   |  <a href="../member/joinform">join</a>
 
 </c:if>
- <c:if test="${not empty sessionScope.loginid }">
-    <a href="../logout">logout</a> 
+ <c:if test="${not empty sessionScope.loginid}">
+    <a href="../member/logout">logout</a> 
  <br />
- ${sessionScope.loginid } 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
+ ${sessionScope.loginid} 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
+  	 <div>
+		<p class="go-myOrderList" style="color: #336666;">
+		<a href="../order/myOrderList">나의 주문내역보기</a>
+		</p>
+	</div>
  </c:if>
  
+ 
+
 <h3>상품</h3>
 
 <div>
-	<c:forEach items="${productMain }" var="pm">
+	<c:forEach items="${productMain}" var="pm">
 		<div>
-			<input type="hidden" name="pname" value="${pm.p_name }" />
-			<input type="hidden" name="pfilesrc" value="${pm.p_filesrc }" /> 
+			<input type="hidden" name="pname" value="${pm.p_name}" />
+			<input type="hidden" name="pfilesrc" value="${pm.p_filesrc}" /> 
 		<!-- 상품사진을 누를때마다 새로운 값을 보내서 아랫단의 ${product } 값을 지정하게됨 -->
-			<a href="productDetail?pname=${pm.p_name }&pfilesrc=${pm.p_filesrc }">
-			<img src="../resources/img/productimg/${pm.p_filesrc }.jpg" width="150" class="product_img" alt="" />
+			<a href="productDetail?pname=${pm.p_name}&pfilesrc=${pm.p_filesrc}">
+			<img src="../resources/img/productimg/${pm.p_filesrc}.jpg" width="150" class="product_img" alt="" />
 			</a>
-			<input type="hidden" name="pcolor" value="${pm.p_color }" />
+			<input type="hidden" name="pcolor" value="${pm.p_color}" />
 		</div>		
 	</c:forEach>
 </div>
 
 <div>
 	<div>
-	<c:forEach items="${product }" var="p" begin="1" end="1">
+	<c:forEach items="${product}" var="p" begin="1" end="1">
 		<span>색상</span>
-		<span>${p.p_color }</span>
+		<span>${p.p_color}</span>
 	</c:forEach>
 	</div>
 	<div>
 	<p>사이즈</p>
-		<c:forEach items="${product }" var="p">
+		<c:forEach items="${product}" var="p">
 		<div class="productSelect">
-		<c:if test="${p.p_cnt eq 0 }">
-			${p.p_size } <span style="font-size:12pt; font-family:맑은 고딕;">품절</span>
-		</c:if>
-		<c:if test="${p.p_cnt > 0 }">
-			<input type="radio" class="sizeNo" name="sizeNo" value="${p.p_no }" onclick="sizeNo('${p.p_no }','${p.p_color }','${p.p_size }',${p.p_cnt });" />${p.p_size }
-		</c:if>
+			<c:if test="${p.p_cnt eq 0}">
+				${p.p_size } <span style="font-size:12pt; font-family:맑은 고딕;">품절</span>
+			</c:if>
+			<c:if test="${p.p_cnt > 0}">
+				<input type="radio" class="sizeNo" name="sizeNo" value="${p.p_no}" onclick="sizeNo('${p.p_no}','${p.p_color}','${p.p_size}',${p.p_cnt});" />${p.p_size}
+			</c:if>
 		</div>
 		</c:forEach>
 	</div>
@@ -168,15 +175,15 @@ $('#order_form').click(function(){
 
 
 <div class="pdp-section pdp-section-review" id="product-review">
-	<h2>리뷰보기</h2>
-	<h2>리뷰보기</h2>
-	<h2>리뷰보기</h2>
-	<h2>리뷰보기</h2>
-	<h2>리뷰보기</h2>
-	<h2>리뷰보기</h2>
-	<h2>리뷰보기</h2>
-	<h2>리뷰보기</h2>
-	<h2>리뷰보기</h2>
+<br />
+<br />
+<a href="../review/reviewBoard">reviewBoard</a>
+<br />
+<c:set var="pname" value="${param.pname }" scope="application"/> <br />
+<c:set var="pfilesrc" value="${param.pfilesrc }" scope="application"/> <br />
+<br />
+<br />
+<jsp:include page="/WEB-INF/views/review/reviewBoard.jsp" />
 </div>
 
 </body>

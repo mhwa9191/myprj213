@@ -12,12 +12,12 @@
 </head>
 <body>
 <c:if test="${empty sessionScope.loginid }">
-   <a href="../loginform">login</a> 
-   |  <a href="">join</a>
+   <a href="../member/loginform">login</a> 
+   |  <a href="../member/joinform">join</a>
 
 </c:if>
  <c:if test="${not empty sessionScope.loginid }">
-    <a href="../logout">logout</a> 
+    <a href="../member/logout">logout</a> 
  <br />
  ${sessionScope.loginid } 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
  </c:if>
@@ -61,7 +61,7 @@
 		<c:otherwise>
 			<c:forEach items="${omdList }" var="mlist">
 				<tr>
-					<td><fmt:formatDate value="${mlist.om_date }" pattern="yyyy.MM.dd"/></td>
+					<td><fmt:formatDate value="${mlist.om_date }" pattern="yyyy.MM.dd hh:mm:ss"/></td>
 					<td>${mlist.om_num }</td>
 					<td><img src="../resources/img/productimg/${mlist.productDto.p_filesrc }.jpg" width="50" alt="상품사진" /></td>
 					<td>

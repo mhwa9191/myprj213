@@ -11,12 +11,12 @@
 <body>
 
 <c:if test="${empty sessionScope.loginid }">
-   <a href="../loginform">login</a> 
-   |  <a href="">join</a>
+   <a href="../member/loginform">login</a> 
+   |  <a href="../member/joinform">join</a>
 
 </c:if>
  <c:if test="${not empty sessionScope.loginid }">
-    <a href="../logout">logout</a> 
+    <a href="../member/logout">logout</a> 
  <br />
  ${sessionScope.loginid } 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
 	 <div>

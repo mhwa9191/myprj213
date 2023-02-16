@@ -1,0 +1,188 @@
+.clear{
+	clear: both;
+}
+
+/* =============== reviewBoard=============== */
+div{
+	height: auto;
+	display: block;
+}
+.tablerow{
+	display: table-row;
+}
+.tablecell{
+	display: table-cell;
+}
+.review_table{  display: table; width: 70%; margin-left:auto; margin-right:auto; }
+.review_total{	cursor: pointer; }
+.selectandsearch_box{	display: table; }
+.select_box{	text-align: left; }
+.search_box{	text-align: right; }
+.row{
+	display: table-row; /* tr */
+}
+.cell{	display: table-cell; /* td */ padding: 3px; border-bottom: 1px solid #ddd;
+}
+.col1{
+	width: 80%;
+	vertical-align: top;
+}
+.col2{
+	width: 20%;
+}
+.img_box>img{
+	width: 100px;
+	height: 100px;
+}
+.user_content:active {
+
+}
+.atag_reviewwrite{	text-align: right;}
+.user_content{
+	width: 90%;
+}
+.u_content{
+	width: 80%;
+	overflow: hidden;
+	/* white-space: nowrap; *//* 두줄 이상을 할 수 없음 */
+	word-break: break-word;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	/* cursor: pointer; */
+}
+.u_contentGray{
+	/* background-color: #eee; */
+	cursor: pointer;
+}
+.atag{
+	/* display: hidden; */
+	/* visibility: hidden; */
+}
+.paging>a{
+	text-align: center;
+	position: relative;
+	text-decoration: none;
+}
+.paging>a:hover{
+	text-decoration: none;
+}
+.atag{
+	visibility: hidden;
+}
+
+/* =============== admin-답글 =============== */
+
+
+/* =============== 별점 =============== */
+.star {
+   position: relative;
+   font-size: 2rem;
+   color: #ddd;
+ }
+ 
+.star input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.star span {
+  width: 0;
+  position: absolute; 
+  left: 0;
+  color: #ff7f00;
+  overflow: hidden;
+  pointer-events: none;
+}
+/* =============== reviewBoard_star =============== */
+.reviewBoard_star {
+   position: relative;
+   font-size: 2rem;
+   color: #ddd;
+ }
+ 
+.reviewBoard_star input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.reviewBoard_star span {
+  width: 0;
+  position: absolute; 
+  left: 0;
+  color: #ff7f00;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+
+
+
+/* =============== review-replyToggle=============== */
+.reply_label{
+	color: red;
+	border: 1px solid black;
+	padding: 4px;
+}
+input#replyToggle{
+	display: none;
+}
+div#reply_box{
+	display: none;
+}
+input#replyToggle:checked+div#reply_box{
+	display: block;
+}
+
+
+
+/* =============== reviewWriteview=============== */
+.styleClassReviewWriteview{
+	opacity: 0;
+	display: none;
+	position: relative;
+	left: 100px;
+	width: auto;
+	padding: 20px;
+	background-color: white;
+	
+	width: 400px;
+	height: 100%;
+}
+
+#styleID_ReviewWriteview{
+	position: relative;
+}
+.popup_review_title{
+	border-bottom: 3px solid black;
+	font-weight: bolder;
+}
+#title_content{
+	padding: 10px;
+	top: 50px;
+	position: absolute;
+}
+
+
+
+/* =============== reviewListview=============== */
+.reviewListview_total{
+	display: table;
+	width: 80%;
+}
+.col11{
+	width: 30%;
+	vertical-align: top;
+}
+.col22{
+	width: 70%;
+}

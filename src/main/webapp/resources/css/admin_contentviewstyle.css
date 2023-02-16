@@ -1,0 +1,26 @@
+@charset "UTF-8";
+.returnolist{
+	text-decoration: none;
+	color: black; 
+	text-align: center;
+}
+.returnolist:hover{
+	color: gray;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.content_h1,.content_h3{
+	margin-top: -20;
+	margin-right: 50px;
+	padding: 52px;
+}
+table{
+	width : 1200px;
+	text-align: center;
+	border-spacing: 0;
+	border-color: #bcbcbc;
+}
+
+div.a{
+	text-align: center
+}

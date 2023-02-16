@@ -11,6 +11,11 @@
 	Hello world!  
 </h1>
 
-<a href="product/productList">productList</a>
+<a href="product/productList">productList</a> <br />
+<a href="review/reviewBoard">review</a> <br />
+<a href="Cart/before">Cart</a>  <br />
+<a href="admin_olist">admin_olist</a>  <br />
+<a href="member/loginform">loginform</a>  <br />
+<a href="admin_product">admin_product</a>  <br />
 </body>
 </html>

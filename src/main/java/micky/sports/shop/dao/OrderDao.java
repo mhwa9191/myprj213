@@ -15,6 +15,9 @@ public interface OrderDao {
 	
 	//나의 주문내역에서 주문목록 확인
 	public ArrayList<OrderMemberDto> mtOrderList(String mIdd,int rowStart,int rowEnd);
+
+	//나의주문내역 주문건당 묶기 주문시간별
+	public ArrayList<OrderMemberDto> mtOrderListGroup(String mIdd,int rowStart,int rowEnd);
 	
 	//주문페이지에서 회원 정보확인+//수량이나 캐시가 없으면 결제가 진행되지 않도록하기
 	public MemberDto ordersMember(String loginId);

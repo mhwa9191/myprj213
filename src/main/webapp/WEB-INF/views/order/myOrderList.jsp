@@ -86,6 +86,11 @@
 			</c:forEach>
 		</c:otherwise>
 		</c:choose>
+		<c:forEach items="${myListGroup}" var="myListGroup">
+			<tr>
+				<td rowspan="${myListGroup.groupcnt}">${myListGroup.groupcnt} _ ${myListGroup.om_num}</td>
+			</tr>
+		</c:forEach>
 	</tbody>
 </table>
 </form>

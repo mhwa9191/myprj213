@@ -51,6 +51,9 @@ public class MyOrderListService implements MickyServiceInter{
 		int rowEnd=searchVO.getRowEnd();
 		
 		ArrayList<OrderMemberDto> omdList=odao.mtOrderList(loginId,rowStart,rowEnd);
+				
+		//나의주문내역 주문건당 묶기 주문시간별
+		ArrayList<OrderMemberDto> mtOrderListGroup=odao.mtOrderListGroup(loginId,rowStart,rowEnd);
 		
 		model.addAttribute("omdList",omdList);
 		model.addAttribute("totRowcnt",total);
@@ -58,6 +61,10 @@ public class MyOrderListService implements MickyServiceInter{
 		
 		//나의주문내역에서 정보확인
 		model.addAttribute("myList",odao.ordersMember(loginId));
+		
+	
+		model.addAttribute("myListGroup",mtOrderListGroup);
+
 		
 	}
 

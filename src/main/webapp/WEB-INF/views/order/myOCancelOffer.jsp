@@ -11,23 +11,22 @@
 <script src="../resources/js/jquery.bpopup.min.js"></script>
 </head>
 <body>
+
 <c:if test="${empty sessionScope.loginid }">
    <a href="../loginform">login</a> 
    |  <a href="">join</a>
-
 </c:if>
- <c:if test="${not empty sessionScope.loginid }">
+<c:if test="${not empty sessionScope.loginid }">
     <a href="../logout">logout</a> 
- <br />
- ${sessionScope.loginid } 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
- </c:if>
+<br />
+${sessionScope.loginid } 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
+</c:if>
  
 
  <div>
- 	<p>회원님의 현재 보유 캐시 : ${myList.m_cash }</p>
+	<h3>취소신청완료</h3> 	
  </div>
  
-<h3>취소신청완료</h3>
 
 <div>
 	<p class="go-myOrderList" style="color: #336666;">

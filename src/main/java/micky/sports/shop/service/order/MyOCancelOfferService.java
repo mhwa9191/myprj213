@@ -23,13 +23,11 @@ public class MyOCancelOfferService implements MickyServiceInter{
 		Map<String, Object> map=model.asMap();
 		HttpServletRequest request=
 				(HttpServletRequest)map.get("request");	
-		
-
+	
 		//로그인 세션
 		httpsession = request.getSession();
 		String loginId = (String)httpsession.getAttribute("loginid");
 		System.out.println("*********~~~~~~~~~~~~~~~~~"+loginId);
-
 		
 		String calcleOfferomcntnum=request.getParameter("calcleOfferomcntnum");
 		String myOrderCancelReason=request.getParameter("myOrderCancelReason");

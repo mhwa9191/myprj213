@@ -25,9 +25,7 @@ public class OrderPaymentService implements MickyServiceInter{
 		Map<String, Object> map=model.asMap();
 		HttpServletRequest request=
 				(HttpServletRequest)map.get("request");	
-		
-		//String mId=request.getParameter("m_id"); //아이디
-		// TODO 230203 mId 수정필요
+
 		//로그인 세션
 		httpsession = request.getSession();
 		String loginId = (String)httpsession.getAttribute("loginid");

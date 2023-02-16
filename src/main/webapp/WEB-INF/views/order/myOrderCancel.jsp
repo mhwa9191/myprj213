@@ -62,7 +62,12 @@
 			</tr>
 			<tr>
 				<td colspan="8">
-					<textarea name="myOrderCancelReason" id="myOrderCancelReason" cols="100" rows="5" onclick="this.value='';">주문취소사유를 작성해주세요.</textarea>
+					<div class="textLengthWrap">
+						<span id="maxtext-display" style="display: none;">글자수는 100자까지 입력 가능합니다.</span>
+						<p class="textCnt">0자</p>					
+						<p class="textTot">/100자</p>					
+					<textarea name="myOrderCancelReason" id="myOrderCancelReason" cols="100" rows="5" maxlength="100" placeholder="주문취소사유를 작성해주세요." style="resize: none;"></textarea>
+					</div>
 				</td>
 			</tr>
 		</tbody>
@@ -70,5 +75,30 @@
 	<input type="submit" value="취소요청하기" />
 </form>
 <br />
+
+<script>
+	$('#myOrderCancelReason').keyup(function (e) {
+		let content = $(this).val();
+	    
+	    // 글자수 세기
+	    if (content.length == 0 || content == '') {
+	    	$('.textCnt').text('0자');
+	    } else {
+	    	$('.textCnt').text(content.length + '자');
+	    }
+	    
+	    // 글자수 제한
+	    if (content.length > 100) {
+	    	// 100자 부터 제한
+	        $(this).val($(this).val().substring(0, 100));
+	        // 100자 넘으면 뜨도록
+	        $('#maxtext-display').css("display","");
+	    }else{
+	    	//100자 안넘으면 다시 문구사라지기
+	        $('#maxtext-display').css("display","none");	    	
+	    }
+	});
+</script>
+
 </body>
 </html>

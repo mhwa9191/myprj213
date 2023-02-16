@@ -24,7 +24,10 @@
     	SELECT P_NO,P_NAME,P_PRICE,P_CNT,P_COLOR,P_SIZE,P_FILESRC 
     	FROM PRODUCT WHERE P_NO=#{param1}
     </select>
+    
+    <!-- 상품결제완료시 상품수량 차감 -->    
     <update id="delpayment">
     	UPDATE PRODUCT SET P_CNT=P_CNT-#{param2} WHERE P_NO=#{param1}
     </update>
+    
 </mapper>

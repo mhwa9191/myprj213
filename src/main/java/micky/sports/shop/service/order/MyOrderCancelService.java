@@ -27,6 +27,9 @@ public class MyOrderCancelService implements MickyServiceInter{
 		//로그인 세션
 		httpsession = request.getSession();
 		String loginId = (String)httpsession.getAttribute("loginid");
+		// TODO 세션 중간 끊김 해결해야함...
+		//if (loginId==null) {
+		//} 
 		System.out.println("*********~~~~~~~~~~~~~~~~~"+loginId);
 
 		String omcntnum=request.getParameter("omcntnum");
@@ -35,6 +38,7 @@ public class MyOrderCancelService implements MickyServiceInter{
 		model.addAttribute("myOrderCancelOffer",odao.myOrderCancelOffer(omcntnum));
 		
 		model.addAttribute("myList",odao.ordersMember(loginId));
+		
 	}
 
 }

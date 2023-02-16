@@ -2,6 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%String loginid = (String)session.getAttribute("loginid"); %>
+<c:if test="${empty sessionScope.loginid }">
+	<a href="../member/loginform">login</a> 
+	<a href="">join</a>
+</c:if>
+<c:if test="${not empty sessionScope.loginid }">
+	<a href="../member/logout">logout</a> 
+	<a href="reviewMylistview?account=${sessionScope.loginid }">${sessionScope.loginid }님</a>
+<br />
+</c:if>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +63,7 @@
 			<div class="row">
 				<div class="cell col11">
 					<div class="reviewListview_img_box">
-						<a href="reviewBoard"><img src="../resources/img/productimg/NJ1DN81K_NJ1DN81K_primary.jpg" width="200" /></a>
+						<a href="../product/productDetail?pname=${mylist.productDto.p_name }&pfilesrc=${mylist.productDto.p_filesrc }"><img src="../resources/img/productimg/${mylist.productDto.p_filesrc }.jpg" width="200" /></a>
 					</div>
 					<div>
 						<button type="button" onclick="location.href='reviewPopupcontentview?r_no=${mylist.r_no }'">수정</button>

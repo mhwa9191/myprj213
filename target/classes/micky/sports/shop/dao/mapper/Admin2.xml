@@ -1,0 +1,95 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="micky.sports.shop.dao.Admin2">
+	<sql id="includelist">
+		<choose>
+		    <when test="param5==1">
+		       ORDER BY P_PRICE DESC
+		    </when>
+		    <when test="param5==2">
+		       ORDER BY P_PRICE ASC
+		    </when>
+		    <when test="param5==0">
+		      
+		    </when>
+		    <otherwise>
+		 
+		    </otherwise>
+		</choose>			
+	</sql>
+	
+	<select id="plist" resultType="micky.sports.shop.dto.ProductDto">    
+		SELECT 
+			* 
+		FROM 
+		    (SELECT ROWNUM NUM,P.* FROM 
+		    (SELECT ROWNUM RNUM, P.* FROM PRODUCT P WHERE P_NAME LIKE '%'||#{param3}||'%' AND P_SIZE LIKE '%'||#{param4}||'%'
+		    <include refid="includelist"/>
+		    ) P)
+		WHERE
+		    NUM BETWEEN #{param1} AND #{param2}	    
+	</select>
+	
+	<!-- admin_olist page -->
+	<select id="selectAdminTotCount" resultType="Integer">
+		SELECT COUNT(*) FROM PRODUCT WHERE P_NAME LIKE '%'||#{param1}||'%'
+	</select>
+	<!-- 선택한 체크박스 삭제  -->
+	<delete id="Checkdelete">
+		DELETE PRODUCT WHERE P_NO=#{param1}
+	</delete>
+	<!-- 상품등록 -->
+	<insert id="produectInsert">
+		INSERT INTO PRODUCT VALUES('N'||PNO_SEQ.NEXTVAL,#{param1},#{param2},
+			#{param3},#{param4},#{param5},#{param6},sysdate,#{param7},#{param8})
+	</insert>
+	
+	
+	
+	
+	
+<!-- 	<sql id="includelist"> -->
+<!-- 		<choose> -->
+<!-- 			<when test="param4==1">    취소요청여부가 Y 일때  -->
+<!-- 				AND OM_CDATE BETWEEN #{param2}AND #{param3} -->
+<!-- 			</when> -->
+<!-- 			<when test="param4==2">    취소요청여부가 N 일때  -->
+<!-- 				AND OM_CDATE BETWEEN #{param2}AND #{param3} -->
+<!-- 				OR OM_CDATE IS NULL -->
+<!-- 			</when> -->
+<!-- 		</choose>	 -->
+<!-- 	</sql> -->
+	
+	<!-- 주문취소 목록 검색 기능-시작날짜~종료날짜+취소요청Y 기준  -->
+<!--    <select id="slist" resultType="micky.sports.shop.dto.OrderMemberDto"> -->
+<!-- 		SELECT OM_CNTNUM,OM_NUM,P_NO, -->
+<!-- 		U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE, -->
+<!-- 		OM_STATE,OM_CANCLE,OM_CDATE FROM ORDER_MEMBER -->
+<!-- 		WHERE OM_CANCLE LIKE '%'||#{param1}||'%' -->
+<!-- 		<include refid="includelist" /> -->
+<!-- 	</select> -->
+     
+     
+     
+     
+     
+     
+	<!-- 관리자 주문내역 상세 -->
+<!-- 	<select id="acontentview" resultType="micky.sports.shop.dto.OrderMemberDto"> -->
+<!-- 		SELECT OM_CNTNUM,OM_NUM,P_NO, -->
+<!-- 		U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE, -->
+<!-- 		OM_STATE,OM_CANCLE,OM_CDATE,C_REASON -->
+<!-- 		FROM ORDER_MEMBER WHERE OM_CNTNUM=#{param1}  -->
+<!-- 	</select> -->
+	
+	
+	<!-- 결제완료 → 주문취소 -->
+<!-- 	<update id="amodify">        -->
+<!-- 		UPDATE ORDER_MEMBER SET OM_STATE=#{param2}  -->
+<!-- 		WHERE OM_CNTNUM=#{param1} -->
+<!-- 	</update> -->
+	
+	
+</mapper>

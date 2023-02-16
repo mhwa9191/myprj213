@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%String loginid = (String)session.getAttribute("loginid"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,10 +56,16 @@
 							<input type="range" onclick="redeptlist(this);" oninput="drawStar(this)" value="1" step="1" min="0" max="5"/>
 						</td>
 					</tr>
-					<tr>
+					<%-- <tr>
+						<!-- <td class="left">작성자</td> -->
+						<td colspan="3">
+							<input id="userid" type="hidden" name="m_id" value="${sessionScope.loginid }" />
+						</td>
+					</tr> --%>
+					<%-- <tr>
 						<td class="left">작성자</td>
 						<td colspan="2">${popupview.m_id }</td>
-					</tr>
+					</tr> --%>
 					<tr>
 						<td class="left">제목</td>
 						<td colspan="2"><input type="text" name="r_title" value="${popupview.r_title }" />

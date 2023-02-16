@@ -1,0 +1,118 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="micky.sports.shop.dao.CartDao">
+	
+<!-- 	<resultMap type="micky.sports.shop.dto.ProductDto" id="ProductDto"> -->
+<!-- 		<id column="p_no" property="p_no"/> -->
+<!-- 		<result column="p_name" property="p_name"/> -->
+<!-- 		<result column="p_price" property="p_price"/> -->
+<!-- 		<result column="p_cnt" property="p_cnt"/> -->
+<!-- 		<result column="p_color" property="p_color"/> -->
+<!-- 		<result column="p_size" property="p_size"/> -->
+<!-- 		<result column="p_filesrc" property="p_filesrc"/> -->
+		
+<!-- 	</resultMap> -->
+	
+<!-- 	<resultMap type="micky.sports.shop.dto.CartDto" id="CartDto"> -->
+<!-- 		<result column="c_no" property="c_no"/> -->
+<!-- 		<result column="m_id" property="m_id"/> -->
+<!-- 		<result column="p_no" property="p_no"/> -->
+<!-- 		<result column="c_cnt" property="c_cnt"/> -->
+<!-- 	</resultMap> -->
+	<!-- 메인단 -->
+	<select id="Productlist" resultType="micky.sports.shop.dto.ProductDto" >
+		SELECT * FROM PRODUCT
+	</select>
+	<!-- 장바구니 추가버튼이 있는 디테일단 -->
+	<select id="Detaillist" resultType="micky.sports.shop.dto.ProductDto">
+		SELECT * FROM PRODUCT WHERE P_NO=#{param1}
+	</select>
+	<!-- 장바구니 추가 -->
+	<insert id="insertCart" >
+		INSERT INTO CART VALUES((SELECT MAX(C_NO) FROM CART)+1,'BLUE',#{param1},'1')		
+	</insert>
+	
+	<resultMap type="micky.sports.shop.dto.ProductDto" id="ProductDto" >	
+		<result column="p_no" property="p_no"/>
+		<result column="p_name" property="p_name"/>
+		<result column="p_price" property="p_price"/>
+		<result column="p_cnt" property="p_cnt"/>
+		<result column="p_color" property="p_color"/>
+		<result column="p_size" property="p_size"/>
+		<result column="p_filesrc" property="p_filesrc"/>
+	</resultMap>
+	
+	<resultMap type="micky.sports.shop.dto.CartDto" id="CartDto">
+		<result column="c_no" property="c_no"/>
+		<result column="m_id" property="m_id"/>
+		<result column="p_no" property="p_no"/>
+		<result column="c_cnt" property="c_cnt"/>
+		<collection property="productDto" resultMap="ProductDto"></collection>
+	</resultMap>
+	
+	<!-- 장바구니 리스트 -->
+	<select id="Cartlist" parameterType="micky.sports.shop.dto.CartDto" resultMap="CartDto">
+		SELECT
+		    P.P_NO, P.P_NAME, P.P_PRICE, P.P_CNT, P.P_COLOR, P.P_SIZE, P.P_FILESRC, C.C_CNT, C.M_ID, C.C_NO
+		FROM
+		    CART C
+		LEFT JOIN
+		    PRODUCT P
+		ON
+		    C.P_NO = P.P_NO
+		WHERE
+			C.M_ID=#{param1}
+		ORDER BY
+    		C.C_NO ASC 
+	</select>
+	<!-- 장바구니 삭제 -->
+	<delete id="Deletelist">
+		DELETE CART WHERE C_NO=#{param1}
+	</delete>
+	<!-- 해당 아이디의 장바구니 전체 삭제 -->
+	<delete id="AllDeletelist">
+		DELETE CART WHERE M_ID=#{param1}
+	</delete>
+	<!-- 구매상품 수량증가 -->
+	<update id="plusCartcount">
+		UPDATE
+			CART C
+		SET 
+			C.C_CNT=C.C_CNT+1
+		WHERE 
+			C.C_NO=#{param1} AND (SELECT P_CNT FROM PRODUCT WHERE P_NO=#{param2})> C.C_CNT
+	</update>
+	<!-- 구매상품 수량감소 -->
+	<update id="minusCartcount">
+		UPDATE
+			CART C
+		SET 
+			C.C_CNT=C.C_CNT-1
+		WHERE 
+			C.C_NO=#{param1} AND C.C_CNT > 1
+	</update>
+	
+	<select id="CartSelectOptionlist" parameterType="micky.sports.shop.dto.CartDto" resultMap="CartDto" >
+		SELECT
+   		 	P.P_NO, P.P_NAME, P.P_PRICE, P.P_CNT, P.P_COLOR, P.P_SIZE, P.P_FILESRC, C.C_CNT, C.M_ID, C.C_NO
+		FROM
+		    CART C
+		LEFT JOIN
+		    PRODUCT P
+		ON
+		    C.P_NO = P.P_NO
+		WHERE
+		    C.C_NO=#{param1}
+	</select>
+	
+	<update id="CartOptionModify">
+		UPDATE 
+		    CART 
+		SET 
+		    P_NO=(SELECT P.P_NO FROM PRODUCT P WHERE P.P_COLOR=#{param1} AND P.P_SIZE=#{param2}),C_CNT=#{param3} 
+		WHERE 
+		    C_NO=#{param4}
+	</update>
+</mapper>

@@ -25,7 +25,7 @@ public class ReviewWriteService implements MickyServiceInter{
 	
 	@Override
 	public void execute(Model model) {
-		System.out.println(">>>>ReviewWriteService");
+System.out.println(">>>>ReviewWriteService");
 		
 //		model에서 request를 풀어내는 방법
 		Map<String, Object> map=model.asMap(); //model을 Map으로 변환
@@ -40,7 +40,7 @@ public class ReviewWriteService implements MickyServiceInter{
 		String uploadPath=request.getSession().getServletContext().getRealPath("/");
 		
 //		학원에서 작업
-		String path="C:\\2022spring\\springwork1\\micky_SportsWear\\src\\main\\webapp\\resources\\reviewupload";
+		String path="C:\\2022spring\\springwork1\\micky_SportsWear_review\\src\\main\\webapp\\resources\\reviewupload";
 //		노트북에서 작업
 //		String path="C:\\2023spring\\springwork1\\micky_SportsWear_review\\src\\main\\webapp\\resources\\reviewupload";
 		
@@ -69,7 +69,6 @@ public class ReviewWriteService implements MickyServiceInter{
 		ReviewDao rdao=sqlSession.getMapper(ReviewDao.class);
 		
 		rdao.write(m_id,r_title,r_content,r_filesrc,r_score);
-		
 	}
 
 }

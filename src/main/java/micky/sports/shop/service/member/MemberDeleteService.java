@@ -34,9 +34,8 @@ public class MemberDeleteService implements MickyServiceInter{
 		
 		String m_id = request.getParameter("m_id");
 		
-		
+		//session.removeAttribute("m_id");
 		dao.memberdelete(m_id);
-		session.removeAttribute("m_id");
 		
 	}
 

@@ -17,7 +17,6 @@ import micky.sports.shop.service.review.ReviewReplyService;
 import micky.sports.shop.service.review.ReviewReplyviewService;
 import micky.sports.shop.service.review.ReviewService;
 import micky.sports.shop.service.review.ReviewWriteService;
-import micky.sports.shop.vopage.SearchVO;
 
 @Controller
 @RequestMapping("/review")
@@ -27,19 +26,21 @@ public class ReviewController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	
 //	임시 메인페이지
+//	@RequestMapping(method = RequestMethod.POST, value = "/reviewBoard")
 	@RequestMapping("/reviewBoard")
-	public String reviewBoard(HttpServletRequest request,
-			SearchVO searchVO, Model model) {
+	public String reviewBoard(HttpServletRequest request, Model model) {
 		System.out.println("=====reviewBoard====");
 		
-		model.addAttribute("searchVO", searchVO);
+		
+		
 		model.addAttribute("request", request);
 		mickyServiceInter=new ReviewService(sqlSession);
 		mickyServiceInter.execute(model);
 		
 		return "review/reviewBoard";
-	}
+	}	
 	
 //	마이페이지-카테고리 리뷰로 접근
 	@RequestMapping("/reviewMylistview")
@@ -114,7 +115,6 @@ public class ReviewController {
 	public String reviewPopupcontentmodify(HttpServletRequest request, Model model) {
 		System.out.println("=====reviewPopupcontentmodify====");
 		
-		
 		model.addAttribute("request", request);
 		mickyServiceInter=new ReviewPopupcontentmodifyService(sqlSession);
 		mickyServiceInter.execute(model);
@@ -145,4 +145,5 @@ public class ReviewController {
 		
 		return "redirect:reviewBoard";
 	}
+	
 }

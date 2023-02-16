@@ -25,8 +25,8 @@ public class LogOutService implements MickyServiceInter{
 	public void execute(Model model) {
 		System.out.println("LogOutService");
 		
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		//Map<String, Object> map = model.asMap();
+		//HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		String loginid = (String)session.getAttribute("loginid");
 		

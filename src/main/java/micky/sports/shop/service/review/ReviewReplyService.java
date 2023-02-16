@@ -34,7 +34,9 @@ public class ReviewReplyService implements MickyServiceInter{
 		String r_recontent=request.getParameter("r_recontent");
 		
 		ReviewDao rdao=sqlSession.getMapper(ReviewDao.class);
-		ReviewDto replyview=rdao.reply(r_no,r_id,r_retitle,r_recontent);
+//		int replyTotalCount=rdao.replyTotalCount(r_no);
+		
+		rdao.replyUpdate(r_no,r_id,r_retitle,r_recontent);
 	}
 
 }

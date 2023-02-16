@@ -22,6 +22,12 @@ public class ReviewDto {
 	private int r_indent; //인덴트
 	private String r_filesrc; //첨부파일
 	
+	private int r_score; //별점
+	private String p_no; //join 사용
+	
+	private MemberDto memberDto; //join 사용
+	private ProductDto productDto; //join 사용
+		
 	public ReviewDto() {
 		// TODO Auto-generated constructor stub
 	}

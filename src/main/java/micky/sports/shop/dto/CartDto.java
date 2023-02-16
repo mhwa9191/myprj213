@@ -13,6 +13,7 @@ public class CartDto {
 	private int c_cnt;//상품의 수량
 	private String c_send;//배송 유무 (배송준비,배송완료)
 	
+	private ProductDto productDto; //쿼리로 join
 	public CartDto() {
 		// TODO Auto-generated constructor stub
 	}

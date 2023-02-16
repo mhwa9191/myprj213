@@ -31,9 +31,12 @@ public class QnaListService implements MickyServiceInter{
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		Member dao = sqlSession.getMapper(Member.class);
-		String m_id = (String)session.getAttribute("loginid");
-		System.out.println("qnalistservice 아이디로그인유지확인용 : "+m_id);
-		ArrayList<Qna_MemberDto> list = dao.getqnalist(m_id);
+		
+		String m_id = (String)session.getAttribute("loginid"); //로그인중인 아이디
+		
+		//System.out.println("qnalistservice 아이디로그인유지확인용 : "+m_id);
+		
+		ArrayList<Qna_MemberDto> list = dao.getqnalist(m_id); //로그인중인 아이디를 조건으로 문의정보 select 후 결과(list)
 		
 		model.addAttribute("qnalist",list);
 		

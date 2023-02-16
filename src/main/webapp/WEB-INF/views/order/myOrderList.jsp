@@ -37,10 +37,10 @@
 <form action="">
 <input type="hidden" name="viewCount" id="viewCount" value="0" />
 <input type="hidden" name="startCount" id="startCount" value="0" />
+
 <table width="800" border="1" id="more_list">
 	<thead>
-		<tr>
-	
+		<tr>	
 			<td>주문일자</td>
 			<td>주문번호</td>
 			<td colspan="2">상품정보</td>
@@ -50,33 +50,42 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${omdList }" var="mlist">
-		<tr>
-
-			<td><fmt:formatDate value="${mlist.om_date }" pattern="yyyy.MM.dd"/></td>
-			<td>${mlist.om_num }</td>
-			<td><img src="../resources/img/productimg/${mlist.productDto.p_filesrc }.jpg" width="50" alt="상품사진" /></td>
-			<td>
-				${mlist.productDto.p_name } <br />
-				${mlist.productDto.p_color } <br />
-				${mlist.productDto.p_size }
-			</td>
-			<td>${mlist.u_cnt }</td>
-			<td>${mlist.p_price }</td>
-			<td>${mlist.om_state }</td>
-			<td>
-				<c:if test="${mlist.om_cancle eq 'N' }">
-					<button type="button" onclick="myOrderCancel('${mlist.om_cntnum }')">결제취소</button>
-					<button type="button" onclick="location.href='#'">리뷰쓰기</button>
-				</c:if>
-				<c:if test="${mlist.om_cancle eq 'Y' }">
-					취소요청 사유 <br />
-					${mlist.c_reason }
-				</c:if>
-				
-			</td>
-		</tr>
-		</c:forEach>
+		<c:choose>
+		<c:when test="${totRowcnt eq '0' }">
+			<tr>
+				<td colspan="8">
+					<c:out value="주문내역이없습니다"></c:out>
+				</td>
+			</tr>
+		</c:when>
+		<c:otherwise>
+			<c:forEach items="${omdList }" var="mlist">
+				<tr>
+					<td><fmt:formatDate value="${mlist.om_date }" pattern="yyyy.MM.dd"/></td>
+					<td>${mlist.om_num }</td>
+					<td><img src="../resources/img/productimg/${mlist.productDto.p_filesrc }.jpg" width="50" alt="상품사진" /></td>
+					<td>
+						${mlist.productDto.p_name } <br />
+						${mlist.productDto.p_color } <br />
+						${mlist.productDto.p_size }
+					</td>
+					<td>${mlist.u_cnt }</td>
+					<td>${mlist.p_price }</td>
+					<td>${mlist.om_state }</td>
+					<td>
+						<c:if test="${mlist.om_cancle eq 'N' }">
+							<button type="button" onclick="myOrderCancel('${mlist.om_cntnum }')">결제취소</button>
+							<button type="button" onclick="location.href='../review/reviewMylistview?account=${sessionScope.loginid}'">리뷰쓰기</button>
+						</c:if>
+						<c:if test="${mlist.om_cancle eq 'Y' }">
+							취소요청 사유 <br />
+							${mlist.c_reason }
+						</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+		</c:otherwise>
+		</c:choose>
 	</tbody>
 </table>
 </form>

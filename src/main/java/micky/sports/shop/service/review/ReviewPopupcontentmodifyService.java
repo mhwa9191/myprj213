@@ -39,7 +39,7 @@ public class ReviewPopupcontentmodifyService implements MickyServiceInter{
 		String uploadPath=request.getSession().getServletContext().getRealPath("/");
 		
 //		학원에서 작업
-		String path="C:\\2022spring\\springwork1\\micky_SportsWear\\src\\main\\webapp\\resources\\reviewupload";
+		String path="C:\\2022spring\\springwork1\\micky_SportsWear_review\\src\\main\\webapp\\resources\\reviewupload";
 //		노트북에서 작업
 //		String path="C:\\2023spring\\springwork1\\micky_SportsWear_review\\src\\main\\webapp\\resources\\reviewupload";
 		
@@ -69,6 +69,7 @@ public class ReviewPopupcontentmodifyService implements MickyServiceInter{
 		
 		ReviewDao rdao=sqlSession.getMapper(ReviewDao.class);
 		rdao.modify(r_no,r_title,r_content,r_score,r_filesrc);
+				
 				
 	}
 

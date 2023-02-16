@@ -7,7 +7,6 @@
 
 <mapper namespace="micky.sports.shop.dao.ReviewDao">
 	
-
 	<!-- 1.join위해 사용한 ReviewDto -->
 	<resultMap type="micky.sports.shop.dto.ReviewDto" id="ReviewDto">
 		<result column="m_id" property="m_id" />
@@ -25,6 +24,7 @@
 		<result column="r_filesrc" property="r_filesrc" />
 		<result column="r_score" property="r_score"/>
 		<collection property="memberDto" resultMap="MemberDto" />
+		<collection property="productDto" resultMap="ProductDto" />
 	</resultMap>
 	
 	<!-- 2.join위해 사용한 MemberDto -->
@@ -42,155 +42,97 @@
 		<result column="m_filesrc" property="m_filesrc" />
 	</resultMap>
 	
-	<sql id="includeReviewBoard">
-		<choose>
-			<when test="param4==1">
-				WHERE R_CONTENT LIKE '%'||#{param3}||'%'
-				<!-- WHERE ROWNO BETWEEN #{param1} AND #{param2} -->
-			</when>
-			<when test="param4==2">
-		        WHERE R_CONTENT LIKE '%'||#{param3}||'%'
-		        ORDER BY R_SCORE DESC
-		        
-				<!-- WHERE R_CONTENT LIKE '%'||#{param3}||'%'
-				AND ROWNO BETWEEN #{param1} AND #{param2}
-				ORDER BY R_GROUP DESC -->
-			</when>
-			<when test="param4==3">
-				WHERE R_CONTENT LIKE '%'||#{param3}||'%'
-				ORDER BY R_SCORE DESC,R_GROUP DESC
-				
-				<!-- WHERE R_CONTENT LIKE '%'||#{param3}||'%'
-				AND ROWNO BETWEEN #{param1} AND #{param2}
-				ORDER BY R_SCORE DESC, R_GROUP DESC -->
-			</when>
-			<otherwise>
-				
-			</otherwise>
-		</choose>
-	</sql>
-
-	<select id="reviewboard" parameterType="micky.sports.shop.dto.ReviewDto" resultMap="ReviewDto">
-		<!-- 검색어 넣고1 -->
-		
-        SELECT ROWNUM,R_NO,M_ID,R_TITLE,R_CONTENT,R_ID,R_RETITLE,
-		R_RECONTENT,R_YNN,R_DATE,R_GROUP,R_STEP,R_INDENT,R_FILESRC,R_SCORE
-		FROM (SELECT ROWNUM ROWNO,R.* FROM
-		(SELECT R.R_NO,M.M_ID,R.R_TITLE,R.R_CONTENT,R.R_ID,R.R_RETITLE,
-		R.R_RECONTENT,R.R_YNN,R.R_DATE,R.R_GROUP,R.R_STEP,R.R_INDENT,R.R_FILESRC,R.R_SCORE
-		FROM MEMBER M, REVIEW R
-		WHERE M.M_ID=R.M_ID
-		ORDER BY R.R_GROUP DESC, R.R_STEP ASC) R
-		
-        <include refid="includeReviewBoard"/>
-        )
-        WHERE ROWNO BETWEEN #{param1} AND #{param2}
+	<!-- 3.join위해 사용한 ProductDto -->
+	<resultMap type="micky.sports.shop.dto.ProductDto" id="ProductDto">
+		<result column="p_no" property="p_no"/>
+		<result column="p_name" property="p_name"/>
+		<result column="p_price" property="p_price"/>
+		<result column="p_cnt" property="p_cnt"/>
+		<result column="p_color" property="p_color"/>
+		<result column="p_size" property="p_size"/>
+		<result column="p_filesrc" property="p_filesrc"/>
+		<result column="p_date" property="p_date"/>
+		<result column="p_category" property="p_category"/>
+		<result column="p_info" property="p_info"/>
+	</resultMap>
 	
-		<!-- 검색어 넣고2 -->
-		<!-- SELECT ROWNUM,R_NO,M_ID,R_TITLE,R_CONTENT,R_ID,R_RETITLE,
-		R_RECONTENT,R_YNN,R_DATE,R_GROUP,R_STEP,R_INDENT,R_FILESRC,R_SCORE
-		FROM (SELECT ROWNUM ROWNO,R.* FROM
-		(SELECT R.R_NO,M.M_ID,R.R_TITLE,R.R_CONTENT,R.R_ID,R.R_RETITLE,
-		R.R_RECONTENT,R.R_YNN,R.R_DATE,R.R_GROUP,R.R_STEP,R.R_INDENT,R.R_FILESRC,R.R_SCORE
-		FROM MEMBER M, REVIEW R
+	<!-- productDetail 하단부에 표시될 리뷰 -->
+	<select id="reviewboard" parameterType="micky.sports.shop.dto.ReviewDto" resultMap="ReviewDto">
+		SELECT ROWNUM, R.*
+		FROM (SELECT R.R_NO,M.M_ID,R.R_TITLE,R.R_CONTENT,R.R_ID,R.R_RETITLE,
+		R.R_RECONTENT,R.R_YNN,R.R_DATE,R.R_GROUP,R.R_STEP,R.R_INDENT,R.R_FILESRC,R.R_SCORE,
+		P.P_NO,P.P_NAME,P.P_COLOR,P.P_SIZE
+		FROM MEMBER M, REVIEW R, PRODUCT P
 		WHERE M.M_ID=R.M_ID
-		ORDER BY R.R_GROUP DESC, R.R_STEP ASC) R)
-		<include refid="includeReviewBoard"/> -->
-		
-		
-		<!-- 오라클 join -->
-		<!-- SELECT R.R_NO,M.M_ID,R.R_TITLE,R.R_CONTENT,R.R_ID,R.R_RETITLE,
-		R.R_RECONTENT,R.R_YNN,R.R_DATE,R.R_GROUP,R.R_STEP,R.R_INDENT,R.R_FILESRC,R.R_SCORE
-		FROM MEMBER M, REVIEW R
-		WHERE M.M_ID=R.M_ID
-		ORDER BY R.R_GROUP DESC, R.R_STEP ASC -->
-		
-		<!-- ansi join -->
-		<!-- SELECT R.R_NO,M.M_ID,R.R_TITLE,R.R_CONTENT,R.R_ID,R.R_RETITLE,
-		R.R_RECONTENT,R.R_YNN,R.R_DATE,R.R_GROUP,R.R_STEP,R.R_INDENT,R.R_FILESRC,R.R_SCORE
-		FROM MEMBER M INNER JOIN REVIEW R
-		ON M.M_ID=R.M_ID
-		ORDER BY R.R_GROUP DESC, R.R_STEP ASC -->
-		
-		<!-- rownum과 join 함께 사용 -->
-		<!-- SELECT ROWNUM, R_NO,M_ID,R_TITLE,R_CONTENT,R_ID,R_RETITLE,
-		R_RECONTENT,R_YNN,R_DATE,R_GROUP,R_STEP,R_INDENT,R_FILESRC,R_SCORE
-		FROM (SELECT ROWNUM ROWNO,R.* FROM
-		(SELECT R.R_NO,M.M_ID,R.R_TITLE,R.R_CONTENT,R.R_ID,R.R_RETITLE,
-		R.R_RECONTENT,R.R_YNN,R.R_DATE,R.R_GROUP,R.R_STEP,R.R_INDENT,R.R_FILESRC,R.R_SCORE
-		FROM MEMBER M, REVIEW R
-		WHERE M.M_ID=R.M_ID
-		ORDER BY R.R_GROUP DESC, R.R_STEP ASC) R)
-		WHERE ROWNO BETWEEN #{param1} AND #{param2} -->
+		AND R.P_NO=P.P_NO
+		AND P_NAME=#{param3}
+		AND R.R_CONTENT like '%'||#{param2}||'%'
+		ORDER BY
+		<choose>
+			<when test="param1 eq 'r_group'">R_GROUP DESC</when>
+			<otherwise>R_SCORE DESC, R_GROUP DESC</otherwise>
+		</choose>
+		) R
 		
 	</select>
 	
-	
+	<!-- 글작성 -->
 	<insert id="write">
-		<!-- INSERT INTO REVIEW VALUES(REVIEW_SEQ.NEXTVAL,'TEMP',
-		#{param1},#{param2},'','','','n',SYSDATE,
-		REVIEW_SEQ.CURRVAL,0,0,#{param3}) -->
-
 		INSERT INTO REVIEW VALUES(REVIEW_SEQ.NEXTVAL,#{param1},
 		#{param2},#{param3},'','','','n',SYSDATE,
-		REVIEW_SEQ.CURRVAL,0,0,#{param4},#{param5})
+		REVIEW_SEQ.CURRVAL,0,0,#{param4},#{param5},'')
 	</insert>
 	
+	<!-- 글삭제 -->
 	<delete id="delete">
 		DELETE FROM REVIEW WHERE R_NO=#{param1}
 	</delete>
-	
 
+	<!-- 마이페이지-후기탭에서 보이는 리뷰 -->
+	<!-- 로그인 한 id가 작성한 리뷰글 전부 출력 -->
 	<select id="mylistview" parameterType="micky.sports.shop.dto.ReviewDto" resultMap="ReviewDto">
 		SELECT R.R_NO,M.M_ID,R.R_TITLE,R.R_CONTENT,R.R_ID,R.R_RETITLE,
-		R.R_RECONTENT,R.R_YNN,R.R_DATE,R.R_GROUP,R.R_STEP,R.R_INDENT,R.R_FILESRC,R.R_SCORE
-		FROM MEMBER M, REVIEW R
+		R.R_RECONTENT,R.R_YNN,R.R_DATE,R.R_GROUP,R.R_STEP,R.R_INDENT,R.R_FILESRC,R.R_SCORE,
+		P.P_NO,P.P_NAME,P.P_COLOR,P.P_SIZE,P.P_FILESRC
+		FROM MEMBER M, REVIEW R, PRODUCT P
 		WHERE M.M_ID=R.M_ID
-		<!-- AND M.M_ID=#{param1} -->
+        AND R.P_NO=P.P_NO
+		AND M.M_ID=#{param1}
 		ORDER BY R.R_GROUP DESC, R.R_STEP ASC
+		
 	</select>
 	
 	<select id="popupview" resultType="micky.sports.shop.dto.ReviewDto">
 		SELECT R_NO,M_ID,R_TITLE,R_CONTENT,R_ID,R_RETITLE,
-		R_RECONTENT,R_YNN,R_DATE,R_GROUP,R_STEP,R_INDENT,R_FILESRC,R_SCORE FROM REVIEW
+		R_RECONTENT,R_YNN,R_DATE,R_GROUP,R_STEP,R_INDENT,R_FILESRC,R_SCORE,P_NO FROM REVIEW
 		WHERE R_NO=#{param1}
 		ORDER BY R_GROUP DESC, R_STEP ASC
 	</select>
 	
-	<!-- <select id="popupupdate" resultType="micky.sports.shop.dto.ReviewDto">
-		SELECT R_NO,M_ID,R_TITLE,R_CONTENT,R_RETITLE,
-		R_RECONTENT,R_YNN,R_DATE,R_GROUP,R_STEP,R_INDENT,R_FILESRC FROM REVIEW
-		WHERE R_NO=#{param1}
-	</select> -->
-	
 	<update id="modify">
 		UPDATE REVIEW SET R_TITLE=#{param2},
-		<!-- R_CONTENT=#{param3} -->
 		R_CONTENT=#{param3}, R_SCORE=#{param4}, R_FILESRC=#{param5}
 		WHERE R_NO=#{param1}
 	</update>
 	
 	<select id="replyview" resultType="micky.sports.shop.dto.ReviewDto">
 		SELECT R_NO,M_ID,R_TITLE,R_CONTENT,R_ID,R_RETITLE,
-		R_RECONTENT,R_YNN,R_DATE,R_GROUP,R_STEP,R_INDENT,R_FILESRC,R_SCORE FROM REVIEW
+		R_RECONTENT,R_YNN,R_DATE,R_GROUP,R_STEP,R_INDENT,R_FILESRC,R_SCORE,P_NO FROM REVIEW
 		WHERE R_NO=#{param1}
 		ORDER BY R_GROUP DESC, R_STEP ASC
 	</select>
 	
-	
-	<select id="selectReviewboardTotCount1" resultType="Integer">
-		SELECT COUNT(*) FROM REVIEW WHERE R_CONTENT LIKE '%'||#{param1}||'%'
-	</select>
-	
-	<select id="selectReviewboardTotCount2" resultType="Integer">
-		SELECT COUNT(*) FROM REVIEW WHERE R_CONTENT LIKE '%'||#{param1}||'%'
-	</select>
-	
-	<select id="selectReviewboardTotCount3" resultType="Integer">
-		SELECT COUNT(*) FROM REVIEW WHERE R_CONTENT LIKE '%'||#{param1}||'%'
-	</select>
-	
-	<select id="selectReviewboardTotCount4" resultType="Integer">
+	<select id="totalCount" resultType="Integer">
 		SELECT COUNT(*) FROM REVIEW
 	</select>
+	
+	<!-- <select id="replyTotalCount" resultType="Integer">
+		SELECT COUNT(R_RECONTENT) FROM REVIEW WHERE R_NO=#{param1, jdbcType=INTEGER}
+	</select> -->
+	
+	<update id="replyUpdate">
+		UPDATE REVIEW SET R_ID=#{param2},
+		R_RETITLE=#{param3}, R_RECONTENT=#{param4},
+		R_YNN='y' WHERE R_NO=#{param1}
+	</update>
 </mapper>

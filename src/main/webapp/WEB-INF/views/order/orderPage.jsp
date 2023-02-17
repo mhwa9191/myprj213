@@ -16,31 +16,29 @@
 <hr />
 <h5>구매할 상품</h5>
 
-<form action="payment" method="post">
-<c:forEach items="${orderPSelectList}" var="slist" varStatus="status">
-<div class="selectlist">
-	<img src="../resources/img/productimg/${slist.p_filesrc }.jpg" width="50" alt="" /> <br />
-	<input type="text" name="p_no" value="${slist.p_no }"/>
-	<input type="text" name="cnt" value="${cnt[status.index] }"/> <br />
-	상품명 : <div id="p_name">${slist.p_name }</div> <br />
-	색상 : <div id="p_color">${slist.p_color }</div> <br />
-	사이즈 : <div id="p_size">${slist.p_size }</div> <br />
-	수량 : <div id="cnt" >${cnt[status.index] }</div> <br />
-	총액 : <div id="totPrice">${cnt[status.index]*slist.p_price }</div> <br />
-</div>
-	<c:set var="totPrices" value="${totPrices+cnt[status.index]*slist.p_price }" />
-
-<hr />
-</c:forEach>
-총 결제 금액
-<c:out value="${totPrices}" />
-<input type="hidden" class="totPrices" name="totPrices" value="${totPrices}" /> <br />
-<input type="submit" value="결제하기" class="btn_payment"/>
-<!-- 결제 금액이 부족한 경우 -->
 <div>
-	<p class="message-no-cash" style="display: none; color: #CC0099;">결제할 캐시가 부족합니다.</p>
+<c:forEach items="${orderPSelectList}" var="slist" varStatus="status">
+	<div class="selectlist">
+		<img src="../resources/img/productimg/${slist.p_filesrc }.jpg" width="50" alt="" /> <br />
+		<input type="text" value="${slist.p_no }"/>
+		<input type="text" value="${cnt[status.index] }"/> <br />
+		상품명 : <div id="p_name">${slist.p_name }</div> <br />
+		색상 : <div id="p_color">${slist.p_color }</div> <br />
+		사이즈 : <div id="p_size">${slist.p_size }</div> <br />
+		수량 : <div id="cnt" >${cnt[status.index] }</div> <br />
+		총액 : <div id="totPrice">${cnt[status.index]*slist.p_price }</div> <br />
+	</div>	
+	<hr />
+</c:forEach>
+	총 결제 금액
+	<c:out value="${totPrices}" />
+	
+	<button class="btn_payment">결제하기</button>
+	<!-- 결제 금액이 부족한 경우 -->
+	<div>
+		<p class="message-no-cash" style="display: none; color: #CC0099;">결제할 캐시가 부족합니다.</p>
+	</div>
 </div>
-</form>
 
 <hr />
 <!-- 주문페이지에서 결제로 넘어가지 않고 다시 상품페이지로 돌아가기 -->
@@ -68,6 +66,12 @@ $('.btn_payment').click(function(){
 	}
 	
 });
+</script>
+<script>
+	$('.btn_payment').click(function(){
+		var link='../order/payment';
+		location.replace(link);
+	});
 </script>
 
 </body>

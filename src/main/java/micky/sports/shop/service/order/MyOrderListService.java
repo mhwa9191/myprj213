@@ -65,6 +65,10 @@ public class MyOrderListService implements MickyServiceInter{
 	
 		model.addAttribute("myListGroup",mtOrderListGroup);
 
+		for (OrderMemberDto orderMemberDto : mtOrderListGroup) {
+			System.out.println(orderMemberDto.getGroupcnt()+"그룹ㄴ");
+			System.out.println(orderMemberDto.getOm_num()+"그룹getOm_numㄴ");
+		}
 		
 	}
 

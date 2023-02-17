@@ -50,11 +50,11 @@ public class OrderPaymentService implements MickyServiceInter{
 		}else {			
 			for (ProductDto orderPSelect : orderPSelectList) {
 				pNo.add(orderPSelect.getP_no()); //상품번호
-				System.out.println(orderPSelect.getP_no()+"상품번호맞니");
+				//System.out.println(orderPSelect.getP_no()+"상품번호맞니");
 			}
 			for (Integer c : cntList) {
 				cnt.add(c); //수량
-				System.out.println(c+"수량확인좀");
+				//System.out.println(c+"수량확인좀");
 			}
 			
 			int totPrices=(Integer)httpsession.getAttribute("totPrices");
@@ -68,14 +68,14 @@ public class OrderPaymentService implements MickyServiceInter{
 				
 			//수량이나 캐시가 없으면 결제가 진행되지 않도록하기
 			int memberCach=odao.ordersMember(loginId).getM_cash();
-			System.out.println("캐시확인"+memberCach);
+			//System.out.println("캐시확인"+memberCach);
 			if(memberCach<totPrices) {
 				//캐시부족...
 				orderResult="0";
 			}else {
 				for (int i = 0; i < pNo.size(); i++) {
 					int checkCnt= pdao.checkPrdCnt(pNo.get(i)).getP_cnt();
-					System.out.println("checkCnt확인"+checkCnt+"ㅋㅋ");
+					//System.out.println("checkCnt확인"+checkCnt+"ㅋㅋ");
 					if (checkCnt<cnt.get(i)) {
 						//재고부족...
 						orderResult="1";
@@ -101,7 +101,7 @@ public class OrderPaymentService implements MickyServiceInter{
 			
 		//가장최근 주문번호확인
 		String checkOmnum= odao.checkOmnum(loginId);
-		System.out.println("여기는"+orderResult+"없");
+		//System.out.println("여기는"+orderResult+"없");
 		//주문결과창
 		model.addAttribute("checkOmnum",checkOmnum);
 		}

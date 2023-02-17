@@ -86,9 +86,35 @@
 			</c:forEach>
 		</c:otherwise>
 		</c:choose>
+			<tr>
+				<td colspan="8">
+					확인작업
+				</td>
+			</tr>
 		<c:forEach items="${myListGroup}" var="myListGroup">
 			<tr>
-				<td rowspan="${myListGroup.groupcnt}">${myListGroup.groupcnt} _ ${myListGroup.om_num}</td>
+				<c:if test="${myListGroup.groupcnt ne '1'}">
+					<td rowspan="${myListGroup.groupcnt}">${myListGroup.groupcnt}</td>
+					<td>${myListGroup.om_num}</td>
+					<td>z</td>
+					<td>z</td>
+					<td>z</td>
+					<td>z</td>
+					<td>z</td>
+					<td>z</td>
+				</c:if>
+			</tr>
+			<tr>
+				<c:if test="${myListGroup.groupcnt eq '1'}">
+					<td>${myListGroup.groupcnt}</td>
+				</c:if>
+					<td>${myListGroup.om_num}</td>
+					<td>z1</td>
+					<td>z1</td>
+					<td>z1</td>
+					<td>z1</td>
+					<td>z1</td>
+					<td>z1</td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -96,30 +122,12 @@
 </form>
 <br />
 totCnt : ${totRowcnt } <br />
-현재페이지/토탈페이지 : ${searchVO.page }/ ${searchVO.totPage } <br />
-
-<c:if test="${searchVO.page>1 }">
-	<a href="myOrderList?page=1">[처음]</a>
-	<a href="myOrderList?page=${searchVO.page-1 }">[이전]</a>
-</c:if>
-<c:forEach begin="${searchVO.pageStart }" end="${searchVO.pageEnd }" var="i">
-	<c:choose>
-		<c:when test="${i eq searchVO.page }">
-			<span style="color:red; font-weight: bold">
-			${i }&nbsp;
-			</span>
-		</c:when>
-		<c:otherwise>
-			<a href="myOrderList?page=${i }" style="text-decoration: none">
-			${i }&nbsp;
-			</a>
-		</c:otherwise>
-	</c:choose>
-</c:forEach>
 <c:if test="${searchVO.page<searchVO.totPage }">
-	<a href="myOrderList?page=${searchVO.page+1 }">[다음]</a>
-	<a href="myOrderList?page=${searchVO.totPage }">[마지막]</a>
+<hr />
+	<a href="myOrderList?page=${searchVO.page+1 }">[더보기]</a>
+<hr />
 </c:if>
+<br />
 
 <script>
 function myOrderCancel(omcntnum){

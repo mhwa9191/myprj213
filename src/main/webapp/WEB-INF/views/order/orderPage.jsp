@@ -17,21 +17,21 @@
 <h5>구매할 상품</h5>
 
 <div>
-<c:forEach items="${orderPSelectList}" var="slist" varStatus="status">
-	<div class="selectlist">
-		<img src="../resources/img/productimg/${slist.p_filesrc }.jpg" width="50" alt="" /> <br />
-		<input type="text" value="${slist.p_no }"/>
-		<input type="text" value="${cnt[status.index] }"/> <br />
-		상품명 : <div id="p_name">${slist.p_name }</div> <br />
-		색상 : <div id="p_color">${slist.p_color }</div> <br />
-		사이즈 : <div id="p_size">${slist.p_size }</div> <br />
-		수량 : <div id="cnt" >${cnt[status.index] }</div> <br />
-		총액 : <div id="totPrice">${cnt[status.index]*slist.p_price }</div> <br />
-	</div>	
-	<hr />
-</c:forEach>
-	총 결제 금액
-	<c:out value="${totPrices}" />
+	<c:forEach items="${orderPSelectList}" var="slist" varStatus="status">
+		<div class="selectlist">
+			<img src="../resources/img/productimg/${slist.p_filesrc }.jpg" width="50" alt="" /> <br />
+			상품명 : <div id="p_name">${slist.p_name }</div> <br />
+			색상 : <div id="p_color">${slist.p_color }</div> <br />
+			사이즈 : <div id="p_size">${slist.p_size }</div> <br />
+			수량 : <div id="cnt" >${cnt[status.index] }</div> <br />
+			총액 : <div id="totPrice">${cnt[status.index]*slist.p_price }</div> <br />
+		</div>	
+		<hr />
+	</c:forEach>
+	<div>
+		<p>총 결제 금액</p>
+		<span class="totPrices">${totPrices}</span>
+	</div>
 	
 	<button class="btn_payment">결제하기</button>
 	<!-- 결제 금액이 부족한 경우 -->
@@ -56,21 +56,17 @@
 
 
 <script>
-$('.btn_payment').click(function(){
-	var m_cash = ${ordersMember.m_cash };
-	var totPrices=$('.totPrices').val();
-	/* alert(totPrices); */
-	if (m_cash < totPrices){
-		$('.message-no-cash').css('display','block');
-		return false;
-	}
-	
-});
-</script>
-<script>
 	$('.btn_payment').click(function(){
-		var link='../order/payment';
-		location.replace(link);
+		var m_cash = ${ordersMember.m_cash };
+		var totPrices=${totPrices};
+		/* alert(totPrices); */
+		if (m_cash < totPrices){
+			$('.message-no-cash').css('display','block');
+			return false;
+		}else{
+			var link='../order/payment';
+			location.replace(link);
+		}
 	});
 </script>
 

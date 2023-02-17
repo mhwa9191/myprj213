@@ -21,15 +21,19 @@
 		<h2>주문실패</h2>
 		<c:out value="품절입니다."></c:out>
 	</c:when>
+	<c:when test="${orderResult eq '2'}">
+		<c:out value="새로고침되었습니다."></c:out>
+	</c:when>
 	<c:otherwise>
 		<span>주문성공</span>
 		<p>주문번호</p>
-		<c:out value="${checkOmnum}"></c:out>
+		<c:out value="${checkOmnum}"></c:out> <br />
+		<button class="replaceLink">나의주문내역확인하기</button>
 	</c:otherwise>
 	</c:choose>
 </div>
 
-<button class="replaceLink">나의주문내역확인하기</button>
+<button onclick="location.href='../product/productList'">상품목록보기</button>
 
 <script>
 $('.replaceLink').click(function(){

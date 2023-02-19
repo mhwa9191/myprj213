@@ -24,7 +24,7 @@ public class OrderMemberDto {
 	
 	private ProductDto productDto; //join  테이블
 
-	private int groupcnt; //나의주문내역 주문건당 묶기 주문시간별
+	//private int groupcnt; //나의주문내역 주문건당 묶기 주문시간별
 	
 	public OrderMemberDto() {
 		// TODO Auto-generated constructor stub

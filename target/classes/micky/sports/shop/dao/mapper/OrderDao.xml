@@ -50,13 +50,13 @@
     </select>
     
     <!-- 나의주문내역 주문건당 묶기 주문시간별 -->
-    <select id="mtOrderListGroup" parameterType="micky.sports.shop.dto.OrderMemberDto" resultMap="OrderMemberDto">
+<!--     <select id="mtOrderListGroup" parameterType="micky.sports.shop.dto.OrderMemberDto" resultMap="OrderMemberDto">
 		SELECT COUNT(*) GROUPCNT,OM_NUM,OM_DATE FROM 
 		(SELECT OM_NUM,OM_CNTNUM,P_NO,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,OM_STATE,OM_CANCLE,OM_CDATE,C_REASON
 		FROM (SELECT ROWNUM NUM, OM.* 
 		FROM (SELECT * FROM ORDER_MEMBER WHERE M_ID=#{param1} ORDER BY OM_DATE DESC) OM)
 		WHERE NUM BETWEEN 1 AND #{param3}) GROUP BY OM_DATE,OM_NUM ORDER BY OM_DATE DESC
-    </select>
+    </select> -->
     
 	<!-- 주문페이지에서 회원정보확인하기 + 수량이나 캐시가 없으면 결제가 진행되지 않도록하기 -->
     <select id="ordersMember" resultType="micky.sports.shop.dto.MemberDto">

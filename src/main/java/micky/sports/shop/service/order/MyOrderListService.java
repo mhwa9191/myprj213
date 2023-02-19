@@ -1,6 +1,7 @@
 package micky.sports.shop.service.order;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,22 +54,48 @@ public class MyOrderListService implements MickyServiceInter{
 		ArrayList<OrderMemberDto> omdList=odao.mtOrderList(loginId,rowStart,rowEnd);
 				
 		//나의주문내역 주문건당 묶기 주문시간별
-		ArrayList<OrderMemberDto> mtOrderListGroup=odao.mtOrderListGroup(loginId,rowStart,rowEnd);
+		//ArrayList<OrderMemberDto> mtOrderListGroup=odao.mtOrderListGroup(loginId,rowStart,rowEnd);
 		
 		model.addAttribute("omdList",omdList);
 		model.addAttribute("totRowcnt",total);
 		model.addAttribute("searchVO",searchVO);
 		
+		ArrayList<Integer> myOrdList= new ArrayList<Integer>();
+		ArrayList<Date> myOrdListDate= new ArrayList<Date>();
+		//omdList 구매시간확인
+		for (OrderMemberDto orderMemberDto : omdList) {
+			Date omDate=orderMemberDto.getOm_date();
+			System.out.println(omDate);
+			myOrdListDate.add(omDate);
+		}
+
+		for (int i = 0; i < myOrdListDate.size()-1; i++) {
+			if (myOrdListDate.get(i).equals(myOrdListDate.get(i+1))) {
+				
+				System.out.println("같은가");
+				myOrdList.add(0);
+				
+			}else {
+				myOrdList.add(1);
+				
+			}
+		}
+		//1 2 0 2 0  이거나 1 0 2 0 2
+		
+		System.out.println(myOrdList);
+		System.out.println(myOrdListDate);
+		System.out.println(myOrdListDate.get(0));
+		
+		
 		//나의주문내역에서 정보확인
 		model.addAttribute("myList",odao.ordersMember(loginId));
 		
-	
-		model.addAttribute("myListGroup",mtOrderListGroup);
 
-		for (OrderMemberDto orderMemberDto : mtOrderListGroup) {
-			System.out.println(orderMemberDto.getGroupcnt()+"그룹ㄴ");
-			System.out.println(orderMemberDto.getOm_num()+"그룹getOm_numㄴ");
-		}
+		//model.addAttribute("myListGroup",mtOrderListGroup);
+//		for (OrderMemberDto orderMemberDto : mtOrderListGroup) {
+//			System.out.println(orderMemberDto.getGroupcnt()+"그룹ㄴ");
+//			System.out.println(orderMemberDto.getOm_num()+"그룹getOm_numㄴ");
+//		}
 		
 	}
 

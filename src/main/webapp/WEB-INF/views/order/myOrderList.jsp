@@ -11,15 +11,15 @@
 <script src="../resources/js/jquery.bpopup.min.js"></script>
 </head>
 <body>
-<c:if test="${empty sessionScope.loginid }">
+<c:if test="${empty sessionScope.loginid}">
    <a href="../member/loginform">login</a> 
    |  <a href="../member/joinform">join</a>
 
 </c:if>
- <c:if test="${not empty sessionScope.loginid }">
+ <c:if test="${not empty sessionScope.loginid}">
     <a href="../member/logout">logout</a> 
  <br />
- ${sessionScope.loginid } 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
+ ${sessionScope.loginid} 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
  </c:if>
  
  
@@ -29,7 +29,7 @@
 	</p>
  </div>
  <div>
- 	<p>회원님의 현재 보유 캐시 : ${myList.m_cash }</p>
+ 	<p>회원님의 현재 보유 캐시 : ${myList.m_cash}</p>
  </div>
  
 
@@ -41,6 +41,7 @@
 <table width="800" border="1" id="more_list">
 	<thead>
 		<tr>	
+			<td>확인</td>
 			<td>주문일자</td>
 			<td>주문번호</td>
 			<td colspan="2">상품정보</td>
@@ -51,7 +52,7 @@
 	</thead>
 	<tbody>
 		<c:choose>
-		<c:when test="${totRowcnt eq '0' }">
+		<c:when test="${totRowcnt eq '0'}">
 			<tr>
 				<td colspan="8">
 					<c:out value="주문내역이없습니다"></c:out>
@@ -59,72 +60,48 @@
 			</tr>
 		</c:when>
 		<c:otherwise>
-			<c:forEach items="${omdList }" var="mlist">
-				<tr>
-					<td><fmt:formatDate value="${mlist.om_date }" pattern="yyyy.MM.dd hh:mm:ss"/></td>
-					<td>${mlist.om_num }</td>
-					<td><img src="../resources/img/productimg/${mlist.productDto.p_filesrc }.jpg" width="50" alt="상품사진" /></td>
-					<td>
-						${mlist.productDto.p_name } <br />
-						${mlist.productDto.p_color } <br />
-						${mlist.productDto.p_size }
-					</td>
-					<td>${mlist.u_cnt }</td>
-					<td>${mlist.p_price }</td>
-					<td>${mlist.om_state }</td>
-					<td>
-						<c:if test="${mlist.om_cancle eq 'N' }">
-							<button type="button" onclick="myOrderCancel('${mlist.om_cntnum }')">결제취소</button>
-							<button type="button" onclick="location.href='../review/reviewMylistview?account=${sessionScope.loginid}'">리뷰쓰기</button>
-						</c:if>
-						<c:if test="${mlist.om_cancle eq 'Y' }">
-							취소요청 사유 <br />
-							${mlist.c_reason }
-						</c:if>
-					</td>
-				</tr>
+		
+			<c:forEach items="${omdList}" var="mlist" varStatus="status">			
+			<tr>
+				<c:if test="${myListGroup[status.index].groupcnt eq '1'}">
+				<td style="display: none;"></td>
+				</c:if>
+				<c:if test="${myListGroup[status.index].groupcnt ne '2'}">
+				<td rowspan="${myListGroup[status.index].groupcnt}">${myListGroup[status.index].groupcnt}</td>
+				</c:if>
+				<td><fmt:formatDate value="${mlist.om_date}" pattern="yyyy.MM.dd hh:mm:ss"/></td>
+				<td>${mlist.om_num}</td>
+				<td><img src="../resources/img/productimg/${mlist.productDto.p_filesrc}.jpg" width="50" alt="상품사진" /></td>
+				<td>
+					${mlist.productDto.p_name} <br />
+					${mlist.productDto.p_color} <br />
+					${mlist.productDto.p_size}
+				</td>
+				<td>${mlist.u_cnt}</td>
+				<td>${mlist.p_price}</td>
+				<td>${mlist.om_state}</td>
+				<td>
+					<c:if test="${mlist.om_cancle eq 'N'}">
+						<button type="button" onclick="myOrderCancel('${mlist.om_cntnum}')">결제취소</button>
+						<button type="button" onclick="location.href='../review/reviewMylistview?account=${sessionScope.loginid}'">리뷰쓰기</button>
+					</c:if>
+					<c:if test="${mlist.om_cancle eq 'Y'}">
+						취소요청 사유 <br />
+						${mlist.c_reason}
+					</c:if>
+				</td>
+			</tr>
 			</c:forEach>
 		</c:otherwise>
 		</c:choose>
-			<tr>
-				<td colspan="8">
-					확인작업
-				</td>
-			</tr>
-		<c:forEach items="${myListGroup}" var="myListGroup">
-			<tr>
-				<c:if test="${myListGroup.groupcnt ne '1'}">
-					<td rowspan="${myListGroup.groupcnt}">${myListGroup.groupcnt}</td>
-					<td>${myListGroup.om_num}</td>
-					<td>z</td>
-					<td>z</td>
-					<td>z</td>
-					<td>z</td>
-					<td>z</td>
-					<td>z</td>
-				</c:if>
-			</tr>
-			<tr>
-				<c:if test="${myListGroup.groupcnt eq '1'}">
-					<td>${myListGroup.groupcnt}</td>
-				</c:if>
-					<td>${myListGroup.om_num}</td>
-					<td>z1</td>
-					<td>z1</td>
-					<td>z1</td>
-					<td>z1</td>
-					<td>z1</td>
-					<td>z1</td>
-			</tr>
-		</c:forEach>
 	</tbody>
 </table>
 </form>
 <br />
-totCnt : ${totRowcnt } <br />
-<c:if test="${searchVO.page<searchVO.totPage }">
+totCnt : ${totRowcnt} <br />
+<c:if test="${searchVO.page<searchVO.totPage}">
 <hr />
-	<a href="myOrderList?page=${searchVO.page+1 }">[더보기]</a>
+	<a href="myOrderList?page=${searchVO.page+1}">[더보기]</a>
 <hr />
 </c:if>
 <br />

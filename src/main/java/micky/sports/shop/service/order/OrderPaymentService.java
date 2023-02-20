@@ -36,12 +36,6 @@ public class OrderPaymentService implements MickyServiceInter{
 		//String[] pNo=request.getParameterValues("p_no"); //상품번호
 		//String[] cnt=request.getParameterValues("cnt"); //수량
 		
-		//배송
-//		String receipt_name=request.getParameter("receipt_name");
-//		System.out.println("****receipt_name~~~~"+receipt_name);
-		
-		
-		
 		
 		ArrayList<ProductDto> orderPSelectList=new ArrayList<ProductDto>();
 		orderPSelectList=(ArrayList<ProductDto>)httpsession.getAttribute("orderPSelectList");		

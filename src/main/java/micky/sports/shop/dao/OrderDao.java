@@ -39,4 +39,8 @@ public interface OrderDao {
 
 	//배송관련 최근주문번호확인
 	public OrderMemberDto checkOmCntnum(String mId);
+	
+	//배송
+	public void delivery(String omCntnum,String mId,String receipt_name,String receipt_phone,String addr1,String addr2,String addr3);
+
 }

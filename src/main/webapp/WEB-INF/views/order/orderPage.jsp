@@ -27,7 +27,6 @@
 		 	주소 : <input type="text" name="addr2" id="addr2"/> <br />
 		 	상세주소 : <input type="text" name="addr3" id="addr3"/>
 		</form>
-		<button class="btn_sub_addr">주소확인</button>
 	</div>
 	
 </div>
@@ -71,22 +70,6 @@
 <hr />
 
 <script>
-$('.btn_sub_addr').click(function(){
-	var receipt_name=document.getElementById('receipt_name').value;
-	var receipt_phone=document.getElementById('receipt_phone').value;
-	var addr1=document.getElementById('addr1').value;
-	var addr2=document.getElementById('addr2').value;
-	var addr3=document.getElementById('addr3').value;
-	alert(receipt_name+"ssss"+receipt_phone+"sss"+addr1+"aaaaa"+addr2+"dd"+addr3);
-	
-});
-</script>
-<%
-String receipt_name=request.getParameter("receipt_name");
-System.out.print(receipt_name);
-System.out.print("s");
-%>
-<script>
 	$('.btn_payment').click(function(){
 		var m_cash = ${ordersMember.m_cash };
 		var totPrices=${totPrices};
@@ -104,7 +87,13 @@ System.out.print("s");
 			$('.message-no-addr').css('display','block');
 			return false;
 		}else{
-			var link='../order/payment';
+			var receipt_name=document.getElementById('receipt_name').value;
+			var receipt_phone=document.getElementById('receipt_phone').value;
+			var addr1=document.getElementById('addr1').value;
+			var addr2=document.getElementById('addr2').value;
+			var addr3=document.getElementById('addr3').value;
+			/* alert("확인돤"); */
+			var link='../order/payment?receipt_name='+receipt_name+'&receipt_phone='+receipt_phone+'&addr1='+addr1+'&addr2='+addr2+'&addr3='+addr3;
 			/* document.sub_addr.submit(); */
 			location.replace(link);
 		}

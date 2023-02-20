@@ -40,18 +40,24 @@ public class OrderDeliveryService implements MickyServiceInter{
 		//String[] cnt=request.getParameterValues("cnt"); //수량
 		
 		//배송
-		String receipt_name=request.getParameter("receipt_name");
-		String receipt_phone=request.getParameter("receipt_phone");
-		String addr1=request.getParameter("addr1");
-		String addr2=request.getParameter("addr2");
-		String addr3=request.getParameter("addr3");
-		System.out.println("****receipt_name~~~~"+receipt_name);
-		System.out.println("****receipt_phone~~~~"+receipt_phone);
-		System.out.println("****addr1~~~~"+addr1);
-		System.out.println("****addr2~~~~"+addr2);
-		System.out.println("****addr3~~~~"+addr3);
-	
-
+//		String[] delivList=request.getParameterValues("delivList");
+//		for (String string : delivList) {
+//			System.out.println("****receipt_name~~~~"+string);
+//		}
+		
+		String receipt_name =request.getParameter("receipt_name");
+		String receipt_phone =request.getParameter("receipt_phone");
+		String addr1 =request.getParameter("addr1");
+		String addr2 =request.getParameter("addr2");
+		String addr3 =request.getParameter("addr3");
+		
+		OrderDao odao=sqlSession.getMapper(OrderDao.class);
+		//가장최근 주문번호확인
+		OrderMemberDto checkOmCntnum= odao.checkOmCntnum(loginId);
+		System.out.println("여기는"+checkOmCntnum.getOm_cntnum()+"없");
+		String omCntnum=checkOmCntnum.getOm_cntnum();
+		
+		odao.delivery(omCntnum,loginId,receipt_name,receipt_phone,addr1,addr2,addr3);
 	}
 
 }

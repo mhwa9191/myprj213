@@ -95,8 +95,14 @@
 	<!-- 배송관련 최근번호조회 -->
 	<select id="checkOmCntnum" parameterType="micky.sports.shop.dto.OrderMemberDto" resultMap="OrderMemberDto">
    		SELECT OM_CNTNUM,OM_NUM,P_NO,U_CNT,M_ID,OM_DATE ,OM_PAY ,P_PRICE ,OM_STATE ,OM_CANCLE ,OM_CDATE,C_REASON
-		FROM(SELECT * FROM ORDER_MEMBER WHERE M_ID=#{parem1} ORDER BY OM_DATE DESC) WHERE ROWNUM = 1
+		FROM(SELECT * FROM ORDER_MEMBER WHERE M_ID=#{param1} ORDER BY OM_DATE DESC) WHERE ROWNUM = 1
     </select>
 	
+	<!-- 배송 -->
+	<insert id="delivery">
+		INSERT INTO ORDER_DELIVERY(OD_NUM,OM_NUM,OM_DATE,M_ID,ADDR1,ADDR2,ADDR3,RECEIPT_NAME,RECEIPT_PHONE,OD_DATE)
+		VALUES(TO_CHAR(SYSDATE, 'YYYYMMDD')||DELIVERY_SEQ.NEXTVAL,(SELECT OM_NUM FROM ORDER_MEMBER WHERE OM_CNTNUM=#{param1}),
+		(SELECT OM_DATE FROM ORDER_MEMBER WHERE OM_CNTNUM=#{param1}),#{param2},#{param5},#{param6},#{param7},#{param3},#{param4},'')
+	</insert>
 	
 </mapper>

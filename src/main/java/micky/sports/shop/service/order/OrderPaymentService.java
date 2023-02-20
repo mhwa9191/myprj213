@@ -35,6 +35,14 @@ public class OrderPaymentService implements MickyServiceInter{
 		//String mId="blue2"; 
 		//String[] pNo=request.getParameterValues("p_no"); //상품번호
 		//String[] cnt=request.getParameterValues("cnt"); //수량
+		
+		//배송
+//		String receipt_name=request.getParameter("receipt_name");
+//		System.out.println("****receipt_name~~~~"+receipt_name);
+		
+		
+		
+		
 		ArrayList<ProductDto> orderPSelectList=new ArrayList<ProductDto>();
 		orderPSelectList=(ArrayList<ProductDto>)httpsession.getAttribute("orderPSelectList");		
 		
@@ -83,7 +91,7 @@ public class OrderPaymentService implements MickyServiceInter{
 					}
 				}	
 			}
-			System.out.println("중간확인되니"+orderResult+"없");
+			//System.out.println("중간확인되니"+orderResult+"없");
 			if (orderResult=="주문성공") {
 				for (int i = 0; i < pNo.size(); i++) {
 					//구매이력 추가 insert

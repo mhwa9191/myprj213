@@ -29,7 +29,7 @@ public class OrderPageService implements MickyServiceInter{
 		//로그인 세션
 		httpsession = request.getSession();
 		String loginId = (String)httpsession.getAttribute("loginid");
-		System.out.println("*********~~~~~~~~~~~~~~~~~"+loginId);
+		//System.out.println("*********~~~~~~~~~~~~~~~~~"+loginId);
 
 		String[] no=request.getParameterValues("choice_pno"); 
 		String[] cnt=request.getParameterValues("choice_cnt"); 
@@ -44,7 +44,7 @@ public class OrderPageService implements MickyServiceInter{
 		
 		for (int i = 0; i < no.length; i++) {
 			//System.out.println("**********"+no[i]);
-			System.out.println("**********"+cnt[i]);
+			//System.out.println("**********"+cnt[i]);
 			orderPSelect.add(odao.orderSelect(no[i]));
 			cnts.add(Integer.parseInt(cnt[i]));
 			//선택상품의 가격

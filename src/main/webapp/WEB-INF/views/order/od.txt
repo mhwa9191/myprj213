@@ -1,0 +1,27 @@
+
+--배송
+drop table order_delivery;
+create table order_delivery(
+od_num varchar2(100), --배송번호(sysdate+seq)
+om_num varchar2(100), --주문번호(sysdate+id)
+om_date date, --주문일자
+m_id varchar2(50), --아이디
+addr1 varchar2(20), --배송지주소1(우편번호)
+addr2 varchar2(50), --배송지주소2(주소)
+addr3 varchar2(50), --배송지주소3(상세주소)
+receipt_name varchar2(20), --수령자이름
+receipt_phone varchar2(20), --수령자전화번호
+od_date date); --배송일자
+
+CREATE SEQUENCE delivery_SEQ INCREMENT BY 1 
+START WITH 1000 MAXVALUE 2000 MINVALUE 1000 CYCLE CACHE 2;
+
+insert into order_delivery(od_num,om_num,om_date,m_id,addr1,addr2,addr3,receipt_name,receipt_phone,od_date)
+values(TO_CHAR(SYSDATE, 'YYYYMMDD')||delivery_SEQ.nextval,(select om_num from order_member where om_cntnum='1000'),
+(select om_date from order_member where om_cntnum='1000'),'blue','18588','서울','13호','홍길동','01012345678','');
+
+select od_num,om_num,om_date,m_id,addr1,addr2,addr3,receipt_name,receipt_phone,od_date from order_delivery;
+
+--가장최근 날짜의 값 가져오기
+select om_cntnum,om_num,p_no,u_cnt,m_id,om_date ,om_pay ,p_price ,om_state ,om_cancle ,om_cdate,c_reason
+from(select * from order_member where m_id='blue1' order by om_date DESC) where ROWNUM = 1;

@@ -17,5 +17,8 @@
 <a href="admin_olist">admin_olist</a>  <br />
 <a href="member/loginform">loginform</a>  <br />
 <a href="admin_product">admin_product</a>  <br />
+<hr />
+<a href="admin3/delivList">admin_deliv</a>  <br />
+
 </body>
 </html>

@@ -81,14 +81,25 @@
 				<td>${mlist.p_price}</td>
 				<td>${mlist.om_state}</td>
 				<td>
-					<c:if test="${mlist.om_cancle eq 'N'}">
-						<button type="button" onclick="myOrderCancel('${mlist.om_cntnum}')">결제취소</button>
-						<button type="button" onclick="location.href='../review/reviewMylistview?account=${sessionScope.loginid}'">리뷰쓰기</button>
-					</c:if>
-					<c:if test="${mlist.om_cancle eq 'Y'}">
-						취소요청 사유 <br />
-						${mlist.c_reason}
-					</c:if>
+					<c:choose>
+						<c:when test="${mlist.om_cancle eq 'N' && mlist.om_state eq '결제완료'}">
+							<button type="button" onclick="myOrderCancel('${mlist.om_cntnum}')">결제취소</button>
+						</c:when>
+						<c:when test="${mlist.om_state eq '상품준비중'}">
+							<button type="button" onclick="deliveryCheck('${mlist.om_cntnum}');">배송조회</button>
+						</c:when>
+						<c:when test="${mlist.om_cancle eq 'Y'}">
+							취소요청 사유 <br />
+							${mlist.c_reason}
+						</c:when>
+						<c:when test="${mlist.om_state eq '구매확정'}">
+							<button type="button" onclick="location.href='../review/reviewMylistview?account=${sessionScope.loginid}'">리뷰쓰기</button>
+						</c:when>
+						<c:otherwise>
+							<button>구매확정</button>
+						</c:otherwise>
+					</c:choose>
+
 				</td>
 			</tr>
 			</c:forEach>
@@ -122,6 +133,17 @@ function myOrderCancel(omcntnum){
 	form.submit();
 }
 </script>
+<script>
+function deliveryCheck(omcntnum){
+	/* alert(omcntnum); */
+	var win = window.open("", "Delivery", "width=500,height=600");
+/* 	win.document.write("<p>새창에 표시될 내용 입니다.</p>"); */
+	win.focus(); // 포커스를 준다음에
+	win.document.body.innerHTML = `<p>이름은 ${name} 입니다</p>`;
+}
+</script>
+
+
 
 </body>
 </html>

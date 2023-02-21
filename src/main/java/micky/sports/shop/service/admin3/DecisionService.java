@@ -37,6 +37,9 @@ public class DecisionService implements MickyServiceInter{
 		Admin3 admin3 =sqlSession.getMapper(Admin3.class);
 		admin3.decisionDeliv(od_num);
 		
+		//배송일자넣기
+		admin3.dateDeliv(od_num);
+		
 	}
 
 }

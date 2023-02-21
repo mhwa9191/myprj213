@@ -13,6 +13,8 @@ public interface Admin3 {
 	public ArrayList<OrderMemberDto> adminDelivList(int rowStart,int rowEnd);
 	//주문 확정 상품준비중변경
 	public void decisionDeliv(String odNum);
+	//배송일자
+	public void dateDeliv(String odNum);
 }
 
 

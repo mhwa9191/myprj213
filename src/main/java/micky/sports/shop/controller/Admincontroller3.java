@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import micky.sports.shop.service.MickyServiceInter;
 import micky.sports.shop.service.admin3.DecisionService;
 import micky.sports.shop.service.admin3.DelivListService;
-import micky.sports.shop.service.order.MyOrderListService;
 import micky.sports.shop.vopage.SearchVO;
 
 @Controller
 @RequestMapping("/admin3")
-public class Admincontroller3 {
+public class AdminController3 {
 	MickyServiceInter mickyServiceInter;
 
 	@Autowired
@@ -47,5 +46,6 @@ public class Admincontroller3 {
 		
 		return "redirect:delivList";
 	}
+
 	
 }

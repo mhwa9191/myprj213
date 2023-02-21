@@ -49,10 +49,14 @@
 	</select>
 	<!-- 주문확정 상품준비중변경 -->
 	<update id="decisionDeliv">
-		update order_member set om_state='상품준비중'
-		where om_date=(select om_date from order_delivery where od_num=#{param1})
-		and m_id=(select m_id from order_delivery where od_num=#{param1})
-		and om_cancle='N'
+		UPDATE ORDER_MEMBER SET OM_STATE='상품준비중'
+		WHERE OM_DATE=(SELECT OM_DATE FROM ORDER_DELIVERY WHERE OD_NUM=#{param1})
+		AND M_ID=(SELECT M_ID FROM ORDER_DELIVERY WHERE OD_NUM=#{param1})
+		AND OM_CANCLE='N'
+	</update>
+	<!-- 배송일자 -->
+	<update id="dateDeliv">
+		UPDATE ORDER_DELIVERY SET OD_DATESYSDATE WHERE OD_NUM=#{param1}
 	</update>
 
 	

@@ -1,0 +1,59 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="micky.sports.shop.dao.Admin3">
+     
+    <!-- 나의 주문 내역 보기 join -->
+    <resultMap type="micky.sports.shop.dto.OrderMemberDto" id="OrderMemberDto">
+    	<result column="om_cntnum" property="om_cntnum" />
+    	<result column="om_num" property="om_num" />
+    	<result column="p_no" property="p_no" />
+    	<result column="u_cnt" property="u_cnt" />
+    	<result column="m_id" property="m_id" />
+    	<result column="om_date" property="om_date" />
+    	<result column="om_pay" property="om_pay" />
+    	<result column="p_price" property="p_price" />
+    	<result column="om_state" property="om_state" />
+    	<result column="om_cancle" property="om_cancle" />
+    	<result column="om_cdate" property="om_cdate" />
+    	<result column="c_reason" property="c_reason" />
+    	<result column="groupcnt" property="groupcnt" />
+		<collection property="orderDeliveryDto" resultMap="OrderDeliveryDto"></collection>
+    </resultMap>
+    <resultMap type="micky.sports.shop.dto.OrderDeliveryDto" id="OrderDeliveryDto">
+    	<result column="od_num" property="od_num"/>
+    	<result column="om_num" property="om_num"/>
+    	<result column="om_date" property="om_date"/>
+    	<result column="m_id" property="m_id"/>
+    	<result column="addr1" property="addr1"/>
+    	<result column="addr2" property="addr2"/>
+    	<result column="addr3" property="addr3"/>
+    	<result column="receipt_name" property="receipt_name"/>
+    	<result column="receipt_phone" property="receipt_phone"/>
+    	<result column="od_date" property="od_date"/>
+<!-- 		<collection property="orderMemberDto" resultMap="OrderMemberDto"></collection> -->
+    </resultMap>
+    <select id="adminDelivList" parameterType="micky.sports.shop.dto.OrderMemberDto" resultMap="OrderMemberDto">
+		SELECT OM_CNTNUM,OM_DATE,OM_NUM,M_ID,P_NO,U_CNT,OM_STATE,OM_CANCLE, OD_NUM,ADDR1,ADDR2,ADDR3,RECEIPT_NAME,RECEIPT_PHONE,OD_DATE
+		FROM( SELECT ROWNUM NUM, PAGEODV.* 
+		FROM (SELECT OM_CNTNUM,OM_DATE,OM_NUM,M_ID,P_NO,U_CNT,OM_STATE,OM_CANCLE, OD_NUM,ADDR1,ADDR2,ADDR3,RECEIPT_NAME,RECEIPT_PHONE,OD_DATE
+		FROM (SELECT OM.OM_CNTNUM,OM.OM_DATE,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.OM_STATE,OM.OM_CANCLE,
+		OD.OD_NUM,OD.ADDR1,OD.ADDR2,OD.ADDR3,OD.RECEIPT_NAME,OD.RECEIPT_PHONE,OD.OD_DATE
+		FROM ORDER_MEMBER OM INNER JOIN ORDER_DELIVERY OD ON OM.OM_DATE=OD.OM_DATE) ORDER BY OM_DATE DESC) PAGEODV)
+		WHERE NUM BETWEEN #{param1} AND #{param2}
+    </select>
+   
+	<!-- 주문 배송보기 페이징 -->
+	<select id="adminDelivListTotCount" resultType="Integer">
+		SELECT COUNT(*) FROM ORDER_MEMBER WHERE OM_CANCLE='N'
+	</select>
+	<!-- 주문확정 상품준비중변경 -->
+	<update id="decisionDeliv">
+		update order_member set om_state='상품준비중'
+		where om_date=(select om_date from order_delivery where od_num=#{param1})
+		and m_id=(select m_id from order_delivery where od_num=#{param1})
+		and om_cancle='N'
+	</update>
+
+	
+</mapper>

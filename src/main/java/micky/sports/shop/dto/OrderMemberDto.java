@@ -23,6 +23,8 @@ public class OrderMemberDto {
 	private String c_reason; // 주문취소사유
 	
 	private ProductDto productDto; //join  테이블
+	
+	private OrderDeliveryDto orderDeliveryDto; //join  테이블
 
 	//private int groupcnt; //나의주문내역 주문건당 묶기 주문시간별
 	

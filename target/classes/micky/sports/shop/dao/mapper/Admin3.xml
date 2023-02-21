@@ -56,7 +56,7 @@
 	</update>
 	<!-- 배송일자 -->
 	<update id="dateDeliv">
-		UPDATE ORDER_DELIVERY SET OD_DATESYSDATE WHERE OD_NUM=#{param1}
+		UPDATE ORDER_DELIVERY SET OD_DATE=SYSDATE WHERE OD_NUM=#{param1}
 	</update>
 
 	

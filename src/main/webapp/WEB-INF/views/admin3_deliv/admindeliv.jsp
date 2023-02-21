@@ -82,13 +82,20 @@ ${sessionScope.loginid} 님, 로그인상태입니다.
 				<td>${list.orderDeliveryDto.receipt_phone}</td>	
 		
 				<td>
-				<c:if test="${list.om_state eq '결제완료' && list.om_cancle eq 'N'}">
+				<c:choose>
+				<c:when test="${list.om_state eq '결제완료' && list.om_cancle eq 'N'}">
 				<form action="../admin3/decision" method="post">
 					<input type="hidden" name="od_num" value="${list.orderDeliveryDto.od_num}" />
 					<input type="submit" value="주문확정하기"/>
-				</form>	
-				</c:if>
-					${list.orderDeliveryDto.od_date}
+				</form>					
+				</c:when>
+				<c:when test="${list.om_cancle eq 'Y'}">
+					<p>취소요청</p>
+				</c:when>
+				<c:otherwise>
+					<fmt:formatDate value="${list.orderDeliveryDto.od_date}" pattern="yyyy.MM.dd hh:mm:ss"/>
+				</c:otherwise>
+				</c:choose>					
 				</td>
 				
 			</tr>

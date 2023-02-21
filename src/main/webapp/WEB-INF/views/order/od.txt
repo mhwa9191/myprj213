@@ -25,3 +25,18 @@ select od_num,om_num,om_date,m_id,addr1,addr2,addr3,receipt_name,receipt_phone,o
 --가장최근 날짜의 값 가져오기
 select om_cntnum,om_num,p_no,u_cnt,m_id,om_date ,om_pay ,p_price ,om_state ,om_cancle ,om_cdate,c_reason
 from(select * from order_member where m_id='blue1' order by om_date DESC) where ROWNUM = 1;
+
+
+--통계
+select om_cntnum,p_no,TO_CHAR(om_date,'HH') hh from order_member where TO_CHAR(om_date,'HH') between 9 and 12;
+
+select rownum num, bestprd.* from
+(select p_no,count(*) c from order_member where TO_CHAR(om_date,'HH') between 9 and 12
+group by p_no order by c desc) bestprd
+where rownum between 1 and 5;
+
+select om.p_no,p.p_color,p.p_size,count(*) c
+from order_member om, product p
+where om.p_no=p.p_no
+group by om.p_no,p.p_color,p.p_size
+order by c desc;

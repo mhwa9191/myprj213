@@ -14,60 +14,65 @@ a {
 }
 .productChartPackage {
 	width: 1500px;
-	height: 800px;
+	height: 400px;
 	border: 1px solid green;
-	margin:0 auto; 
+	margin:0 1px;
+	padding: 1px;
 	
 }
 .productChart {
 	border: 1px dotted green;
-	margin: 5px 3px;
+	margin: 5px 2px;
+	padding: 1px;
 }
 .productChart > li {
-	width: 17%;
-	margin: 0 auto;
+	width: 290px;
+	margin: 0.3px 0;
  	display: inline-block;
  	padding-top: 5px;
- 	border: 1px solid red;
- 	overflow : hidden;
+ 	/* border: 2px dotted red; */
+ 	/* overflow : hidden; */
 }
 .pdtthumbnail {
-	margin: 0 10px;
-	padding: 10;
-	position: relative;
-	width: auto;
+	margin: 0 auto; 
+	padding: 3px;
+	/* border: 1px solid red; */		
 }
 .pdtthumbnail > a > img {
-	margin-left : 0;
-	padding: 0;
-	width: 230px;
+	margin: 0 5px 0 1px ;
+	padding: 2px;
+	width: 290px;
+	
 }
 .pdtdetail {
-	margin: 0.8em;
+	margin: 0 2px;
 	padding: 0;
-	line-height: 10;
+	/* line-height: 10; */
 	position: relative;
- 	display: inline-block;
- 	width: 200px;
+ 	/* display: inline-block; */
+ 	width: 250px;
+ 	/* border: 1px solid pink; */
+ 	
 }
 .pdtdetail > p {
-	margin: 0.8em;
-	padding: 0;
-	line-height: 10;
-	position: relative;
+	margin: 0 2px 0 2px ;
+	padding: 2px;
+	/* line-height: 10; */
+	/* position: relative; */
  	display: inline-block;
- 	width: 200px;
+ 	width: 290px;
  	height: 20px;
- 	font-family: sans-serif;
- 	font-size: 5px;
-
+	/* border: 1px dotted blue; */
 }
-.pname > a {
- 	width: 200px;
+.pname > a:link {
+ 	width: 250px;
+	height: 5px;
  	font-family: sans-serif;
  	font-weight: bold;
  	font-size: 14px;
  	color: #000000;
+	/* border: 1px solid blue; */
+	
 }
 .pname > a:hover {
  	width: 200px;
@@ -76,10 +81,11 @@ a {
 	color: cyan;
 }
 .pcolor > span {
+ 	margin: 10px 0;
 	position: relative;
- 	display: inline-block;
- 	margin: 0 0 4px;
+ 	font-family: sans-serif;
 	font-size: 14px;
 	color: green;
 	vertical-align: top;
+	/* border: 1px solid green; */
 }

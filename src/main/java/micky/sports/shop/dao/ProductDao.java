@@ -19,4 +19,7 @@ public interface ProductDao {
 	
 	//구매한 수량 재고 삭제
 	public void delpayment(String pno,int cnt);
+	
+	//상품목록 차트
+	public ArrayList<ProductDto> productChart();
 }

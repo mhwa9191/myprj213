@@ -17,7 +17,7 @@ public class ProductDto {
 	private String p_size; //사이즈
 	private String p_filesrc; //첨부파일
 	private Date p_date; //상품등록일
-	private String p_category; //제품 등록일
+	private String p_category; //카테고리
 	private String p_info; //제품 정보
 
 	

@@ -138,6 +138,7 @@ function myOrder_btn(type,omcntnum){
 	form.setAttribute('action', "../order/"+type); //보내는 url
 	document.body.appendChild(form);
 	form.submit();
+	
 }
 </script>
 <script>

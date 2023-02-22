@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/pstyle.css" />
+<link rel="stylesheet" href="../resources/css/pchartstyle.css" />
 </head>
 <body>
 
@@ -27,22 +27,25 @@
  </c:if>
  
  <!-- 로그인 상태라면 나의 주문내역보기 가능 -->
-<a href="../product/productChart">차트를봅니다~~</a>
-<h3>상품리스트</h3>
-<div class="productNormalPackage">
 
-<ul class="productList">
-<c:forEach items="${productlsit}" var="plist">
+<h3>판매량 top5</h3>
+<div class="productChartPackage">
+
+<ul class="productChart">
+<c:forEach items="${productChart }" var="pChart">
 	<li>
 		<div class="pdtthumbnail" >
-			<a href="productDetail?pname=${plist.p_name }&pfilesrc=${plist.p_filesrc}">
-			<img src="../resources/img/productimg/${plist.p_filesrc}.jpg" alt="" />
+			<a href="productDetail?pname=${pChart.p_name }&pfilesrc=${pChart.p_filesrc }">
+			<img src="../resources/img/productimg/${pChart.p_filesrc }.jpg" alt="" />
 			</a>
 		</div>
-		<div class="pdtname">
-			<a href="productDetail?pname=${plist.p_name}&pfilesrc=${plist.p_filesrc}">
-			${plist.p_name}
+		<div class="pdtdetail">
+			<p class="pname">
+			<a href="productDetail?pname=${pChart.p_name }&pfilesrc=${pChart.p_filesrc }">
+			${pChart.p_name}
 			</a>
+			</p>
+			<p class="pcolor"><span>${pChart.p_color}</span></p>
 		</div>
 	</li>	
 </c:forEach>

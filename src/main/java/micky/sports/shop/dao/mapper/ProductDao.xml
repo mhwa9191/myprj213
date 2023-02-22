@@ -30,4 +30,15 @@
     	UPDATE PRODUCT SET P_CNT=P_CNT-#{param2} WHERE P_NO=#{param1}
     </update>
     
+    <!-- 상품목록 차트 -->
+	<select id="productChart" resultType="micky.sports.shop.dto.ProductDto">
+		SELECT 판매량,P_COLOR,P_NAME,P_FILESRC FROM (
+		SELECT ROWNUM NUM, BESTSELL.* FROM
+		(SELECT SUM(OM.U_CNT) 판매량,P.P_COLOR,P.P_NAME, P_FILESRC
+		FROM ORDER_MEMBER OM, PRODUCT P
+		WHERE OM.P_NO=P.P_NO
+		GROUP BY P.P_COLOR,P.P_NAME,P.P_FILESRC ORDER BY 판매량 DESC) BESTSELL)
+		WHERE ROWNUM BETWEEN 1 AND 5
+    </select>
+    
 </mapper>

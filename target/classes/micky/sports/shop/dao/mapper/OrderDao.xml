@@ -26,6 +26,7 @@
     	<result column="om_cancle" property="om_cancle" />
     	<result column="om_cdate" property="om_cdate" />
     	<result column="c_reason" property="c_reason" />
+    	<result column="om_delcancle" property="om_delcancle" />
     	<result column="groupcnt" property="groupcnt" />
 		<collection property="productDto" resultMap="ProductDto"></collection>
     </resultMap>
@@ -40,10 +41,10 @@
 <!-- 		<collection property="orderMemberDto" resultMap="OrderMemberDto"></collection> -->
     </resultMap>
     <select id="mtOrderList" parameterType="micky.sports.shop.dto.OrderMemberDto" resultMap="OrderMemberDto">
-    	SELECT OM_CNTNUM,OM_NUM,P_NO,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,OM_STATE,OM_CANCLE,OM_CDATE,C_REASON,P_NAME,P_COLOR,P_SIZE,P_FILESRC
+    	SELECT OM_CNTNUM,OM_NUM,P_NO,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,OM_STATE,OM_CANCLE,OM_CDATE,OM_DELCANCLE, C_REASON,P_NAME,P_COLOR,P_SIZE,P_FILESRC
 		FROM (SELECT ROWNUM NUM, PAGEOM.* 
-		FROM (SELECT OM_CNTNUM,OM_NUM,P_NO,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,OM_STATE,OM_CANCLE,OM_CDATE,C_REASON,P_NAME,P_COLOR,P_SIZE,P_FILESRC
-		FROM (SELECT OM.OM_CNTNUM,OM.OM_NUM,OM.P_NO,OM.U_CNT,OM.M_ID,OM.OM_DATE,OM.OM_PAY,OM.P_PRICE,OM.OM_STATE,OM.OM_CANCLE,OM.OM_CDATE,OM.C_REASON,
+		FROM (SELECT OM_CNTNUM,OM_NUM,P_NO,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,OM_STATE,OM_CANCLE,OM_CDATE,C_REASON,OM_DELCANCLE, P_NAME,P_COLOR,P_SIZE,P_FILESRC
+		FROM (SELECT OM.OM_CNTNUM,OM.OM_NUM,OM.P_NO,OM.U_CNT,OM.M_ID,OM.OM_DATE,OM.OM_PAY,OM.P_PRICE,OM.OM_STATE,OM.OM_CANCLE,OM.OM_CDATE,OM.C_REASON,OM.OM_DELCANCLE, 
 		P.P_NAME,P.P_COLOR,P.P_SIZE,P.P_FILESRC
 		FROM ORDER_MEMBER OM INNER JOIN PRODUCT P ON OM.P_NO=P.P_NO) WHERE M_ID=#{param1} ORDER BY OM_DATE DESC) PAGEOM)
 		WHERE NUM BETWEEN 1 AND #{param3}
@@ -104,5 +105,16 @@
 		VALUES(TO_CHAR(SYSDATE, 'YYYYMMDD')||DELIVERY_SEQ.NEXTVAL,(SELECT OM_NUM FROM ORDER_MEMBER WHERE OM_CNTNUM=#{param1}),
 		(SELECT OM_DATE FROM ORDER_MEMBER WHERE OM_CNTNUM=#{param1}),#{param2},#{param5},#{param6},#{param7},#{param3},#{param4},'')
 	</insert>
+	
+	<!-- 구매확정 -->
+	<update id="myOrderConfirm">
+		UPDATE ORDER_MEMBER SET OM_STATE='구매확정' WHERE OM_CNTNUM=#{param1}
+	</update>
+	
+	<!-- 반품요청 -->
+	<update id="myDelivCancelOffer">
+		UPDATE ORDER_MEMBER SET OM_DELCANCLE='Y' WHERE OM_CNTNUM=#{param1}
+	</update>
+	
 	
 </mapper>

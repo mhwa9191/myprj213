@@ -21,6 +21,7 @@ public class OrderMemberDto {
 	private String om_cancle; // 주문취소여부
 	private Date om_cdate; // 주문취소일자
 	private String c_reason; // 주문취소사유
+	private String om_delcancle; // 주문취소사유
 	
 	private ProductDto productDto; //join  테이블
 	

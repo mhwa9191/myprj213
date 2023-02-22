@@ -43,4 +43,8 @@ public interface OrderDao {
 	//배송
 	public void delivery(String omCntnum,String mId,String receipt_name,String receipt_phone,String addr1,String addr2,String addr3);
 
+	//구매확정
+	public void myOrderConfirm(String omnum);
+	//반품요청
+	public void myDelivCancelOffer(String omnum);
 }

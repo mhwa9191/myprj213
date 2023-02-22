@@ -10,6 +10,7 @@
 <script src="../resources/js/jquery.bpopup.min.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/member/main.jsp" />
 <c:if test="${empty sessionScope.loginid}">
    <a href="../member/loginform">login</a> 
    |  <a href="../member/joinform">join</a>
@@ -185,6 +186,7 @@ $('#order_form').click(function(){
 <br />
 <br />
 <jsp:include page="/WEB-INF/views/review/reviewBoard.jsp" />
+
 </div>
 
 </body>

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import micky.sports.shop.service.MickyServiceInter;
+import micky.sports.shop.service.order.MyDelivCancelService;
 import micky.sports.shop.service.order.MyOCancelOfferService;
 import micky.sports.shop.service.order.MyOrderCancelService;
+import micky.sports.shop.service.order.MyOrderConfirmService;
 import micky.sports.shop.service.order.MyOrderListService;
 import micky.sports.shop.service.order.OrderDeliveryService;
 import micky.sports.shop.service.order.OrderPageService;
@@ -42,7 +44,7 @@ public class OrderController {
 		return "/order/orderPage";
 	}
 	
-	// 주문 기능 payment
+	// 주문 기능 payment +배송지입력
 	@RequestMapping("/payment")
 	public String payment(HttpServletRequest request, Model model) {
 		System.out.println("========payment=======");
@@ -103,6 +105,29 @@ public class OrderController {
 		mickyServiceInter.execute(model);
 		
 		return "/order/myOCancelOffer";
+	}
+	
+	//배송완료 상태에서 반품요청
+	@RequestMapping("/myDelivCancel")
+	public String myDelivCancel(HttpServletRequest request,Model model) {
+		System.out.println("========myDelivCancel,=======");
+		
+		model.addAttribute("request",request);
+		mickyServiceInter=new MyDelivCancelService(sqlSession,httpsession);
+		mickyServiceInter.execute(model);
+		
+		return "redirect:myOrderList";
+	}
+	//배송완료 상태에서 구매확정
+	@RequestMapping("/myOrderConfirm")
+	public String myOrderConfirm(HttpServletRequest request,Model model) {
+		System.out.println("========myOrderConfirm=======");
+		
+		model.addAttribute("request",request);
+		mickyServiceInter=new MyOrderConfirmService(sqlSession,httpsession);
+		mickyServiceInter.execute(model);
+		
+		return "redirect:myOrderList";
 	}
 	
 }

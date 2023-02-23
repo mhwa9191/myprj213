@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Nanum+Gothic&family=Noto+Sans+KR:wght@900&family=UnifrakturCook&display=swap" rel="stylesheet">
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +37,7 @@
 <ul class="productChart">
 <c:forEach items="${productChart }" var="pChart">
 	<li>
-		<div class="pdtthumbnail" >
+		<div class="pdtthumbnail">
 			<a href="productDetail?pname=${pChart.p_name }&pfilesrc=${pChart.p_filesrc }">
 			<img src="../resources/img/productimg/${pChart.p_filesrc }.jpg" alt="" />
 			</a>
@@ -45,7 +48,12 @@
 			${pChart.p_name}
 			</a>
 			</p>
-			<p class="pcolor"><span>${pChart.p_color}</span></p>
+			<p class="pcolor">
+				<span>${pChart.p_color}</span>
+			</p>
+			<p class="pprice">
+				<span>${pChart.p_price}</span>
+			</p>
 		</div>
 	</li>	
 </c:forEach>

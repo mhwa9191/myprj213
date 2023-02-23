@@ -3,7 +3,11 @@
 	--bs-body-color: #0d6efd;
 }
 /* background-color: #CCCCCC;
-border-color: #bcbcbc; */
+border-color: #bcbcbc; 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Nanum+Gothic&family=Noto+Sans+KR:wght@900&family=UnifrakturCook&display=swap" rel="stylesheet">
+*/
 body {
 	margin: 0;
 	color: var(--bs-body-color);
@@ -15,17 +19,17 @@ a {
 .productChartPackage {
 	width: 1500px;
 	height: 400px;
-	border: 1px solid green;
-	margin:0 1px;
+	/* border: 1px solid green; */
+	margin:0 auto;
 	padding: 1px;
 	
 }
 .productChart {
-	border: 1px dotted green;
+	/* border: 1px dotted green; */
 	margin: 5px 2px;
 	padding: 1px;
 }
-.productChart > li {
+.productChart>li {
 	width: 290px;
 	margin: 0.3px 0;
  	display: inline-block;
@@ -38,7 +42,7 @@ a {
 	padding: 3px;
 	/* border: 1px solid red; */		
 }
-.pdtthumbnail > a > img {
+.pdtthumbnail>a>img {
 	margin: 0 5px 0 1px ;
 	padding: 2px;
 	width: 290px;
@@ -48,13 +52,14 @@ a {
 	margin: 0 2px;
 	padding: 0;
 	/* line-height: 10; */
+	font-family: Nanum Gothic;
 	position: relative;
  	/* display: inline-block; */
  	width: 250px;
  	/* border: 1px solid pink; */
  	
 }
-.pdtdetail > p {
+.pdtdetail>p {
 	margin: 0 2px 0 2px ;
 	padding: 2px;
 	/* line-height: 10; */
@@ -64,28 +69,44 @@ a {
  	height: 20px;
 	/* border: 1px dotted blue; */
 }
-.pname > a:link {
+.pname>a:link {
  	width: 250px;
 	height: 5px;
- 	font-family: sans-serif;
+ 	
  	font-weight: bold;
  	font-size: 14px;
  	color: #000000;
 	/* border: 1px solid blue; */
 	
 }
-.pname > a:hover {
- 	width: 200px;
- 	font-family: sans-serif;
- 	font-size: 14px;
-	color: cyan;
+.pname>a:visited {
+	color: #000000;
 }
-.pcolor > span {
- 	margin: 10px 0;
-	position: relative;
- 	font-family: sans-serif;
+.pname>a:hover {
+ 	width: 200px;
 	font-size: 14px;
-	color: green;
+	/* color: cyan; */
+	text-decoration:underline;
+}
+
+.pcolor>span {
+ 	margin: 20px 0;
+	position: relative;
+	font-size: 14px;
+	color: #141414;
 	vertical-align: top;
+}
+.pdtthumbnail:hover + .pdtdetail>.pprice>span {
+	visibility: visible;
+	font-size: 14px;
+	color: #141414;
+}
+.pprice>span {
+	visibility: hidden;
+
+	font-size: 14px;
+	color: #141414;
 	/* border: 1px solid green; */
 }
+
+

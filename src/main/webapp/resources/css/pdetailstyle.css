@@ -65,44 +65,32 @@ a {
 	padding: 2px;
 	width: 290px;
 	display: inline-block;
-	border: 2px dotted pink;
 }
 .pdtsize{
 	margin: 20px 10px;
 	padding: 2px;
-	border: 2px solid red;
-	display: inline-block;
 	
 }
 .pdtsizeradio {
-	margin: 20px 0;
-	padding: 2px;
-	width: 45px;
-	height : 45px;
-	border: 1px solid #EAE7E7;
-  	border-radius: 10px;
+	width: 43px;
+	height: 43px;
+	padding: 2px 5px;
 	display: inline-block;
-	float: left;
 }
 	.pdtsizeradio input[type=radio] {
 		display: none;
-		margin: 20px 5px;
-		padding: 2px;
-		width: 45px;
-		height : 45px;
-		border: 1px solid red;
 	}
-	.pdtsizeradio label {
+	.pdtsizeradio input[type=radio]+label {
 			display: inline-block;
+    		width: 40px;
+			height: 40px;
+    		border: 1px solid #333;
+   			line-height: 40px;
     		border-radius: 10px;
-   			margin: 0 auto;
-   			padding: 5px;
     		text-align: center;
-    		line-height: 40px;
     		font-size: 12px;
-    		border: 1px solid green;
 		}
-	.pdtsizeradio input[type=radio]:checked + label {
+	.pdtsizeradio input[type=radio]:checked+label {
 			background: #000;
 			color: #fff;
 		}

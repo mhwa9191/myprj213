@@ -73,14 +73,18 @@
 			</c:forEach>
 			<div class="pdtsize">
 				<c:forEach items="${product}" var="p">
-				<div class="pdtsizeradio">
-					<input type="radio" id="sizeNo" class="sizeNo" name="sizeNo" value="${p.p_no}" onclick="sizeNo('${p.p_no}','${p.p_color}','${p.p_size}',${p.p_cnt});" />
-					
-					<c:if test="${p.p_cnt eq 0}">
-						<label for="sizeNo">품절</label>
-					</c:if>
+				<div class="pdtsizeradio">				
 					<c:if test="${p.p_cnt > 0}">
-						<label for="sizeNo">${p.p_size}</label>
+					<div>
+						<input type="radio" id="sizeNo${p.p_no}" class="sizeNo" name="sizeNo" value="${p.p_no}" onclick="sizeNo('${p.p_no}','${p.p_color}','${p.p_size}',${p.p_cnt});"/>
+						<label for="sizeNo${p.p_no}">${p.p_size}</label>
+					</div>
+					</c:if>
+					<c:if test="${p.p_cnt eq 0}">
+					<div style="color: #333; background-color: #ccc; border-radius: 10px;">
+						<input type="radio"/>
+						<label for="sizeNo${p.p_no}">${p.p_size}</label>		
+					</div>
 					</c:if>
 				</div>
 				</c:forEach>

@@ -9,6 +9,34 @@
 <title>Insert title here</title>
 <script src="../resources/js/jquery-3.6.1.min.js"></script>
 <script src="../resources/js/jquery.bpopup.min.js"></script>
+<style>
+#more_list{
+	width: 1000px;
+	border-collapse: collapse;
+	border: 1px solid #E6E6E6;
+	margin: 5px 20px;
+}
+thead tr td{
+	text-align: center;
+	border: 1px solid #E6E6E6;
+	color: #141414;
+}
+tbody tr td{
+	border: 1px solid #E6E6E6;
+	margin: 0;
+	padding: 0 5px;
+}
+button{
+	background-color: #FFF;
+	border: 1px solid #141414;
+	border-radius: 3px;
+	margin: 1px;
+	text-align: center;
+}
+.stateInfo{
+	padding: 2px;
+}
+</style>
 </head>
 <body>
 <c:if test="${empty sessionScope.loginid}">
@@ -38,23 +66,22 @@
 <input type="hidden" name="viewCount" id="viewCount" value="0" />
 <input type="hidden" name="startCount" id="startCount" value="0" />
 
-<table width="800" border="1" id="more_list">
+<table id="more_list">
 	<thead>
 		<tr>	
-			<td>확인</td>
-			<td>주문일자</td>
-			<td>주문번호</td>
-			<td colspan="2">상품정보</td>
-			<td>주문수량</td>
-			<td>총액</td>
-			<td colspan="2">주문상태</td>
+			<td width="1%">확인</td>
+			<td width="10%">주문일자</td>
+			<td width="10%">주문번호</td>
+			<td width="40%" colspan="2">상품정보</td>
+			<td width="10%">총액</td>
+			<td  width="25%" colspan="2">주문상태</td>
 		</tr>
 	</thead>
 	<tbody>
 		<c:choose>
 		<c:when test="${totRowcnt eq '0'}">
 			<tr>
-				<td colspan="8">
+				<td colspan="7">
 					<c:out value="주문내역이없습니다"></c:out>
 				</td>
 			</tr>
@@ -74,13 +101,12 @@
 				<td><img src="../resources/img/productimg/${mlist.productDto.p_filesrc}.jpg" width="50" alt="상품사진" /></td>
 				<td>
 					${mlist.productDto.p_name} <br />
-					${mlist.productDto.p_color} <br />
-					${mlist.productDto.p_size}
+					${mlist.productDto.p_color} / ${mlist.productDto.p_size} <br />
+					${mlist.u_cnt}개
 				</td>
-				<td>${mlist.u_cnt}</td>
-				<td>${mlist.p_price}</td>
+				<td><fmt:formatNumber value="${mlist.p_price}" pattern="###,###"/>원</td>
 				<td>${mlist.om_state}</td>
-				<td>
+				<td class="stateInfo">
 					<c:choose>
 						<c:when test="${mlist.om_cancle eq 'N' && mlist.om_state eq '결제완료'}">
 							<button type="button" onclick="myOrder_btn('myOrderCancel','${mlist.om_cntnum}')">결제취소</button>

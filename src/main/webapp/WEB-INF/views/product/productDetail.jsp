@@ -111,7 +111,7 @@
 	/* -+버튼 눌렀을때 수량 변화 */
 	function Count(type,pno,totcnt) { /* ths [object HTMLButtonElement] */
 		/* alert(type+"***"+pno+"***"+totcnt); */
-		var cnt=".cnt_"+pno;
+		var cnt="#cnt_"+pno;
 		var tCount = Number($(cnt).val());
 		if (type == 'plus') {
 			if (tCount < totcnt)
@@ -138,10 +138,10 @@
 /* 중복클릭 if else 처리 필요함 */
 	 	var elems= document.getElementsByName('choice');	 	
 	 	/* alert(elems.length); */
-	 	var html='<div name="choice" id="choice_'+pno+'">'+pcolor+'&nbsp;'+psize+'&nbsp;&nbsp;'
+	 	var html='<div class="choice" name="choice" id="choice_'+pno+'"><p>'+pcolor+'&nbsp;'+psize+'</p>&nbsp;&nbsp;'
 	 	+'<span>수량</span>'
 	 	+'<input type="hidden" class="cnttot" name="재고수량" value="'+totcnt+'" />'
-	    +'<input type="text" class="cnt_'+pno+'" name="choice_cnt" value="1" size="1" readonly="readonly" style="text-align: center;" />'
+	    +'<input type="text" class="choice_pno" id="cnt_'+pno+'" name="choice_cnt" value="1" size="1" readonly="readonly" style="text-align: center;" />'
 	 	+'<input type="hidden" name="choice_pno" id="choice_pno" value="'+pno+'" />'
 	    +'<button type="button" onclick="Count(\'minus\',\''+pno+'\','+totcnt+');">-</button>'
 	 	+'<button type="button" onclick="Count(\'plus\',\''+pno+'\','+totcnt+');">+</button>'

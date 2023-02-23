@@ -94,3 +94,40 @@ a {
 			background: #000;
 			color: #fff;
 		}
+.choicelist{
+	/* border: 1px solid red; */
+	display: inline-block;
+	width: 400px;
+}
+.choice{
+	/* border: 1px solid blue; */
+	width: 400px;
+	display: inline-block;
+	float: left;
+}
+.choice > p{
+	/* border: 1px solid blue; */
+	width: 190px;
+	display: inline-block;
+	float: left;
+	margin: 0 5px;
+}
+.choice > span{
+	/* border: 1px solid pink; */
+	display: inline-block;
+	float: left;
+	margin: 0 2px;
+}
+.choice > button {
+	background-color: #C0C0C0;
+	color: #141414;
+	border: 1px solid #C0C0C0;
+	border-radius: 3px;
+	margin: 0 2px;
+}
+#order_form{
+	background: #141414;
+	color: #fff;
+	width: 200px;
+	margin: 10px;
+}

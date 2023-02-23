@@ -35,43 +35,45 @@
 		 	<label class="label" for="receipt_phone">전화번호</label>
 		 	<input type="text" name="receipt_phone" id="receipt_phone" placeholder="전화번호를 입력하세요" onclick="$('.message-no-addr-phone').css('display','none')"/>
 		 	<input type="button" value="확인" name="btn_checkPhone" id="btn_checkPhone"onclick="checkPhone();"/>
-		 	<p id="checkPhoneMessage"></p>		 	
+		 	<p id="checkPhoneMessage"></p> <br />		 	
 		 	<label class="label" for="addr1">우편번호</label>
 		 	<input type="text" name="addr1" id="addr1" size="5" readonly placeholder="우편번호" onclick="$('.message-no-addr').css('display','none')"/>
 		 	<input type="button" value="검색" name="btn_addr" id="btn_addr" onclick="$('.message-no-addr').css('display','none')"/> <br />
 		 	<label class="label" for="addr2">주소</label>
-		 	<input type="text" name="addr2" id="addr2" readonly placeholder="주소"/> <br />
+		 	<input type="text" name="addr2" id="addr2" size="50" readonly placeholder="주소"/> <br />
 		 	<label class="label" for="addr2">상세주소</label>
-		 	<input type="text" name="addr3" id="addr3" placeholder="상세주소를 입력하세요"/>
+		 	<input type="text" name="addr3" id="addr3" size="50" placeholder="상세주소를 입력하세요"/>
 		</form>
 	</div>
 	
 	
-	<h5>구매할 상품</h5>
 	
 	<div class="orderSelectList">
+	<h5>구매할 상품</h5>
 		<c:forEach items="${orderPSelectList}" var="slist" varStatus="status">
 			<div class="selectlist">
-				<img src="../resources/img/productimg/${slist.p_filesrc}.jpg" width="50" alt="" /> <br />
-				<div id="p_name">
-					<span>상품명</span> <span>${slist.p_name}</span>
-				</div> <br />
-				<div id="p_color">
-					<span>색상</span> <span>${slist.p_color}</span>
-				</div> <br />
-				<div id="p_size">
-					<span>사이즈</span> <span>${slist.p_size}</span>
-				</div> <br />
-				<div id="cnt">
-					<span>수량</span> <span>${cnt[status.index]}</span>
-				</div> <br />
-				<div id="totPrice">
-					<span>총액</span> <span><fmt:formatNumber value="${cnt[status.index]*slist.p_price}" pattern="###,###"/>원</span>	
-				</div>	
+				<img src="../resources/img/productimg/${slist.p_filesrc}.jpg" width="100" alt="" />
+				<div class="selectprdinfo">
+					<div id="p_name">
+						<span>${slist.p_name}</span>
+					</div> <br />
+					<div id="p_color">
+						<span>${slist.p_color} / </span>
+					</div>
+					<div id="p_size">
+						<span>${slist.p_size}</span>
+					</div> <br />
+					<div id="cnt">
+						<span>${cnt[status.index]}개</span>
+					</div> <br />
+					<div id="totPrice">
+						<span><fmt:formatNumber value="${cnt[status.index]*slist.p_price}" pattern="###,###"/>원</span>	
+					</div>	
+				</div>
 			</div>	
 			<hr />
 		</c:forEach>
-		<div>
+		<div class="selectTotPrice">
 			<p>총 결제 금액</p>
 			<span class="totPrices"><fmt:formatNumber value="${totPrices}" pattern="###,###"/>원</span>
 		</div>
@@ -82,18 +84,17 @@
 			<p class="message-no-cash" style="display: none; color: #CC0099;">결제할 캐시가 부족합니다.</p>
 		</div>
 		<!-- 수령인 번호 주소 없는 경우 -->
-		<div>
+		<div class="message-no">
 			<p class="message-no-addr-name" style="display: none; ">수령인을 입력해주세요.</p>
-			<p class="message-no-addr-phone" style="display: none; ">전화번호를 입력해주세요.</p>
+			<p class="message-no-addr-phone" style="display: none; ">전화번호를 확인해주세요.</p>
 			<p class="message-no-addr" style="display: none; ">주소를 입력해주세요.</p>
 		</div>
 	</div>
 	
-	<hr />
-	<!-- 주문페이지에서 결제로 넘어가지 않고 다시 상품페이지로 돌아가기 -->
-	<a href="../product/productList"><button>취소</button></a>
 	
-	<hr />
+	<!-- 주문페이지에서 결제로 넘어가지 않고 다시 상품페이지로 돌아가기 -->
+	<a href="../product/productList"><button class="btn-back">취소</button></a>
+	
 </div>
 <script>
 	$('.btn_payment').click(function(){

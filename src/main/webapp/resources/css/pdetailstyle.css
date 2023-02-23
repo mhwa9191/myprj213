@@ -1,0 +1,108 @@
+body {
+	margin: 0;
+	font-family: Nanum Gothic;
+	
+}
+a {
+	text-decoration: none;
+}
+.pdt{
+	/* border: 1px solid pink; */
+	display: inline-block;
+	width: 1000px;
+	height: auto;
+}
+.main-img>img {
+	width: 500px;
+	height: auto;
+	float: left;
+	/* border: 1px solid green; */
+	margin:10 auto;
+	padding: 10px;
+}
+.pdtdetailleft{
+	width: 400px;
+	display: inline-block;
+	margin: 10px;
+	padding: 10px;
+	/* border: 1px solid pink; */
+}
+.main-name {
+	width: 400px;
+	float: left;
+	/* border: 1px dotted green; */
+	margin: 0;
+	padding: 5px;
+}
+/* .productList {
+	border: 1px dotted green;
+	margin: 5px 5px 5px 200px;
+	padding: 1px;
+}*/
+.pdtthumbnail {
+	width: 400px;
+	margin: 10px 3px;
+ 	display: inline-block;
+ 	padding-top: 5px;
+/*  	border: 2px dotted red; */
+
+} 
+.pdtimgs {
+	margin: 5px;
+	width: 70px;
+	padding: 5px;
+	float: left;
+/* 	border: 1px solid blue; */
+}
+.pdtimgs>a>img {
+	margin: 0 5px 0 1px ;
+	padding: 2px;
+	width: 70px;
+	float: left;
+}
+.productDetail {
+	margin: 0 5px 0 1px ;
+	padding: 2px;
+	width: 290px;
+	display: inline-block;
+	border: 2px dotted pink;
+}
+.pdtsize{
+	margin: 20px 10px;
+	padding: 2px;
+	border: 2px solid red;
+	display: inline-block;
+	
+}
+.pdtsizeradio {
+	margin: 20px 0;
+	padding: 2px;
+	width: 45px;
+	height : 45px;
+	border: 1px solid #EAE7E7;
+  	border-radius: 10px;
+	display: inline-block;
+	float: left;
+}
+	.pdtsizeradio input[type=radio] {
+		display: none;
+		margin: 20px 5px;
+		padding: 2px;
+		width: 45px;
+		height : 45px;
+		border: 1px solid red;
+	}
+	.pdtsizeradio label {
+			display: inline-block;
+    		border-radius: 10px;
+   			margin: 0 auto;
+   			padding: 5px;
+    		text-align: center;
+    		line-height: 40px;
+    		font-size: 12px;
+    		border: 1px solid green;
+		}
+	.pdtsizeradio input[type=radio]:checked + label {
+			background: #000;
+			color: #fff;
+		}

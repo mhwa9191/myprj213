@@ -3,7 +3,7 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="micky.sports.shop.dao.ProductDao">
     <select id="productlist" resultType="micky.sports.shop.dto.ProductDto">
-		SELECT P_NAME,MIN(P_FILESRC) P_FILESRC FROM PRODUCT GROUP BY P_NAME
+		SELECT P_NAME,MIN(P_FILESRC) P_FILESRC,P_PRICE FROM PRODUCT GROUP BY P_NAME,P_PRICE
     </select>
 
 	<select id="productMain" resultType="micky.sports.shop.dto.ProductDto">

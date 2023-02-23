@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Nanum+Gothic&family=Noto+Sans+KR:wght@900&family=UnifrakturCook&display=swap" rel="stylesheet">
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +47,9 @@
 			<a href="productDetail?pname=${plist.p_name}&pfilesrc=${plist.p_filesrc}">
 			${plist.p_name}
 			</a>
+		</div>
+		<div class="pdtprice">
+			<p><fmt:formatNumber value="${plist.p_price}" pattern="###,###"/>원</p>
 		</div>
 	</li>	
 </c:forEach>

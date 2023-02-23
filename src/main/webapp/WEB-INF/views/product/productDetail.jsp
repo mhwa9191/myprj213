@@ -38,7 +38,7 @@
 
 <h3>상품</h3>
 <div class="pdt">
-	<c:forEach items="${product}" var="p" varStatus="status" begin="1" end="1">
+	<c:forEach items="${product}" var="p" varStatus="status" begin="0" end="0">
 	<div class="main-img">
 		<img src="../resources/img/productimg/${p.p_filesrc}.jpg" alt="상품사진" />
 	</div>

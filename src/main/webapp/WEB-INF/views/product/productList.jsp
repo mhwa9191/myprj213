@@ -14,15 +14,15 @@
 </head>
 <body>
 
-<c:if test="${empty sessionScope.loginid }">
+<c:if test="${empty sessionScope.loginid}">
    <a href="../member/loginform">login</a> 
    |  <a href="../member/joinform">join</a>
 
 </c:if>
- <c:if test="${not empty sessionScope.loginid }">
+ <c:if test="${not empty sessionScope.loginid}">
     <a href="../member/logout">logout</a> 
  <br />
- ${sessionScope.loginid } 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
+ ${sessionScope.loginid} 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
 	 <div>
 		<p class="go-myOrderList" style="color: #336666;">
 		<a href="../order/myOrderList">나의 주문내역보기</a>
@@ -39,7 +39,7 @@
 <c:forEach items="${productlsit}" var="plist">
 	<li>
 		<div class="pdtthumbnail" >
-			<a href="productDetail?pname=${plist.p_name }&pfilesrc=${plist.p_filesrc}">
+			<a href="productDetail?pname=${plist.p_name}&pfilesrc=${plist.p_filesrc}">
 			<img src="../resources/img/productimg/${plist.p_filesrc}.jpg" alt="" />
 			</a>
 		</div>

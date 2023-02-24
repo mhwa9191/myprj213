@@ -117,7 +117,7 @@
 			if (tCount < totcnt)
 				$(cnt).val(Number(tCount) + 1);
 		} else {
-			if (tCount > 0)
+			if (tCount >= 2)
 				$(cnt).val(Number(tCount) - 1);
 		}
 	}

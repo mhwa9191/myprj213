@@ -1,16 +1,16 @@
 body {
 	margin: 0;
 	font-family: Nanum Gothic;
-	
 }
 a {
 	text-decoration: none;
 }
 .pdt{
-	/* border: 1px solid pink; */
+	/* border: 1px solid red; */
 	display: inline-block;
 	width: 1000px;
 	height: auto;
+	margin: 10px 40px;
 }
 .main-img>img {
 	width: 500px;
@@ -24,7 +24,7 @@ a {
 	width: 400px;
 	display: inline-block;
 	margin: 10px;
-	padding: 10px;
+	padding: 10px 20px;
 	/* border: 1px solid pink; */
 }
 .main-name {
@@ -45,7 +45,6 @@ a {
  	display: inline-block;
  	padding-top: 5px;
 /*  	border: 2px dotted red; */
-
 } 
 .pdtimgs {
 	margin: 5px;
@@ -69,7 +68,6 @@ a {
 .pdtsize{
 	margin: 20px 10px;
 	padding: 2px;
-	
 }
 .pdtsizeradio {
 	width: 43px;
@@ -77,23 +75,23 @@ a {
 	padding: 2px 5px;
 	display: inline-block;
 }
-	.pdtsizeradio input[type=radio] {
-		display: none;
-	}
-	.pdtsizeradio input[type=radio]+label {
-			display: inline-block;
-    		width: 40px;
-			height: 40px;
-    		border: 1px solid #333;
-   			line-height: 40px;
-    		border-radius: 10px;
-    		text-align: center;
-    		font-size: 12px;
-		}
-	.pdtsizeradio input[type=radio]:checked+label {
-			background: #000;
-			color: #fff;
-		}
+.pdtsizeradio input[type=radio] {
+	display: none;
+}
+.pdtsizeradio input[type=radio]+label {
+	display: inline-block;
+    width: 40px;
+	height: 40px;
+	border: 1px solid #333;
+	line-height: 40px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12px;
+}
+.pdtsizeradio input[type=radio]:checked+label {
+	background: #000;
+	color: #fff;
+}
 .choicelist{
 	/* border: 1px solid red; */
 	display: inline-block;
@@ -104,10 +102,11 @@ a {
 	width: 400px;
 	display: inline-block;
 	float: left;
+	margin: 5px 5px 5px 10px;
 }
 .choice > p{
 	/* border: 1px solid blue; */
-	width: 190px;
+	width: 200px;
 	display: inline-block;
 	float: left;
 	margin: 0 5px;
@@ -123,11 +122,11 @@ a {
 	color: #141414;
 	border: 1px solid #C0C0C0;
 	border-radius: 3px;
-	margin: 0 2px;
+	margin: 0 1px;
 }
 #order_form{
 	background: #141414;
 	color: #fff;
 	width: 200px;
-	margin: 10px;
+	margin: 20px 30px;
 }

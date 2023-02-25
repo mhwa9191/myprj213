@@ -20,5 +20,8 @@
 <hr />
 <a href="admin3/delivList">admin_deliv</a>  <br />
 
+<hr />
+<a href="myPage">myPage</a>
+
 </body>
 </html>

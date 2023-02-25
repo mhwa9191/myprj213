@@ -23,11 +23,9 @@ public class MyPageController {
 	@Autowired
 	private HttpSession httpsession;
 	
-	//상품목록
+	//
 	@RequestMapping("/myPage")
 	public String mypage(HttpServletRequest request, Model model) {
-		System.out.println("========mypageindex=======");
-		System.out.println("========mypageindex=======");
 		System.out.println("========mypageindex=======");
 
 		model.addAttribute("request",request);
@@ -36,6 +34,18 @@ public class MyPageController {
 //		mickyServiceInter.execute(model);
 		
 		return "/myPage/index";
+	}
+	
+	@RequestMapping("/checkIndex")
+	public String checkIndex(HttpServletRequest request, Model model) {
+		System.out.println("========checkIndex=======");
+		
+		model.addAttribute("request",request);
+		
+//		mickyServiceInter=new ProductListService(sqlSession,httpsession);
+//		mickyServiceInter.execute(model);
+		
+		return "/myPage/checkIndex";
 	}
 	
 

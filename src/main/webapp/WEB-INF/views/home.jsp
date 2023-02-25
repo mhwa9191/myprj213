@@ -21,7 +21,8 @@
 <a href="admin3/delivList">admin_deliv</a>  <br />
 
 <hr />
-<a href="myPage">myPage</a>
+<a href="myPage">myPage</a>	<br />
+<a href="checkIndex">checkIndex</a>
 
 </body>
 </html>

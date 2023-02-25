@@ -57,7 +57,7 @@
 					<input type="hidden" name="pname" value="${pm.p_name}" />
 					<input type="hidden" name="pfilesrc" value="${pm.p_filesrc}" /> 
 				<!-- 상품사진을 누를때마다 새로운 값을 보내서 아랫단의 ${product } 값을 지정하게됨 -->
-					<a href="productDetail?pname=${pm.p_name}&pfilesrc=${pm.p_filesrc}">
+					<a href="../product/productDetail?pname=${pm.p_name}&pfilesrc=${pm.p_filesrc}">
 					<img src="../resources/img/productimg/${pm.p_filesrc}.jpg" width="150" class="product_img" alt="" />
 					</a>
 					<input type="hidden" name="pcolor" value="${pm.p_color}" />
@@ -117,7 +117,7 @@
 			if (tCount < totcnt)
 				$(cnt).val(Number(tCount) + 1);
 		} else {
-			if (tCount > 0)
+			if (tCount >= 2)
 				$(cnt).val(Number(tCount) - 1);
 		}
 	}

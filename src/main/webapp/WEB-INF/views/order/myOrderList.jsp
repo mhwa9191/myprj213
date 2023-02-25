@@ -10,27 +10,35 @@
 <script src="../resources/js/jquery-3.6.1.min.js"></script>
 <script src="../resources/js/jquery.bpopup.min.js"></script>
 <style>
+body{ font-family: Nanum Gothic;}
+h2{ color: #2E2E2E; font-size: 30px; font-weight: 400; text-align: center;}
 #more_list{
 	width: 1000px;
 	border-collapse: collapse;
 	border: 1px solid #E6E6E6;
-	margin: 5px 20px;
+	margin: 5px auto;
+	font-size: 14px;
 }
 thead tr td{
 	text-align: center;
 	border: 1px solid #E6E6E6;
 	color: #141414;
+	background-color: #FBFAFA;
 }
 tbody tr td{
-	border: 1px solid #E6E6E6;
+	border-bottom: 1px solid #E6E6E6;
+	color: #353535;
 	margin: 0;
-	padding: 0 5px;
+	padding: 5px 0 5px 8px;
 }
+.option{ color: #757575; font-size: 12px; margin: 2px 0;}
+.right{text-align: right; margin: 10px;}
+.state{text-align: center;}
 button{
 	background-color: #FFF;
 	border: 1px solid #141414;
 	border-radius: 3px;
-	margin: 1px;
+	margin: 1px auto;
 	text-align: center;
 }
 .stateInfo{
@@ -61,7 +69,7 @@ button{
  </div>
  
 
- <h3>나의주문내역 </h3>
+ <h2>나의주문내역 </h2>
 <form action="">
 <input type="hidden" name="viewCount" id="viewCount" value="0" />
 <input type="hidden" name="startCount" id="startCount" value="0" />
@@ -98,14 +106,14 @@ button{
 				</c:if>
 				<td><fmt:formatDate value="${mlist.om_date}" pattern="yyyy.MM.dd hh:mm:ss"/></td>
 				<td>${mlist.om_num}</td>
-				<td><img src="../resources/img/productimg/${mlist.productDto.p_filesrc}.jpg" width="50" alt="상품사진" /></td>
+				<td><img src="../resources/img/productimg/${mlist.productDto.p_filesrc}.jpg" width="80" alt="상품사진" /></td>
 				<td>
 					${mlist.productDto.p_name} <br />
-					${mlist.productDto.p_color} / ${mlist.productDto.p_size} <br />
+					<div class="option">${mlist.productDto.p_color} / ${mlist.productDto.p_size}</div>
 					${mlist.u_cnt}개
 				</td>
-				<td><fmt:formatNumber value="${mlist.p_price}" pattern="###,###"/>원</td>
-				<td>${mlist.om_state}</td>
+				<td><div class="right"><fmt:formatNumber value="${mlist.p_price}" pattern="###,###"/>원</div></td>
+				<td><div class="state">${mlist.om_state}</div></td>
 				<td class="stateInfo">
 					<c:choose>
 						<c:when test="${mlist.om_cancle eq 'N' && mlist.om_state eq '결제완료'}">
@@ -115,8 +123,7 @@ button{
 							<button type="button" onclick="deliveryCheck('${mlist.om_cntnum}');">배송조회</button>
 						</c:when>
 						<c:when test="${mlist.om_cancle eq 'Y'}">
-							취소요청 사유 <br />
-							${mlist.c_reason}
+							<p>취소요청</p>
 						</c:when>
 						<c:when test="${mlist.om_state eq '배송완료' && mlist.om_delcancle eq 'N'}">
 							<button type="button" onclick="myOrder_btn('myDelivCancel','${mlist.om_cntnum}')">반품요청</button> <br />

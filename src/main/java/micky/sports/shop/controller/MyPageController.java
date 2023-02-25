@@ -27,6 +27,8 @@ public class MyPageController {
 	@RequestMapping("/myPage")
 	public String mypage(HttpServletRequest request, Model model) {
 		System.out.println("========mypageindex=======");
+		System.out.println("========mypageindex=======");
+		System.out.println("========mypageindex=======");
 
 		model.addAttribute("request",request);
 		

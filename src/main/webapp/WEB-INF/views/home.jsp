@@ -11,7 +11,7 @@
 	Hello world!  
 </h1>
 
-<a href="product/productList">productList</a> <br />
+<a href="#">productList</a> <br />
 <a href="review/reviewBoard">review</a> <br />
 <a href="Cart/before">Cart</a>  <br />
 <a href="admin_olist">admin_olist</a>  <br />

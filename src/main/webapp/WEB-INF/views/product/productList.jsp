@@ -11,8 +11,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/pstyle.css" />
+
+<link href="resources/css/checkIndex.css" rel="stylesheet">
 </head>
 <body>
+<!-- 사이드 -->
+<jsp:include page="/WEB-INF/views/myPage/checkIndex.jsp" />
 
 <c:if test="${empty sessionScope.loginid}">
    <a href="../member/loginform">login</a> 
@@ -57,6 +61,7 @@
 
 </div>
 
-
+</section>
+<hr class="m-0" />
 </body>
 </html>

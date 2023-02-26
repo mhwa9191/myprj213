@@ -15,8 +15,13 @@
 <script src="../resources/js/jquery-3.6.1.min.js"></script>
 <script src="../resources/js/jquery.bpopup.min.js"></script>
 <link rel="stylesheet" href="../resources/css/pdetailstyle.css" />
+
+<link href="../resources/css/checkIndex.css" rel="stylesheet">
 </head>
 <body>
+<!-- 사이드 -->
+<jsp:include page="/WEB-INF/views/myPage/checkIndex.jsp" />
+
 <jsp:include page="/WEB-INF/views/member/main.jsp" />
 <c:if test="${empty sessionScope.loginid}">
    <a href="../member/loginform">login</a> 

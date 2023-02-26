@@ -20,8 +20,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/reviewstyle.css" />
+<link href="../resources/css/checkIndex.css" rel="stylesheet">
 </head>
 <body>
+<!-- 사이드 -->
+<jsp:include page="/WEB-INF/views/myPage/checkIndex.jsp" />
 <h3>reviewMylistview</h3>
 <%-- <input type="hidden" value="${review_mylist.m_id }" /> --%>
 <h1>상품리뷰</h1>

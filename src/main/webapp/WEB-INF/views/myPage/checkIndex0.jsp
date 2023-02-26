@@ -24,8 +24,7 @@
 
   <title>Title page</title>  
 
-<link href="resources/css/checkIndex.css" rel="stylesheet">
-</head>
+<link href="resources/css/checkIndex.css" rel="stylesheet"></head>
 
 <body>
 
@@ -52,10 +51,10 @@
       </div>
       <ul class="nav">
         <li><a href="./order/myOrderList" title="">나의주문내역</a></li>
-        <li><a href="../review/reviewMylistview" title="">나의리뷰보기</a></li>
-        <li><a href="./product/productList" title="">확인작업productList</a></li>
-        <li><a href="#" title="">회원정보수정란?</a></li>
-        <li><a href="#" title="">추가하기</a></li>
+        <li><a href="./about.html" title="">About</a></li>
+        <li><a href="./services.html" title="">Services</a></li>
+        <li><a href="./contact.html" title="">Contact</a></li>
+        <li><a href="./components.html" title="">Components</a></li>
 
       </ul>
 
@@ -98,8 +97,87 @@
     </div>
 
     
+    <div class="grid-item">
+      <img class="img-responsive" alt="" src=".resources/images/img-05.jpg">
+      <a href="./project.html" class="project-description">
+        <div class="project-text-holder">
+          <div class="project-text-inner">
+            <h3>Vivamus vestibulum</h3>
+            <p>Discover more</p>
+          </div>
+        </div>
+      </a>
+    </div>
 
+    <div class="grid-item">
+      <img class="img-responsive" alt="" src="resources/images/img-13.jpg">
+      <a href="./project.html" class="project-description">
+        <div class="project-text-holder">
+          <div class="project-text-inner">
+            <h3>Vivamus vestibulum</h3>
+            <p>Discover more</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="grid-item">
+      <img class="img-responsive" alt="" src="resources/images/img-04.jpg">
+      <a href="./project.html" class="project-description">
+        <div class="project-text-holder">
+          <div class="project-text-inner">
+            <h3>Vivamus vestibulum</h3>
+            <p>Discover more</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    <div class="grid-item">
+      <img class="img-responsive" alt="" src="resources/images/img-07.jpg">
+      <a href="./project.html" class="project-description">
+        <div class="project-text-holder">
+          <div class="project-text-inner">
+            <h3>Vivamus vestibulum</h3>
+            <p>Discover more</p>
+          </div>
+        </div>
+      </a>
+    </div>
 
+    <div class="grid-item">
+      <img class="img-responsive" alt="" src="resources/images/img-11.jpg">
+      <a href="./project.html" class="project-description">
+        <div class="project-text-holder">
+          <div class="project-text-inner">
+            <h3>Vivamus vestibulum</h3>
+            <p>Discover more</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="grid-item">
+      <img class="img-responsive" alt="" src="resources/images/img-10.jpg">
+      <a href="./project.html" class="project-description">
+        <div class="project-text-holder">
+          <div class="project-text-inner">
+            <h3>Vivamus vestibulum</h3>
+            <p>Discover more</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="grid-item">
+      <img class="img-responsive" alt="" src="resources/images/img-03.jpg">
+      <a href="./project.html" class="project-description">
+        <div class="project-text-holder">
+          <div class="project-text-inner">
+            <h3>Vivamus vestibulum</h3>
+            <p>Discover more</p>
+          </div>
+        </div>
+      </a>
+    </div>
     
   </div>
 </div>

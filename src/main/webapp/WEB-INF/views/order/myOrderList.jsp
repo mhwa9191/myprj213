@@ -135,8 +135,8 @@ button{
 							<p>취소요청</p>
 						</c:when>
 						<c:when test="${mlist.om_state eq '배송완료' && mlist.om_delcancle eq 'N'}">
-							<button type="button" onclick="myOrder_btn('myDelivCancel','${mlist.om_cntnum}')">반품요청</button> <br />
-							<button type="button" onclick="myOrder_btn('myOrderConfirm','${mlist.om_cntnum}')">구매확정</button>
+							<button type="button" onclick="doubleCheck_btn('myDelivCancel','${mlist.om_cntnum}')">반품요청</button> <br />
+							<button type="button" onclick="doubleCheck_btn('myOrderConfirm','${mlist.om_cntnum}')">구매확정</button>
 						</c:when>
 						<c:when test="${mlist.om_state eq '구매확정'}">
 							<button type="button" onclick="location.href='../review/reviewMylistview?account=${sessionScope.loginid}'">리뷰쓰기</button>
@@ -182,7 +182,6 @@ function myOrder_btn(type,omcntnum){
 	form.setAttribute('action', "../order/"+type); //보내는 url
 	document.body.appendChild(form);
 	form.submit();
-	
 }
 </script>
 <script>
@@ -193,6 +192,20 @@ function deliveryCheck(omcntnum){
 	win.focus(); // 포커스를 준다음에
 	win.document.body.innerHTML = `<p>이름은 ${name} 입니다</p>`;
 }
+</script>
+
+<script>
+function doubleCheck_btn(type,omcntnum){
+	var btnTtype;
+	if(type=='myDelivCancel'){
+		btnTtype='반품요청'
+	}else{btnTtype='구매확정'	}
+	var win = window.open("", "Delivery", "width=350,height=200");
+		win.focus(); // 포커스
+		win.document.body.innerHTML = `<p>`+btnTtype+` 입니다</p>`
+		+`<button type="button" onclick="myOrder_btn('`+type+`','`+omcntnum+`')">`+btnTtype+`</button><br />`
+		+`<button type="button" onclick="window.close();">취소</button>`;
+} 
 </script>
 
 </body>

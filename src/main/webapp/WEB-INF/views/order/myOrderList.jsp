@@ -44,7 +44,7 @@ button{
 .stateInfo{
 	padding: 2px;
 }
-.logInOut-box{
+.logInOut-box,.page-more{
 	margin: 10px 0 10px 900px;
 }
 </style>
@@ -158,12 +158,14 @@ button{
 </table>
 </form>
 <br />
+<div class="page-more">
 totCnt : ${totRowcnt} <br />
 <c:if test="${searchVO.page<searchVO.totPage}">
 <hr />
 	<a href="myOrderList?page=${searchVO.page+1}">[더보기]</a>
 <hr />
 </c:if>
+</div>
 <br />
 
 <script>

@@ -21,7 +21,7 @@
 <a href="admin3/delivList">admin_deliv</a>  <br />
 
 <hr />
-<a href="myPage">myPage</a>	<br />
+<a href="myPage">css확인</a>	<br />
 <a href="checkIndex">checkIndex</a>
 
 </body>

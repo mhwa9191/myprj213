@@ -44,6 +44,9 @@ button{
 .stateInfo{
 	padding: 2px;
 }
+.logInOut-box{
+	margin: 10px 0 10px 900px;
+}
 </style>
 
 <link href="../resources/css/checkIndex.css" rel="stylesheet">
@@ -52,7 +55,7 @@ button{
 <!-- 사이드 -->
 <jsp:include page="/WEB-INF/views/myPage/checkIndex.jsp" />
 
-
+<div class="logInOut-box">
 <c:if test="${empty sessionScope.loginid}">
    <a href="../member/loginform">login</a> 
    |  <a href="../member/joinform">join</a>
@@ -64,7 +67,6 @@ button{
  ${sessionScope.loginid} 님, 로그인상태입니다 ദ്ദി*ˊᗜˋ*)
  </c:if>
  
- 
  <div>
 	<p class="go-productList" style="color: #336666;">
 	<a href="../product/productList">상품둘러보기</a>
@@ -73,6 +75,7 @@ button{
  <div>
  	<p>회원님의 현재 보유 캐시 : ${myList.m_cash}</p>
  </div>
+</div>
  
 
  <h2>나의주문내역 </h2>

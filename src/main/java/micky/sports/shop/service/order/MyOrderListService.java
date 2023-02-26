@@ -33,7 +33,7 @@ public class MyOrderListService implements MickyServiceInter{
 		//로그인 세션
 		httpsession = request.getSession();
 		String loginId = (String)httpsession.getAttribute("loginid");
-		//System.out.println("*********~~~~~~~~~~~~~~~~~"+loginId);
+		System.out.println("*********~~~~~~~~~~~~~~~~~"+loginId);
 		
 		OrderDao odao=sqlSession.getMapper(OrderDao.class);
 

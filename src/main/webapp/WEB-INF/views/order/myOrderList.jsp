@@ -73,7 +73,7 @@ button{
 	</p>
  </div>
  <div>
- 	<p>회원님의 현재 보유 캐시 : ${myList.m_cash}</p>
+ 	<p>회원님의 현재 보유 캐시 : <fmt:formatNumber value="${myList.m_cash}" pattern="###,###"/></p>
  </div>
 </div>
  

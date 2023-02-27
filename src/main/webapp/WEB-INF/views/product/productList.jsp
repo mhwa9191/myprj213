@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/pstyle.css" />
 
-<link href="resources/css/checkIndex.css" rel="stylesheet">
+<link href="../resources/css/checkIndex.css" rel="stylesheet">
 </head>
 <body>
 <!-- 사이드 -->

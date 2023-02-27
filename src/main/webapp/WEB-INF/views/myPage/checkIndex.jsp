@@ -17,22 +17,22 @@
   <!-- Disable tap highlight on IE -->
   <meta name="msapplication-tap-highlight" content="no">
   
-  <link href="resources/images/apple-icon-180x180.png" rel="apple-touch-icon">
-  <link href="resources/images/favicon.ico" rel="icon">
+  <link href="../resources/images/apple-icon-180x180.png" rel="apple-touch-icon">
+  <link href="../resources/images/favicon.ico" rel="icon">
 
 
 
   <title>Title page</title>  
 
-<link href="resources/css/checkIndex.css" rel="stylesheet">
+<link href="../resources/css/checkIndex.css" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="loginJoin-box">
 <c:if test="${empty sessionScope.loginid}">
-   <a href="./member/loginform">login</a> 
-   |  <a href="./member/joinform">join</a>
+   <a href="../member/loginform">login</a> 
+   |  <a href="../member/joinform">join</a>
 
 로그인이 필요합니다.
 </c:if>
@@ -59,15 +59,15 @@
     <div class="navbar-collapse" id="navbar-collapse">
       <div class="site-header hidden-xs">
           <a class="site-brand" href="./checkIndex" title="">
-            <img class="img-responsive site-logo" alt="" src="resources/images/mashup-logo.svg">
+            <img class="img-responsive site-logo" alt="" src="../resources/images/mashup-logo.svg">
             MICKY SHOP
           </a>
         <p>마이페이지</p>
       </div>
       <ul class="nav">
-        <li><a href="./order/myOrderList" title="">나의주문내역</a></li>
+        <li><a href="../order/myOrderList" title="">나의주문내역</a></li>
         <li><a href="../review/reviewMylistview" title="">나의리뷰보기</a></li>
-        <li><a href="./product/productList" title="">확인작업productList</a></li>
+        <li><a href="../product/productList" title="">확인작업productList</a></li>
         <li><a href="#" title="">회원정보수정란?</a></li>
         <li><a href="#" title="">추가하기</a></li>
 
@@ -100,7 +100,7 @@
     <div class="grid-sizer"></div>
     
     <div class="grid-item">
-      <img class="img-responsive" alt="" src="resources/images/img-12.jpg">
+      <img class="img-responsive" alt="" src="../resources/images/img-12.jpg">
       <a href="./project.html" class="project-description">
         <div class="project-text-holder">
           <div class="project-text-inner">
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   ga('send', 'pageview');
 </script>
 
---><script type="text/javascript" src="./main.85741bff.js"></script>
+--><script type="text/javascript" src="../resources/js/checkIndex.js"></script>
 
  </c:if>
 </body>

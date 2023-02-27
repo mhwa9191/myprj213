@@ -22,7 +22,7 @@
 
 <hr />
 <a href="myPage">css확인</a>	<br />
-<a href="checkIndex">checkIndex</a>
+<a href="myPage/checkIndex">checkIndex</a>
 
 </body>
 </html>

@@ -27,7 +27,7 @@
 	 <div>
 		<p class="go-myOrderList" style="color: #336666;">
 		<a href="../order/myOrderList">나의 주문내역보기</a> <br />
-		<a href="../checkIndex">checkIndex</a>
+		<a href="../myPage/checkIndex">checkIndex</a>
 		</p>
 	</div>
  </c:if>
@@ -38,11 +38,11 @@
 <div class="productChartPackage">
 
 <ul class="productChart">
-<c:forEach items="${productChart }" var="pChart">
+<c:forEach items="${productChart}" var="pChart">
 	<li>
 		<div class="pdtthumbnail">
-			<a href="productDetail?pname=${pChart.p_name }&pfilesrc=${pChart.p_filesrc }">
-			<img src="../resources/img/productimg/${pChart.p_filesrc }.jpg" alt="" />
+			<a href="productDetail?pname=${pChart.p_name}&pfilesrc=${pChart.p_filesrc}">
+			<img src="../resources/img/productimg/${pChart.p_filesrc}.jpg" alt="" />
 			</a>
 		</div>
 		<div class="pdtdetail">

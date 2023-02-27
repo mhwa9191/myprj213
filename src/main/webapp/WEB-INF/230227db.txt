@@ -1,0 +1,507 @@
+--create user micky identified by 123456;
+--grant connect,resource,dba to micky;
+--conn micky;
+show user;
+
+--계정삭제
+--drop user micky CASCADE;
+commit;
+create table product(
+p_no varchar2(50), --상품번호
+p_name varchar2(100), --상품명
+p_price number, --가격
+p_cnt number, --재고
+p_color varchar2(20), --색상
+p_size varchar2(20), --사이즈
+p_filesrc varchar2(100), --첨부파일
+p_date date, --입고일
+p_category varchar2(20), --카테고리
+p_info varchar2(1500)); --상품정보
+drop table product;
+drop SEQUENCE PNO_SEQ;
+
+commit;
+CREATE SEQUENCE PNO_SEQ
+INCREMENT BY 1 START WITH 101 MAXVALUE 300 MINVALUE 101 CYCLE CACHE 2;
+
+insert into product values('N'||PNO_SEQ.NEXTVAL,'W''S NUPTSE HYBRID DOWN BALL JACKET',249000,8,'BLACK','085XS','NJ1DN82A_NJ1DN82A_primary',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'W''S NUPTSE HYBRID DOWN BALL JACKET',249000,9,'BLACK','090S','NJ1DN82A_NJ1DN82A_primary',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'W''S NUPTSE HYBRID DOWN BALL JACKET',249000,5,'BLACK','095M','NJ1DN82A_NJ1DN82A_primary',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'W''S NUPTSE HYBRID DOWN BALL JACKET',249000,8,'IVORY','085XS','NJ1DN82B_NJ1DN82B_primary',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'W''S NUPTSE HYBRID DOWN BALL JACKET',249000,9,'IVORY','090S','NJ1DN82B_NJ1DN82B_primary',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'W''S NUPTSE HYBRID DOWN BALL JACKET',249000,5,'IVORY','095M','NJ1DN82B_NJ1DN82B_primary',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'W''S NOVELTY NUPTSE DOWN JACKET P',318000,5,'SILVER','085XS','NJ1DN81K_NJ1DN81K_primary',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'W''S NOVELTY NUPTSE DOWN JACKET P',318000,5,'SILVER','090S','NJ1DN81K_NJ1DN81K_primary',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'W''S NOVELTY NUPTSE DOWN JACKET P',318000,5,'SILVER','095M','NJ1DN81K_NJ1DN81K_primary',sysdate,'','');
+
+insert into product values('N'||PNO_SEQ.NEXTVAL,'아디컬러 쉐르파 재킷',119000,5,'Wonder White','085XS','HC0308_HC0308',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'아디컬러 쉐르파 재킷',119000,5,'Wonder White','090S','HC0308_HC0308',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'아디컬러 쉐르파 재킷',119000,5,'Wild Brown','085XS','HC0310_HC0310',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'아디컬러 쉐르파 재킷',119000,5,'Wild Brown','090S','HC0310_HC0310',sysdate,'','');
+
+insert into product values('N'||PNO_SEQ.NEXTVAL,'세미 오버핏 봄버 자켓',119000,5,'BLACK','095M','N231MJP903C',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'세미 오버핏 봄버 자켓',119000,5,'BLACK','100L','N231MJP903C',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'세미 오버핏 봄버 자켓',219000,5,'BEIGE','095M','N231MJP903L',sysdate,'','');
+insert into product values('N'||PNO_SEQ.NEXTVAL,'세미 오버핏 봄버 자켓',219000,5,'BEIGE','100L','N231MJP903L',sysdate,'','');
+
+
+
+select * from product;
+select p_no,p_name,p_price,p_cnt,p_color,p_size,p_filesrc from product;
+select p_name,p_filesrc from product group by p_name,p_filesrc order by p_name;
+
+select p_no,p_name,p_price,p_cnt,p_color,p_size,p_filesrc from product where p_no='N101';
+select p_no,p_name,p_price,p_cnt,p_color,p_size,p_filesrc from product where p_name='W''S NOVELTY NUPTSE DOWN JACKET P';
+SELECT P_NAME,MIN(P_FILESRC) P_FILESRC FROM PRODUCT GROUP BY P_NAME;
+
+--동일한 내용 보이는것 productMain
+select p_name,p_filesrc from product where p_name='W''S NOVELTY NUPTSE DOWN JACKET P'
+group by p_name,p_filesrc;
+select p_name,p_filesrc,p_color from product where p_name='W''S NUPTSE HYBRID DOWN BALL JACKET'
+group by p_name,p_filesrc,p_color;
+SELECT P_NAME,P_FILESRC FROM PRODUCT GROUP BY P_NAME,P_FILESRC ORDER BY P_NAME;
+SELECT P_NAME,min(P_FILESRC) P_FILESRC FROM PRODUCT GROUP BY P_NAME;
+SELECT p_color,P_NAME,min(P_FILESRC) P_FILESRC FROM PRODUCT GROUP BY P_NAME,p_color;
+
+SELECT P_NO,P_NAME,P_PRICE,P_CNT,P_COLOR,P_SIZE,P_FILESRC FROM PRODUCT WHERE P_NAME='W''S NUPTSE HYBRID DOWN BALL JACKET' AND P_FILESRC='NJ1DN82A_NJ1DN82A_primary';
+
+--상품별 사이즈 확인
+select p_size from (select * from product where p_name='W''S NUPTSE HYBRID DOWN BALL JACKET');
+select p_no,p_size,p_color,p_cnt from (select * from product where p_name='W''S NUPTSE HYBRID DOWN BALL JACKET');
+select p_no,p_size,p_color,p_cnt from product where p_name='W''S NUPTSE HYBRID DOWN BALL JACKET' and p_color='BLACK';
+select p_no,p_name,p_price,p_cnt,p_color,p_size,p_filesrc from product where p_name='W''S NUPTSE HYBRID DOWN BALL JACKET' and p_color='BLACK';
+
+select p_no,p_name,p_price,p_cnt,p_color,p_size,p_filesrc from product where p_name='W''S NUPTSE HYBRID DOWN BALL JACKET';
+
+select p_no,p_name,p_price,p_cnt,p_color,p_size,p_filesrc from product where p_name='W''S NOVELTY NUPTSE DOWN JACKET P' and p_size='085XS' and p_color='SILVER';
+select p_name,p_price,p_color,p_size from product where p_no='N108';
+
+
+drop table order_member;
+drop SEQUENCE ORDER_SEQ;
+
+create table order_member(
+om_num varchar2(100), --주문번호
+om_cntnum varchar2(100), --상품주문번호 primary
+p_no varchar2(100), --상품번호
+u_cnt number, --주문수량
+m_id varchar2(100), --아이디
+om_date date, --주문일자
+om_pay varchar2(100), --결제형태
+p_price number, --총액
+om_state varchar2(100), --처리상태(결제완료,취소요청,취소완료,상품준비중,배송완료,구매확정)
+om_cancle varchar2(100), --주문취소여부(N,Y)
+om_cdate date,
+c_reason varchar2(100)); --주문취소일자
+commit;
+
+--2차테이블
+create table order_member(
+om_num varchar2(100), --주문번호
+om_cntnum varchar2(100), --상품주문번호 primary
+p_no varchar2(100), --상품번호
+u_cnt number, --주문수량
+m_id varchar2(100), --아이디
+om_date date, --주문일자
+om_pay varchar2(100), --결제형태
+p_price number, --총액
+om_state varchar2(100), --처리상태(결제완료,취소요청,취소완료,상품준비중,배송완료,구매확정)
+om_cancle varchar2(100), --주문취소여부(N,Y)
+om_cdate date,
+c_reason varchar2(100),
+om_delcancle varchar2(100)
+);
+
+CREATE SEQUENCE ORDER_SEQ INCREMENT BY 1 
+START WITH 1000 MAXVALUE 2000 MINVALUE 1000 CYCLE CACHE 2;
+
+insert into order_member values(TO_CHAR(SYSDATE, 'YYYYMMDD')||'blue1',ORDER_SEQ.NEXTVAL,'N101',2,'blue1',sysdate,'포인트',249000*2,'결제완료','N','',null);
+insert into order_member values(TO_CHAR(SYSDATE, 'YYYYMMDD')||'blue1',ORDER_SEQ.NEXTVAL,'N105',1,'blue1',sysdate,'포인트',249000*1,'결제완료','N','',null);
+insert into order_member values(TO_CHAR(SYSDATE, 'YYYYMMDD')||'blue1',ORDER_SEQ.NEXTVAL,'N108',4,'blue1',sysdate,'포인트',318000*4,'결제완료','N','',null);
+insert into order_member values(TO_CHAR(SYSDATE, 'YYYYMMDD')||'blue2',ORDER_SEQ.NEXTVAL,'N103',1,'blue2',sysdate,'포인트',249000*1,'결제완료','N','',null);
+
+select * from order_member;
+select * from order_member order by om_date desc;
+
+
+--특정상품 가격으로 인서트
+select p_price from product where p_no='N101';
+insert into order_member values(TO_CHAR(SYSDATE,'YYYYMMDD')||'blue2',ORDER_SEQ.NEXTVAL,'N101','','',2,'blue2',sysdate,'포인트',30,'결제완료','N',null);
+insert into order_member values(TO_CHAR(SYSDATE, 'YYYYMMDD')||'blue2',ORDER_SEQ.NEXTVAL,'N103',1,'blue2',sysdate,'포',
+(select p_price from product where p_no='N101'),'결제완료','N',null,null);
+
+select om_cntnum 상품주문번호,om_num 주문번호,p_no 상품번호,u_cnt 주문수량,m_id 아이디,om_date 주문일자,om_pay 결제형태,
+p_price 총액,om_state 처리상태,om_cancle 주문취소요청여부,om_cdate 주문취소일자 from order_member;
+
+
+select p.p_no 상품번호, om.om_num 상품주문번호, p.p_color 색상
+from product p full outer join order_member om
+on p.p_no=om.p_no;
+
+select p.p_no
+from product p inner join order_member om
+on p.p_no=om.p_no;
+
+--조인 join
+select * from order_member;
+select * from product;
+select om.om_date,om.p_no,om.om_num,p.p_color,p.p_size
+from order_member om, product p
+where om.p_no=p.p_no
+order by om_date desc;
+
+--select om_cntnum ,om_num ,p_no ,p_color ,p_size ,u_cnt ,m_id ,om_date ,om_pay ,p_price ,om_state ,om_cancle ,om_cdate  from order_member where m_id='blue1';
+--SELECT OM_CNTNUM,OM_NUM,P_COLOR,P_SIZE,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE FROM ORDER_MEMBER WHERE M_ID='blue1';
+SELECT OM_CNTNUM FROM ORDER_MEMBER WHERE M_ID='blue1';
+--SELECT OM_CNTNUM,OM_NUM,P_COLOR,P_SIZE,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE FROM ORDER_MEMBER;
+SELECT OM_CNTNUM,OM_NUM FROM (SELECT * FROM ORDER_MEMBER WHERE M_ID='blue1');
+--SELECT OM_CNTNUM,OM_NUM,P_COLOR,P_SIZE,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,p_no FROM ORDER_MEMBER WHERE M_ID='blue1';
+delete from order_member where om_cntnum=1008;
+--주문테이블 수정안
+--주문할때는 상품번호와 주문수량만 입력하고 
+--주문내역을 확인할때는 select join을 실행
+SELECT om_date,P_NO,OM_NUM,M_ID,P_COLOR,P_SIZE,U_CNT,P_PRICE,OM_STATE,P_NAME
+FROM (SELECT om.om_date,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.P_PRICE,OM.OM_STATE,P.P_COLOR,P.P_SIZE,P.P_NAME
+FROM ORDER_MEMBER OM INNER JOIN PRODUCT P ON OM.P_NO=P.P_NO)
+WHERE M_ID='blue2' order by om_date desc;
+
+--주문시 구매한 수량 재고 삭제
+select * from product;
+select p_no,p_name,p_price,p_cnt,p_color,p_size,p_filesrc from product;
+update product set p_cnt=p_cnt-1 where p_no='N101';
+
+
+--회원
+create table member(
+m_id varchar2(20),
+m_pw varchar2(20),
+m_name varchar2(20),
+m_tel number,
+m_name2 varchar2(20),
+m_email varchar2(20),
+m_grade varchar2(20),
+m_age number,
+m_gender  varchar2(10),
+m_cash number,
+m_filesrc varchar2(50));
+
+insert into member(m_id,m_pw,m_name,m_tel,m_name2,m_email,m_grade,m_age,m_gender,m_cash,m_filesrc)
+values ('micky','123456','micky',1234567,'micky','abc@abc.com','bronze',19,'남',10000,'noimg');
+insert into member(m_id,m_pw,m_name,m_tel,m_name2,m_email,m_grade,m_age,m_gender,m_cash,m_filesrc)
+values ('blue1','111111','blue1',111111,'blue1','blue1@abc.com','bronze',32,'남',10000,'noimg');
+insert into member(m_id,m_pw,m_name,m_tel,m_name2,m_email,m_grade,m_age,m_gender,m_cash,m_filesrc)
+values ('blue2','222222','blue2',222222,'blue2','blue2@abc.com','bronze',25,'여',10000,'noimg');
+
+commit;
+select m_id,m_pw,m_name,m_tel,m_name2,m_email,m_grade,m_age,m_gender,m_cash,m_filesrc from member;
+
+select m_id,m_pw,m_name,m_tel,m_name2,m_email,m_grade,m_age,m_gender,m_cash,m_filesrc from member where m_id='micky';
+
+--결제하기 확인을 위해 blue2 m_cash 수정
+update member set m_cash=m_cash+1000000 where m_id='blue2';
+
+select * from order_member;
+
+
+--리뷰테이블
+create table review(
+r_no number,
+m_id varchar2(100), --fk 지정 필요
+r_title varchar2(125), --리뷰제목
+r_content varchar2(1000), --리뷰내용
+r_id varchar2(100), --관리자 id
+r_retitle varchar2(125), -- 답변제목
+r_recontent varchar2(1000), -- 답변내용 replaycontent->recontent
+r_ynn varchar(10) default 'n', --답변유무
+r_date date default sysdate, --문의날짜
+r_group number,
+r_step number,
+r_indent number,
+r_filesrc varchar2(200));
+create sequence review_seq;
+
+insert into review values(review_seq.nextval,'temp1','옷 좋아요','프린팅 이쁘네요 클라이밍할 때 입으려고요','','','','n',sysdate,review_seq.currval,0,0,'');
+insert into review values(review_seq.nextval,'temp2','제목확인','내용확인','','','','n',sysdate,review_seq.currval,0,0,'');
+insert into review values(review_seq.nextval,'blue2','23','내용확인','','','','n',sysdate,review_seq.currval,0,0,'',3,'N103');
+
+
+select * from review;
+
+
+--page 페이징
+--중간삭제글이 생길수 있으므로 rownum 사용
+--결과에 대해서 rownum 를 만들어서 원하는 수만큼 행을 출력할 수 있음
+select * from order_member where m_id='blue1';
+select rownum, om.*
+from (select * from order_member where m_id='blue1' order by om_date desc) om
+where rownum between 1 and 5;
+--셀렉트 결과에 rownum
+--rownum 는 시작점이 없으면 가져올 수 없음 안나옴
+--서브쿼리로 새로 만들어서 출력
+select om_num,om_cntnum,p_no,u_cnt,m_id,om_date,om_pay,p_price,om_state,om_cancle,om_cdate,c_reason
+from (select rownum num, om.* 
+from (select * from order_member where m_id='blue1' order by om_date desc) om)
+where num between 6 and 10;
+
+select * from order_member WHERE M_ID='blue1' order by om_date desc;
+SELECT OM_CNTNUM,OM_DATE,P_NO,OM_NUM,M_ID,P_COLOR,P_SIZE,U_CNT,P_PRICE,OM_STATE,P_NAME,P_FILESRC
+FROM(
+select rownum num, pageom.* 
+from (SELECT OM_CNTNUM,OM_DATE,P_NO,OM_NUM,M_ID,P_COLOR,P_SIZE,U_CNT,P_PRICE,OM_STATE,P_NAME,P_FILESRC
+FROM (SELECT OM.OM_CNTNUM,OM.OM_DATE,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.P_PRICE,OM.OM_STATE,P.P_COLOR,P.P_SIZE,P.P_NAME,P.P_FILESRC
+FROM ORDER_MEMBER OM INNER JOIN PRODUCT P ON OM.P_NO=P.P_NO) WHERE M_ID='blue1' ORDER BY OM_DATE DESc) pageom)
+where num between 6 and 10;
+--구매시간별 묶기
+select * from order_member;
+select OM_NUM,OM_CNTNUM,P_NO,U_CNT,m_id,om_date,om_pay,p_price,om_state,om_cancle,om_cdate,c_reason from order_member;
+select count(*),OM_NUM from order_member group by om_date,OM_NUM;
+
+select * from order_member where m_id='blue1' ORDER BY OM_DATE DESC;
+select count(*) groupcnt,OM_NUM,om_date from 
+(select om_num,om_cntnum,p_no,u_cnt,m_id,om_date,om_pay,p_price,om_state,om_cancle,om_cdate,c_reason
+from (select rownum num, om.* 
+from (select * from order_member where m_id='blue1' order by om_date desc) om)
+where num between 1 and 5) group by om_date,OM_NUM order by om_date desc;
+
+SELECT COUNT(*) GROUPCNT,OM_NUM FROM 
+(SELECT OM_NUM,OM_CNTNUM,P_NO,U_CNT,M_ID,OM_DATE,OM_PAY,P_PRICE,OM_STATE,OM_CANCLE,OM_CDATE,C_REASON
+FROM (SELECT ROWNUM NUM, OM.* 
+FROM (SELECT * FROM ORDER_MEMBER WHERE M_ID='blue1' ORDER BY OM_DATE DESC) OM)
+WHERE NUM BETWEEN 1 AND 5) GROUP BY OM_DATE,OM_NUM ORDER BY OM_DATE DESC;
+
+SELECT COUNT(*) FROM ORDER_MEMBER WHERE M_ID='blue1';
+
+
+--상품취소요청클릭시 화면단 보기 join
+select * from order_member where OM_CNTNUM='1058';
+SELECT om_cntnum,om_date,P_NO,OM_NUM,M_ID,P_COLOR,P_SIZE,U_CNT,P_PRICE,OM_STATE,P_NAME
+FROM (SELECT om.om_cntnum,om.om_date,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.P_PRICE,OM.OM_STATE,P.P_COLOR,P.P_SIZE,P.P_NAME
+FROM ORDER_MEMBER OM INNER JOIN PRODUCT P ON OM.P_NO=P.P_NO)
+WHERE OM_CNTNUM='1058';
+
+--취소사유 적은후 취소요청하기
+update order_member set OM_CANCLE='Y', C_REASON='단순변심', OM_CDATE=sysdate WHERE OM_CNTNUM='1058';
+
+select * from order_member WHERE OM_CNTNUM='1058';
+
+select max(om_num) om_num from order_member where m_id='blue1';
+
+--
+select count(r_recontent) r_recontent, r_no from review group by r_no order by r_no desc;
+select * from review;
+
+--
+
+--cart
+create table cart(
+c_no varchar2(20),
+m_id varchar2(30),
+p_no varchar2(20),
+c_cnt number);
+drop table cart;
+insert into cart values('1','blue1','N101','1');
+insert into cart values('2','micky','N108','2');
+insert into cart values((select max(c_no) from cart)+1,'blue1','N105','2');
+delete cart;
+select * from cart;
+commit;
+
+--AdminDto
+create table cancle_member(
+om_date date, --주문일자
+m_id   VARCHAR2(1000),--id
+om_num varchar2(100), --주문번호(sysdate+id)
+om_cntnum VARCHAR2(1000), --상품주문번호(seq)  primary
+p_no varchar2(100), --상품번호(이니셜+seq)
+p_price number,--총액
+om_state varchar2(100), --처리상태 :결제완료,취소요청,취소완료,상품준비중,배송완료,구매확정
+c_date date,--주문취소일자
+c_reason VARCHAR2(1000));--주문취소사유  : 고객변심, 상품파손, 배송지연, 기타
+select * from cancle_member;
+
+insert into cancle_member values(sysdate,'blue1',TO_CHAR(SYSDATE, 'YYYYMMDD')||'blue1','1000','N100',249000*2,'결제완료','2023-03-01','상품파손');
+insert into cancle_member values(sysdate,'blue2',TO_CHAR(SYSDATE, 'YYYYMMDD')||'blue2','1002','N101',318000*2,'결제완료','2023-03-03','상품파손');
+insert into cancle_member values(sysdate,'blue3',TO_CHAR(SYSDATE, 'YYYYMMDD')||'blue3','1004','N102',318000*2,'결제완료','2023-03-05','배송지연');
+insert into cancle_member values(sysdate,'blue4',TO_CHAR(SYSDATE, 'YYYYMMDD')||'blue4','1005','N108',318000*2,'결제완료','2023-03-05','상품불량');
+
+--나의주문내역 리뷰작성확인
+select * from order_member;
+SELECT om.om_cntnum,om.om_date,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.P_PRICE,OM.OM_STATE,rv.r_no
+FROM ORDER_MEMBER OM INNER JOIN review rv ON OM.om_cntnum=rv.om_cntnum;
+
+
+
+--sysdate확인
+select * from order_member where om_date='23/02/03';
+select * from order_member where TO_CHAR(om_date,'yy/mm/dd') ='23/02/03';
+SELECT TO_CHAR(om_date,'yyyy-mm-dd hh24:mi:ss') FROM order_member;
+
+
+--배송
+drop table order_delivery;
+drop table delivery_SEQ;
+create table order_delivery(
+od_num varchar2(100), --배송번호(sysdate+seq)
+om_num varchar2(100), --주문번호(sysdate+id)
+om_date date, --주문일자
+m_id varchar2(50), --아이디
+addr1 varchar2(20), --배송지주소1(우편번호)
+addr2 varchar2(50), --배송지주소2(주소)
+addr3 varchar2(50), --배송지주소3(상세주소)
+receipt_name varchar2(20), --수령자이름
+receipt_phone varchar2(20), --수령자전화번호
+od_date date); --배송일자
+
+CREATE SEQUENCE delivery_SEQ INCREMENT BY 1 
+START WITH 1000 MAXVALUE 2000 MINVALUE 1000 CYCLE CACHE 2;
+
+insert into order_delivery(od_num,om_num,om_date,m_id,addr1,addr2,addr3,receipt_name,receipt_phone,OD_DATE)
+values(TO_CHAR(SYSDATE, 'YYYYMMDD')||delivery_SEQ.nextval,(select om_num from order_member where om_cntnum='1000'),
+(select om_date from order_member where om_cntnum='1000'),'blue','18588','서울','13호','홍길동','01012345678','');
+
+select od_num,om_num,om_date,m_id,addr1,addr2,addr3,receipt_name,receipt_phone,od_date from order_delivery;
+
+--가장최근 날짜의 값 가져오기
+select om_cntnum,om_num,p_no,u_cnt,m_id,om_date ,om_pay ,p_price ,om_state ,om_cancle ,om_cdate,c_reason
+from(select * from order_member where m_id='blue1' order by om_date DESC) where ROWNUM = 1;
+
+
+--배송 주문 join
+SELECT om_cntnum,om_date,om_num,m_id,p_no,u_cnt,om_state,OM_CANCLE, od_num,addr1,addr2,addr3,receipt_name,receipt_phone,od_date
+from (SELECT om.om_cntnum,om.om_date,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.OM_STATE,om.OM_CANCLE,
+OD.od_num,OD.addr1,OD.addr2,OD.addr3,OD.receipt_name,OD.receipt_phone,OD.od_date
+FROM ORDER_MEMBER OM INNER JOIN order_delivery OD ON OM.om_date=OD.om_date) where m_id='blue2' order by om_date desc;
+
+
+--페이징전체글수
+SELECT COUNT(*) FROM ORDER_MEMBER WHERE OM_CANCLE='N';
+
+SELECT om_cntnum,om_date,om_num,m_id,p_no,u_cnt,om_state,OM_CANCLE, od_num,addr1,addr2,addr3,receipt_name,receipt_phone,od_date
+FROM(
+select rownum num, pageodv.* 
+from (SELECT om_cntnum,om_date,om_num,m_id,p_no,u_cnt,om_state,OM_CANCLE, od_num,addr1,addr2,addr3,receipt_name,receipt_phone,od_date
+from (SELECT om.om_cntnum,om.om_date,OM.P_NO,OM.OM_NUM,OM.M_ID,OM.U_CNT,OM.OM_STATE,om.OM_CANCLE,
+OD.od_num,OD.addr1,OD.addr2,OD.addr3,OD.receipt_name,OD.receipt_phone,OD.od_date
+FROM ORDER_MEMBER OM INNER JOIN order_delivery OD ON OM.om_date=OD.om_date) order by om_date desc) pageodv)
+where num between 6 and 10;
+
+
+
+SELECT COUNT(*) FROM order_delivery ;
+select COUNT(*) from ORDER_MEMBER where om_cancle='N' ;
+
+purge recyclebin;
+delete order_member;
+delete order_delivery;
+commit;
+select om_date from order_delivery where od_num='202302211014';
+
+--주문확정하기
+update order_member set om_state='상품준비중'
+where om_date=(select om_date from order_delivery where od_num='202302211012') and m_id=(select m_id from order_delivery where od_num='202302211012')
+and om_cancle='N';
+
+select om_cntnum from order_member where om_date=(select om_date from order_delivery where od_num='202302211012');
+
+--배송일자
+UPDATE ORDER_DELIVERY SET OD_DATE=SYSDATE WHERE OD_NUM='202302211012';
+
+select * from ORDER_DELIVERY;
+rollback;
+
+
+
+--통계
+select om_cntnum,p_no,u_cnt,TO_CHAR(om_date,'HH') hh from order_member where TO_CHAR(om_date,'HH') between 9 and 12 ;
+
+--시간대
+select p_no, topfive from (
+select rownum num, bestprd.* from
+(select p_no,count(*) topfive from order_member where TO_CHAR(om_date,'HH') between 9 and 12
+group by p_no order by topfive desc) bestprd)
+where rownum between 1 and 5;
+
+--판매량에 따른 순위  1~5등
+select p_no,판매량,p_color,p_name,p_filesrc,p_price from (
+select rownum num, bestsell.* from
+(select om.p_no,sum(om.u_cnt) 판매량,p.p_color,p.p_name,p.p_filesrc,p.p_price
+from order_member om, product p
+where om.p_no=p.p_no
+group by om.p_no,p.p_color,p.p_name,p.p_filesrc,p.p_price order by 판매량 desc) bestsell)
+where rownum between 1 and 5;
+select 판매량,p_color,p_name,p_filesrc from (
+select rownum num, bestsell.* from
+(select sum(om.u_cnt) 판매량,p.p_color,p.p_name, p_filesrc
+from order_member om, product p
+where om.p_no=p.p_no
+group by p.p_color,p.p_name,p.p_filesrc order by 판매량 desc) bestsell)
+where rownum between 1 and 5;
+select p_filesrc
+from order_member om, product p
+where om.p_no=p.p_no group by p.p_filesrc;
+
+--주문수에 따른 순위  
+select om.p_no,count(*) 주문수,p.p_color,p.p_name, p_filesrc
+from order_member om, product p
+where om.p_no=p.p_no
+group by om.p_no,p.p_color,p.p_name,p.p_filesrc
+order by 주문수 desc;
+--시간대별 판매량
+select sum(u_cnt) s,TO_CHAR(om_date,'HH24') hh from order_member group by TO_CHAR(om_date,'HH24') order by hh asc;
+select sum(u_cnt) s,TO_CHAR(om_date,'HH24') hh from order_member group by TO_CHAR(om_date,'HH24') order by s desc;
+
+
+
+
+---
+
+--마스크
+insert into product values('M'||PNO_SEQ.NEXTVAL,'TEAMKOREA REPLICA MASK',12600,80,'WHITE','M','NA5AM18A_NA5AM18A',sysdate,'마스크','필터 없이 사용하는 마스크로서 운동 또는 평상시에 편리하게 사용 가능한 마스크입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'TEAMKOREA REPLICA MASK',12600,80,'WHITE','L','NA5AM18A_NA5AM18A',sysdate,'마스크','필터 없이 사용하는 마스크로서 운동 또는 평상시에 편리하게 사용 가능한 마스크입니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'Polo 필터 마스크',34300,50,'BLACK','S','MAPOHDW07620008',sysdate,'마스크','Polo Ralph Lauren의 세척 및 재사용 가능한 페이스 마스크로, 코와 입을 가려줍니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'Polo 필터 마스크',34300,50,'BLACK','M','MAPOHDW07620008',sysdate,'마스크','Polo Ralph Lauren의 세척 및 재사용 가능한 페이스 마스크로, 코와 입을 가려줍니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'Polo 필터 마스크',34300,50,'BLACK','L','MAPOHDW07620008',sysdate,'마스크','Polo Ralph Lauren의 세척 및 재사용 가능한 페이스 마스크로, 코와 입을 가려줍니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'로고 3D마스크[에어로실버원단] 블랙(3매)',9900,50,'BLACK','L','BYMOSS1511078',sysdate,'마스크','트렌디한 디자인과 기능성원단(효성 에어로실버)을 사용한 마스크 제품입니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'프로쉴드 마스크',17000,50,'MELANGE GREY','L','NA5AM60B',sysdate,'마스크','3D 입체 곡선으로 제작되어 밀착감이 뛰어나며, 스트레치 원단을 사용하여 착용감이 편안합니다.');
+
+
+--양말
+insert into product values('M'||PNO_SEQ.NEXTVAL,'COOLMAX MID SOCKS',13500,80,'BLACK','240MM','NY4MP01E_NY4MP01E',sysdate,'양말','흡속속건 기능의 COOLMAX 소재를 사용한 미드기장 양말입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'COOLMAX MID SOCKS',13500,80,'BLACK','260MM','NY4MP01E_NY4MP01E',sysdate,'양말','흡속속건 기능의 COOLMAX 소재를 사용한 미드기장 양말입니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'COOLMAX MID SOCKS',13500,80,'WHITE','240MM','NY4MP01F_NY4MP01F',sysdate,'양말','흡속속건 기능의 COOLMAX 소재를 사용한 미드기장 양말입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'COOLMAX MID SOCKS',13500,80,'WHITE','260MM','NY4MP01F_NY4MP01F',sysdate,'양말','흡속속건 기능의 COOLMAX 소재를 사용한 미드기장 양말입니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'COOLMAX MID SOCKS',13500,80,'LILAC','240MM','NY4MP01G_NY4MP01G',sysdate,'양말','흡속속건 기능의 COOLMAX 소재를 사용한 미드기장 양말입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'COOLMAX MID SOCKS',13500,80,'LILAC','260MM','NY4MP01F_NY4MP01F',sysdate,'양말','흡속속건 기능의 COOLMAX 소재를 사용한 미드기장 양말입니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'코트 중목양말',5000,80,'VANILLA','240','FS3SCF5333X_VAA',sysdate,'양말','종아리의 1/4까지 올라오는 길이의 미드크루삭스입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'코트 중목양말',5000,80,'VANILLA','260','FS3SCF5333X_VAA',sysdate,'양말','종아리의 1/4까지 올라오는 길이의 미드크루삭스입니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'코트 중목양말',5000,80,'PALE LAVENDER','240','FS3SCF5333X_PLV',sysdate,'양말','종아리의 1/4까지 올라오는 길이의 미드크루삭스입니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'코트 중목양말',5000,80,'OFF WHITE','240','FS3SCF5333X_OWH',sysdate,'양말','종아리의 1/4까지 올라오는 길이의 미드크루삭스입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'코트 중목양말',5000,80,'OFF WHITE','260','FS3SCF5333X_OWH',sysdate,'양말','종아리의 1/4까지 올라오는 길이의 미드크루삭스입니다.');
+
+--가방
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'DUAL PRO III BACKPACK',135200,80,'CREAM','ONE','NM2DP02K_NM2DP02K',sysdate,'캐주얼백팩','30L급의 스탠다드한 쉐입으로 안정된 구조감을 제안하는 LIGHT한 등판 몰드를 적용된 신학기 가방입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'DUAL PRO III BACKPACK',135200,80,'BLACK','ONE','NM2DP02J_NM2DP02J',sysdate,'캐주얼백팩','30L급의 스탠다드한 쉐입으로 안정된 구조감을 제안하는 LIGHT한 등판 몰드를 적용된 신학기 가방입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'DUAL PRO III BACKPACK',135200,80,'BEIGE','ONE','NM2DP02L_NM2DP02L',sysdate,'캐주얼백팩','30L급의 스탠다드한 쉐입으로 안정된 구조감을 제안하는 LIGHT한 등판 몰드를 적용된 신학기 가방입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'DUAL PRO III BACKPACK',135200,80,'DARK_GRAY','ONE','NM2DP02M_NM2DP02M',sysdate,'캐주얼백팩','30L급의 스탠다드한 쉐입으로 안정된 구조감을 제안하는 LIGHT한 등판 몰드를 적용된 신학기 가방입니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'WANNABE EXT PACK',127200,80,'LIGHT_GRAY','ONE','NM2DP03L_NM2DP03L',sysdate,'캐주얼백팩','익스텐션 기능이 있어 사용하는 용도에 따라 29L까지 용량을 늘려 사용할 수 있습니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'WANNABE EXT PACK',127200,80,'LIGHT_PINK','ONE','NM2DP03M_NM2DP03M',sysdate,'캐주얼백팩','익스텐션 기능이 있어 사용하는 용도에 따라 29L까지 용량을 늘려 사용할 수 있습니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'WANNABE EXT PACK',127200,80,'CREAM','ONE','NM2DP03K_NM2DP03K',sysdate,'캐주얼백팩','익스텐션 기능이 있어 사용하는 용도에 따라 29L까지 용량을 늘려 사용할 수 있습니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'WANNABE EXT PACK',127200,80,'BLACK','ONE','NM2DP03J_NM2DP03J',sysdate,'캐주얼백팩','익스텐션 기능이 있어 사용하는 용도에 따라 29L까지 용량을 늘려 사용할 수 있습니다.');
+
+insert into product values('M'||PNO_SEQ.NEXTVAL,'HOT SHOTK',139500,80,'CLOUD','ONE','NM2DP01C_NM2DP01C',sysdate,'등산백팩','오리지널 HOT SHOT 모델, 8리터로 수납에 충실한 DAYPACK입니다.일상 생활, 여행 및 간단한 하이킹에도 사용 할 수 있는 가방입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'HOT SHOTK',139500,80,'BLACK','ONE','NM2DP01A_NM2DP01A',sysdate,'등산백팩','오리지널 HOT SHOT 모델, 8리터로 수납에 충실한 DAYPACK입니다.일상 생활, 여행 및 간단한 하이킹에도 사용 할 수 있는 가방입니다.');
+insert into product values('M'||PNO_SEQ.NEXTVAL,'HOT SHOTK',139500,80,'COOL_GRAY','ONE','NM2DP01B_NM2DP01B',sysdate,'등산백팩','오리지널 HOT SHOT 모델, 8리터로 수납에 충실한 DAYPACK입니다.일상 생활, 여행 및 간단한 하이킹에도 사용 할 수 있는 가방입니다.');
+
+
+commit;
+

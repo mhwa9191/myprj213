@@ -15,6 +15,7 @@ import micky.sports.shop.service.product.ProductDetailService;
 import micky.sports.shop.service.product.ProductListService;
 
 @Controller
+@RequestMapping("/myPage")
 public class MyPageController {
 	MickyServiceInter mickyServiceInter;
 
@@ -24,7 +25,7 @@ public class MyPageController {
 	private HttpSession httpsession;
 	
 	//
-	@RequestMapping("/myPage")
+	@RequestMapping("/index")
 	public String mypage(HttpServletRequest request, Model model) {
 		System.out.println("========mypageindex=======");
 
